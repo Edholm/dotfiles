@@ -1,0 +1,17 @@
+# conkyrc file for dzen
+###
+
+background no
+out_to_console yes
+out_to_x no
+override_utf8_locale yes
+update_interval 3
+total_run_times 0
+default_color 657b83
+#mpd_host 127.0.0.1
+#mpd_port 6600
+#${if_mpd_playing}^i(.xmonad/data/icons/music.xbm) [ ${mpd_status}-${mpd_elapsed}/${mpd_length} ] ^fg(\#909090)${mpd_title}^fg() by ^fg(\#909090)${mpd_artist}$endif^fg() ^fg(\#909090)${execpi 40 python ~/.scripts/gmail-check.py}^fg() CPU:^fg(\#909090)${cpu}%^fg() - ${time %a %d %b ^fg(\#909090)%H:%M}  
+
+TEXT
+#^fg(\#909090)${execpi 40 python ~/.scripts/gmail-check.py}^fg() CPU:^fg(\#909090)${cpu}%^fg() - ${time %a %d %b ^fg(\#909090)%H:%M}  
+^fn(Consolas:size=11)${exec /home/eda/.scripts/spotcont_dzen}^fn()   ^fg(\#b58900)^i(/home/eda/.xmonad/xbm_icons/subtle/battery_vert3.xbm)^fg() ^fg()${battery_percent}% ${battery_time}^fg() ^fg(\#b58900)|^fg()  ^fg()${time (%A v%W)} ^fg(\#b58900)${time %H:%M}
