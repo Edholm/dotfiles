@@ -22,7 +22,7 @@ update_interval 10
 use_xft yes
 xftalpha 0.7
 xftfont Verdana:size=9
-default_color 657b83
+default_color eee8d5
 
 # After TEXT is formatted on screen
 TEXT
