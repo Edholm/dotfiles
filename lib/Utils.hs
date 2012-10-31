@@ -58,7 +58,7 @@ import qualified XMonad.StackSet as W
 myIconPath           = "/home/eda/.xmonad/xbm_icons/subtle/"
 -- | The setup I like: a main, web and chat plus the rest numbered.
 pbWorkspaces :: [WorkspaceId]
-pbWorkspaces = ["^i(" ++ myIconPath  ++ "tv.xbm) 1-web", "^i(" ++ myIconPath  ++ "terminal.xbm) 2-rnd"] ++ map show [3..5 :: Int] ++ 
+pbWorkspaces = ["^i(" ++ myIconPath  ++ "tv.xbm) 1-web", "^i(" ++ myIconPath  ++ "code.xbm) 2-code"] ++ map show [3..5 :: Int] ++ 
                [
                 "6-irc", 
                 "^i(" ++ myIconPath  ++ "spotify.xbm) 7-spotify", 
