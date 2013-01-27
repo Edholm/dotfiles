@@ -1,2 +1,0 @@
-#!/bin/bash
-echo "^fg(\#b58900)^i(/home/eda/.xmonad/xbm_icons/subtle/battery_vert3.xbm)^fg() ^fg()\${battery_percent}% \${battery_time}^fg()"

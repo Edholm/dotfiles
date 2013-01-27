@@ -1,0 +1,3 @@
+#!/bin/bash
+BATT=$(acpi -b | awk '{print $4}' | awk 'sub(".$", "")')%
+echo WARNING! Low battery - $BATT | dzen2 -fg red -h 50 -fn -xos4-terminus-medium-r-normal-*-40-*-*-*-*-*-*-* -p 3

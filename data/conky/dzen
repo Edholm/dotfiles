@@ -11,12 +11,46 @@ default_color 657b83
 
 TEXT
 ^fn(Consolas:size=12)  \
+# WLAN #
 ^fg(\#b58900)^i(/home/eda/.xmonad/data/icons/net-wifi4.xbm)^fg() \
 ${if_existing /proc/net/route wlan0} \
 ${wireless_link_qual_perc wlan0}% @ ${addr wlan0} (${wireless_essid wlan0})  \
 ${else} \
 Wlan disconnected \
+${endif}\
+# Battery #
+${if_existing /sys/class/power_supply/AC0/online 0}\
+^fg(\#b58900)^i(/home/eda/.xmonad/data/icons/power-bat.xbm)^fg() \
+${else}\
+^fg(\#b58900)^i(/home/eda/.xmonad/data/icons/power-ac.xbm)^fg() \
+${endif}\
+\
+${if_match ${battery_percent BAT0} <= 9}\
+^fg(red)${battery_percent}%^fg()\
+${execpi 60 sh /home/eda/.xmonad/data/conky/low-bat-warn}\ 
+${endif}\
+\
+${if_match ${battery_percent BAT0} >= 10}\
+${if_match ${battery_percent BAT0} <=49}\
+^fg(orange)${battery_percent}%^fg()\
+${endif}${endif}\
+\
+${if_match ${battery_percent BAT0} >= 50}\
+${if_match ${battery_percent BAT0} <=79}\
+^fg(yellow)${battery_percent}%^fg()\
+${endif}${endif}\
+\
+${if_match ${battery_percent BAT0} >= 80}\
+${if_match ${battery_percent BAT0} <= 95}\
+^fg(green)${battery_percent}%^fg()\
+${endif}${endif}\
+\
+${if_match ${battery_percent BAT0} > 95}\
+${battery_percent}%\
 ${endif} \
-${execpi 30 sh /home/eda/.xmonad/data/conky/on-ac-dzen} ^fg(\#b58900)|^fg()  \
+^fg(yellow)${battery_time}^fg() \
+#${execpi 2 sh /home/eda/.xmonad/data/conky/on-ac-dzen} ^fg(\#b58900)|^fg()  \
+# Date #
 ^fg()${time (%A %d%b}-${execpi 60 cat /home/eda/.scripts/lasvecka.txt}) \
+# Time #
 ^fg(\#b58900)${time %H:%M}
