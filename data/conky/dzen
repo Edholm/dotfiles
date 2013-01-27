@@ -10,7 +10,7 @@ total_run_times 0
 default_color 657b83
 
 TEXT
-^fn(Consolas:size=12) \
+^fn(Terminus:size=14) \
 #
 # WLAN #
 #
@@ -65,13 +65,13 @@ ${if_existing /sys/class/power_supply/AC0/online 0}\
 ${endif}\
 ${battery_percent}%\
 ${endif} \
-${if_empty ${battery_time}}{$else}\
+${if_empty ${battery_time}}${else}\
 (\
 ${if_existing /sys/class/power_supply/AC0/online 1}\
 charging \
 ${endif}\
-${battery_time}) \
-${endif} \
+${battery_time})\
+${endif}  \
 #
 # Date #
 #
