@@ -10,10 +10,10 @@ total_run_times 0
 default_color 657b83
 
 TEXT
-^fn(Consolas:size=12)  \
+^fn(Consolas:size=12) \
 # WLAN #
 ^fg(\#b58900)^i(/home/eda/.xmonad/data/icons/net-wifi4.xbm)^fg() \
-${if_existing /proc/net/route wlan0} \
+${if_existing /proc/net/route wlan0}\
 ${wireless_link_qual_perc wlan0}% @ ${addr wlan0} (${wireless_essid wlan0})  \
 ${else} \
 Wlan disconnected \
