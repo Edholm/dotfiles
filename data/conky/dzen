@@ -8,10 +8,15 @@ override_utf8_locale yes
 update_interval 3
 total_run_times 0
 default_color 657b83
-#mpd_host 127.0.0.1
-#mpd_port 6600
-#${if_mpd_playing}^i(.xmonad/data/icons/music.xbm) [ ${mpd_status}-${mpd_elapsed}/${mpd_length} ] ^fg(\#909090)${mpd_title}^fg() by ^fg(\#909090)${mpd_artist}$endif^fg() ^fg(\#909090)${execpi 40 python ~/.scripts/gmail-check.py}^fg() CPU:^fg(\#909090)${cpu}%^fg() - ${time %a %d %b ^fg(\#909090)%H:%M}  
 
 TEXT
-#^fg(\#909090)${execpi 40 python ~/.scripts/gmail-check.py}^fg() CPU:^fg(\#909090)${cpu}%^fg() - ${time %a %d %b ^fg(\#909090)%H:%M}  
-^fn(Consolas:size=11)${exec /home/eda/.scripts/spotcont_dzen}^fn()   ${execpi 30 sh /home/eda/.xmonad/data/conky/on-ac-dzen} ^fg(\#b58900)|^fg()  ^fg()${time (%A }${execpi 60 cat /home/eda/.scripts/lasvecka.txt}) ^fg(\#b58900)${time %H:%M}
+^fn(Consolas:size=12)  \
+^fg(\#b58900)^i(/home/eda/.xmonad/data/icons/net-wifi4.xbm)^fg() \
+${if_existing /proc/net/route wlan0} \
+${wireless_link_qual_perc wlan0}% @ ${addr wlan0} (${wireless_essid wlan0})  \
+${else} \
+Wlan disconnected \
+${endif} \
+${execpi 30 sh /home/eda/.xmonad/data/conky/on-ac-dzen} ^fg(\#b58900)|^fg()  \
+^fg()${time (%A %d%b}-${execpi 60 cat /home/eda/.scripts/lasvecka.txt}) \
+^fg(\#b58900)${time %H:%M}
