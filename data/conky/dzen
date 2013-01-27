@@ -18,7 +18,7 @@ TEXT
 ${if_existing /proc/net/route wlan0}\
 ${wireless_link_qual_perc wlan0}% @ ${addr wlan0} (${wireless_essid wlan0})  \
 ${else} \
-Wlan disconnected \
+disconnected \
 ${endif}\
 #
 # Battery #
@@ -30,9 +30,9 @@ ${endif}\
 ${if_match ${battery_percent BAT0} <= 9}\
 ${if_existing /sys/class/power_supply/AC0/online 0}\
 ^fg(\#b58900)^i(/home/eda/.xmonad/xbm_icons/subtle/bat_empty_01.xbm)^fg() \
+${execpi 60 sh /home/eda/.xmonad/data/conky/low-bat-warn}\ 
 ${endif}\
 ^fg(red)${battery_percent}%^fg()\
-${execpi 60 sh /home/eda/.xmonad/data/conky/low-bat-warn}\ 
 ${endif}\
 #
 ${if_match ${battery_percent BAT0} >= 10}\
@@ -64,9 +64,9 @@ ${if_existing /sys/class/power_supply/AC0/online 0}\
 ^fg(\#b58900)^i(/home/eda/.xmonad/xbm_icons/subtle/bat_full_01.xbm)^fg() \
 ${endif}\
 ${battery_percent}%\
-${endif} \
+${endif}\
 ${if_empty ${battery_time}}${else}\
-(\
+ (\
 ${if_existing /sys/class/power_supply/AC0/online 1}\
 charging \
 ${endif}\
