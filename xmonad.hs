@@ -101,9 +101,9 @@ myKeyunbindings = ["M-<Return>"]
 -- Layouts:
 myLayout = avoidStruts $ onWorkspace (pbWorkspaces !! 8) (im pidgin) $ onWorkspace (pbWorkspaces !! 7) (im skype) $ smartBorders  $ pbLayout       
   where
-    skype  =  Or (Title "emil.edholm - Skype™ (Beta)")(Title "Skype™ 2.2 (Beta) for Linux")
+    skype  =  Or (Title "emil.edholm - Skype™")(Title "Skype™ 2.2 (Beta) for Linux")
     pidgin =  Role "buddy_list"
-    im roster   = reflectHoriz(withIM (0.20) roster (smartBorders Grid ||| Mirror tiled ||| tiled))
+    im roster   = withIM (0.20) roster (smartBorders Grid ||| Mirror tiled ||| tiled)
    
     -- default tiling algorithm partitions the screen into two panes
     tiled           = smartBorders (Tall nmaster delta ratio)
