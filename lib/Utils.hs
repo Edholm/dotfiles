@@ -110,9 +110,9 @@ pbPP = dzenPP
             "Hinted Tall"             -> "^i(" ++ myIconPath ++ "tall.xbm)"
             "Hinted Mirror Tall"      -> "^i(" ++ myIconPath ++ "mtall.xbm)"
             "Hinted Full"             -> "^i(" ++ myIconPath ++ "full2.xbm)"
-            "ReflectX IM Grid"        -> "^i(" ++ myIconPath ++ "grid.xbm) " ++ "^i(" ++ myIconPath ++ "dotbox.xbm)"
-            "ReflectX IM Tall"        -> "^i(" ++ myIconPath ++ "tall.xbm) " ++ "^i(" ++ myIconPath ++ "dotbox.xbm)"
-            "ReflectX IM Mirror Tall" -> "^i(" ++ myIconPath ++ "mtall.xbm) " ++ "^i(" ++ myIconPath ++ "dotbox.xbm)"
+            "IM Grid"        ->  "^i(" ++ myIconPath ++ "dotbox.xbm) " ++ "^i(" ++ myIconPath ++ "grid.xbm)" 
+            "IM Tall"        ->  "^i(" ++ myIconPath ++ "dotbox.xbm) " ++ "^i(" ++ myIconPath ++ "tall.xbm)" 
+            "IM Mirror Tall" ->  "^i(" ++ myIconPath ++ "dotbox.xbm) " ++ "^i(" ++ myIconPath ++ "mtall.xbm)"
             _                      -> pad s
     }
           where
