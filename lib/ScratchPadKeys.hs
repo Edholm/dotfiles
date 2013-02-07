@@ -187,7 +187,7 @@ scratchHubben = ScratchPad
              { keybind  = "M1-S-h"
              , cmd      =  runInTerminal [ "-name", "sp-chalmers", "-title", "hubben", "-e bash -ci", "\"SCREEN_CONF=" ++ "hubben", "screen -S", "hubben", "R -D", "hubben" ++ "\"" ]
              , query    = resource =? "sp-chalmers"
-             , hook     = centerScreen 0.75
+             , hook     = centerScreen 0.90
              }
 
 
@@ -197,7 +197,7 @@ scratchTop = ScratchPad
              { keybind  = "M1-z"
              , cmd      = runInTerminal ["-name", "sp-htop", "-e", "htop"]
              , query    = resource =? "sp-htop"
-             , hook     = centerScreen 0.65
+             , hook     = centerScreen 0.85
              }
 
 
