@@ -64,9 +64,9 @@ myKeybindings =
     ("M-p"   ,spawn "gmrun"                         ),  
     ("M-r"   ,yeganesh                              ),          
     ("M-S-p" ,runOrRaisePrompt defaultXPConfig      ),        
-    ("M-c"   ,spawn "google-chrome"                 ),
-    ("M-v"   ,spawn "google-chrome --incognito"     ),
-    --("M4-l"  ,spawn "slock"                         ),  -- Lock screen with Win-L
+    ("M-c"   ,spawn "firefox"                       ),
+    ("M-v"   ,spawn "firefox --private"             ),
+    --("M4-l"  ,spawn "slock"                       ),  -- Lock screen with Win-L
     ("M-S-t" ,spawn "thunar"                        ),
     ("M-q"   ,cleanStart                            ),
 
