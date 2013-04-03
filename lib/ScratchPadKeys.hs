@@ -178,7 +178,7 @@ scratchIrssi = ScratchPad
              { keybind  = "M1-S-i"
              , cmd      =  runInTerminal [ "-name", "sp-irssi", "-title", "irssi", "-e bash -ci", "\"SCREEN_CONF=" ++ "irssi", "screen -S", "irssi", "R -D", "irssi" ++ "\"" ]
              , query    = resource =? "sp-irssi"
-             , hook     = centerScreen 0.75
+             , hook     = centerScreen 0.9
              }
 
 -- | irssi (hubben.chalmers.it) center screen                                                      
