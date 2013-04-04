@@ -10,6 +10,7 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+local scratch = require("scratch")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -38,35 +39,40 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("/home/eda/.config/awesome/themes/solarized-dark/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
+-- Define some folders
+base_dir    = "/home/eda/"
+awesome_dir = base_dir .. ".config/awesome/"
+icons       = awesome_dir .. "icons/"
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod1"
+modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier
+    awful.layout.suit.max,
+    --awful.layout.suit.floating,
+    --awful.layout.suit.fair,
+    --awful.layout.suit.fair.horizontal,
+    --awful.layout.suit.spiral,
+    --awful.layout.suit.spiral.dwindle,
+    --awful.layout.suit.magnifier
 }
 -- }}}
 
@@ -80,11 +86,23 @@ end
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {}
+tags = {
+    names   = { "1-web", "2-foo", "3-bar", 4, 5, 6, "7-spotify", "8-skype", 9 },
+    layouts = {layouts[1],layouts[1],layouts[1],layouts[1],layouts[1],layouts[1],
+                layouts[1],layouts[2],layouts[1]},
+    icons   = {icons .. "tv.xbm", icons .. "code.xbm", nil, nil, nil, icons .. "spotify.xbm", icons .. "mail.xbm", nil}
+}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
+    tags[s] = awful.tag(tags.names, s, tags.layouts)
+    --if tagseparator then
+    --    for i, t in ipairs(tags[s]) do
+    --        awful.tag.seticon(tags.icons[i], t)
+    --    end
+    --end
+    awful.tag.setmwfact(0.25, tags[s][8])
 end
+
 -- }}}
 
 -- {{{ Menu
@@ -110,10 +128,13 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibox
 -- Create a textclock widget
-mytextclock = awful.widget.textclock()
+mycaliw     = wibox.widget.imagebox()
+mycaliw:set_image(beautiful.icon_cal)
+mydateclock = awful.widget.textclock(' <span color="#b58900">%a %d %b</span> ', 300)
+mytimeclock = awful.widget.textclock('%H:%M ', 60)
 
 -- Create a wibox for each screen and add it
-mywibox = {}
+mywibox = {mycaliw}
 mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
@@ -182,15 +203,17 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
+    --left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
+    left_layout:add(mylayoutbox[s])
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
-    if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(mytextclock)
-    right_layout:add(mylayoutbox[s])
+    --if s == 1 then right_layout:add(wibox.widget.systray()) end
+    right_layout:add(mycaliw)
+    right_layout:add(mydateclock)
+    right_layout:add(mytimeclock)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -243,8 +266,8 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
-    awful.key({ modkey, "Control" }, "r", awesome.restart),
+    awful.key({ modkey, "Shift"   }, "Return", function () awful.util.spawn(terminal) end),
+    awful.key({ modkey,           }, "q", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
@@ -259,17 +282,47 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    awful.key({ modkey }, "r", 
+        function ()  
+            local yeganesh = "exe=\"yeganesh -x -- -nb \\#002b36 -nf \\#b58900 -sb \\#002b36 -sf \\#dc322f -fn -xos4-terminus-medium-r-normal-*-20-*-*-*-*-*-*-*\" && eval \"exec $exe\"" 
+            awful.util.spawn(yeganesh)
+        end),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end),
+    --awful.key({ modkey }, "x",
+    --          function ()
+    --              awful.prompt.run({ prompt = "Run Lua code: " },
+    --              mypromptbox[mouse.screen].widget,
+    --              awful.util.eval, nil,
+    --              awful.util.getdir("cache") .. "/history_eval")
+    --          end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+    
+    -- Scratch-pads
+    awful.key({ modkey,         }, "s", function() scratch.drop(terminal .. " -title scratch", "bottom", "center", 1, 0.4) end),
+    awful.key({ modkey, "Shift" }, "s", function() scratch.drop(terminal .. " -title center", "bottom", "center", 0.65, 0.65) end),
+    awful.key({ modkey,         }, "x", function() scratch.drop(terminal .. " -title alsa -e alsamixer", "center", "center", 0.65, 0.65) end),
+    awful.key({ modkey,         }, "z", function() scratch.drop(terminal .. " -title htop -e htop", "center", "center", 0.65, 0.65) end),
+    awful.key({ modkey, "Shift" }, "i", function() scratch.drop(terminal .. " -title irc -e weechat-screen.sh", "center", "center", 0.85, 0.85) end),
+    awful.key({ modkey, "Shift" }, "r", function() scratch.drop(terminal .. " -title fm -e ranger", "center", "center", 0.85, 0.85) end),
+    
+    -- Spawn apps
+    awful.key({ modkey            }, "c", function() awful.util.spawn("firefox") end),
+    awful.key({ modkey            }, "v", function() awful.util.spawn("firefox --private") end),
+    awful.key({ modkey, "Control" }, "r", function() awful.util.spawn(terminal .. " -e ranger") end),
+
+    -- Multimedia keys
+    awful.key({},"XF86AudioMute",        function() awful.util.spawn("sh /home/eda/.scripts/cvol -t") end),
+    awful.key({},"XF86AudioLowerVolume", function() awful.util.spawn("sh /home/eda/.scripts/cvol -d 5") end),
+    awful.key({},"XF86AudioRaiseVolume", function() awful.util.spawn("sh /home/eda/.scripts/cvol -i 5") end),
+    awful.key({},"XF86AudioNext",        function() awful.util.spawn("sh /home/eda/.scripts/mediacontroler.py next") end),
+    awful.key({},"XF86AudioPrev",        function() awful.util.spawn("sh /home/eda/.scripts/mediacontroler.py next") end),
+    awful.key({},"XF86KbdBrightnessDown",function() awful.util.spawn("asus-kbd-backlight down") end),
+    awful.key({},"XF86KbdBrightnessUp",  function() awful.util.spawn("asus-kbd-backlight up") end),
+    awful.key({},"XF86TouchpadToggle",   function() awful.util.spawn("/home/eda/.scripts/trackpad-toggle.sh") end)
+  --awful.key({},"XF86ScreenBrightnessUp",function()awful.util.spawn("sudo-n/home/eda/.scripts/brightness.shup"),
+  --awful.key({},"XF86ScreenBrightnessDown",function()awful.util.spawn("sudo-n/home/eda/.scripts/brightness.shdown")
+    
 )
 
 clientkeys = awful.util.table.join(
@@ -353,9 +406,14 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
+    { rule = { class = "Firefox" },
+      properties = { tag = tags[1][1] } },
+    { rule = { class = "Skype" },
+      properties = { tag = tags[1][8] } },
+    { rule = { class = "Spotify" },
+      properties = { tag = tags[1][7] } },
+    { rule = { name = "Options" },
+      properties = { floating = true } },
 }
 -- }}}
 
