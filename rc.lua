@@ -86,10 +86,8 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-    names   = { "1-web", "2-foo", "3-bar", 4, 5, 6, "7-spotify", "8-skype", 9 },
-    layouts = {layouts[1],layouts[1],layouts[1],layouts[1],layouts[1],layouts[1],
-                layouts[1],layouts[1],layouts[1]},
-    icons   = {icons .. "tv.xbm", icons .. "code.xbm", nil, nil, nil, icons .. "spotify.xbm", icons .. "mail.xbm", nil}
+    names   = { "web", "term", "foo", "bar", "rnd", "spotify", "skype"},
+    layouts = layouts[1],
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -99,7 +97,7 @@ for s = 1, screen.count() do
     --        awful.tag.seticon(tags.icons[i], t)
     --    end
     --end
-    awful.tag.setmwfact(0.75, tags[s][8])
+    awful.tag.setmwfact(0.75, tags[s][7])
 end
 
 -- }}}
@@ -212,10 +210,10 @@ for s = 1, screen.count() do
     right_layout:add(spacer)
     right_layout:add(gmail1_icon)
     right_layout:add(gmail1_widget)
-    right_layout:add(spacer)
+    right_layout:add(m1_sep)
     right_layout:add(gmail2_icon)
     right_layout:add(gmail2_widget)
-    right_layout:add(spacer)
+    right_layout:add(m2_sep)
     right_layout:add(wlan_icon)
     right_layout:add(wlan_widget)
     right_layout:add(separator)
@@ -423,10 +421,12 @@ awful.rules.rules = {
     { rule = { class = "Firefox" },
       properties = { tag = tags[1][1] } },
     { rule = { class = "Skype" },
-      properties = { tag = tags[1][8] } },
-    { rule = { class = "Spotify" },
       properties = { tag = tags[1][7] } },
+    { rule = { class = "Spotify" },
+      properties = { tag = tags[1][6] } },
     { rule = { name = "Options" },
+      properties = { floating = true } },
+    { rule = { name = "File Transfers" },
       properties = { floating = true } },
 }
 -- }}}

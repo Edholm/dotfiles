@@ -36,12 +36,15 @@ local function mail_notify(address, count, subject)
             "gmail_color.png")
 end
 
-local function mail_status(icon, address, count, subject)
+local function mail_status(sep, icon, address, count, subject)
     if count > 0 then
+        sep:set_image(icons .. "separator.png")
         icon:set_image(icons .. "gmail_color.png")
         mail_notify(address, count, subject)
         return ' <span color="' .. base01 .. '">' .. address .. ':</span> <span color="red">' .. count .. '</span>' 
     else
+        sep:set_image()
+        icon:set_image()
         return " "
     end
 end
@@ -49,6 +52,9 @@ end
 -- Separator
 separator = wibox.widget.imagebox()
 separator:set_image(icons .. "separator.png")
+
+m1_sep = wibox.widget.imagebox()
+m2_sep = wibox.widget.imagebox()
 
 spacer = wibox.widget.textbox()
 spacer:set_text(" ")
@@ -75,36 +81,73 @@ vicious.register(wlan_widget, vicious.widgets.wifi,
            return " Not connected"
         end
     end, 7,  "wlan0") 
+-- Buttons
+wlan_icon:buttons(awful.util.table.join(
+    awful.button({ }, 1, 
+        function() 
+            -- needs nopasswd in visudo
+            naughty.notify { text = "Available access points:\n" ..  awful.util.pread("sudo iwlist wlan0 scan | grep ESSID | awk -F\\\" \'{print $(NF-1)}\'"), timeout = 10, hover_timeout = 3 }
+        end)))
+wlan_widget:buttons(wlan_icon:buttons())
+-- // Wlan widget
 
 -- Battery widget
+local b_charge  = 0 
+local b_state   = ""
+local b_time    = ""
 batt_icon = wibox.widget.imagebox()
 batt_widget = wibox.widget.textbox()
 vicious.register(batt_widget, vicious.widgets.bat, 
     function(widget, args)
-        charge  = args[2]
-        state   = args[1]
-        if charge > 75 or state == "N/A" then
+        b_charge  = args[2]
+        b_state   = args[1]
+        b_time    = args[3]
+        if b_charge > 75 or b_state == "N/A" then
             batt_icon:set_image(icons .. "batt_100.png")
-        elseif charge <= 75 and charge > 50 then
+        elseif b_charge <= 75 and b_charge > 50 then
             batt_icon:set_image(icons .. "batt_75.png")
-        elseif charge <= 50 and charge > 25 then
+        elseif b_charge <= 50 and b_charge > 25 then
             batt_icon:set_image(icons .. "batt_50.png")
-        elseif charge <= 25 then 
+        elseif b_charge <= 25 then 
             batt_icon:set_image(icons .. "batt_25.png")
-            if charge <= 10 and args[1] == "-" then
-                notify("Battery charge at <span color=\"red\">" .. charge .. "%</span>",
+            if b_charge <= 10 and args[1] == "-" then
+                notify("Battery b_charge at <span color=\"red\">" .. b_charge .. "%</span>",
                        "Battery warning", "batt_25_big.png")
             end
         end
-        bat = " <span color=\"" .. yellow .. "\">" .. charge .. "%</span>"
-        if args[1] ~= "-" then
-            bat = ' <span color="' .. base01 .. '">' .. args[1] .. '</span>' .. bat
+        local retval = " " .. b_state;
+        if b_state == "-" then -- discharging
+            retval = retval .. " <span color=\"" .. yellow .. "\">" .. b_charge .. "%</span>"
+            if args[3] ~= "N/A" then
+                retval = retval .. " (<span color=\"" .. yellow .. "\">".. args[3] .. " left</span>)"
+            end
         end
-        if args[3] ~= "N/A" then
-            bat = bat .. " (<span color=\"" .. yellow .. "\">".. args[3] .. " left</span>)"
-        end
-        return bat
+        return retval
     end, 31, "BAT0")
+
+-- Button
+function popup_bat()
+  local state = ""
+  if b_state == "↯" then
+    state = "Full"
+  elseif b_state == "↯" then
+    state = "Charged"
+  elseif b_state == "+" then
+    state = "Charging"
+  elseif b_state == "-" then
+    state = "Discharging"
+  elseif b_state == "⌁" then
+    state = "Not charging"
+  else
+    state = "Unknown"
+  end
+
+  naughty.notify { text = "Charge : " .. b_charge .. "%\nState : " .. state ..
+    " (" .. b_time .. ")", timeout = 5, hover_timeout = 0.5 }
+end
+batt_widget:buttons(awful.util.table.join(awful.button({ }, 1, popup_bat)))
+batt_icon:buttons(batt_widget:buttons())
+-- // Battery widget
 
 -- Mail notification widget
 -- @edholm.it
@@ -112,7 +155,7 @@ gmail1_icon = wibox.widget.imagebox()
 gmail1_widget = wibox.widget.textbox()
 vicious.register(gmail1_widget, vicious.widgets.gmail,
     function(widget, args)
-        return mail_status(gmail1_icon, "emil@edholm.it", args["{count}"], args["{subject}"]) 
+        return mail_status(m1_sep, gmail1_icon, "emil@edholm.it", args["{count}"], args["{subject}"]) 
     end, 173)
 
 -- @chalmers.it
@@ -120,10 +163,11 @@ gmail2_icon = wibox.widget.imagebox()
 gmail2_widget = wibox.widget.textbox()
 vicious.register(gmail2_widget, vicious.widgets.gmail_custom,
     function(widget, args)
-        return mail_status(gmail2_icon, "eda@chalmers.it", args["{count}"], args["{subject}"]) 
+        return mail_status(m2_sep, gmail2_icon, "eda@chalmers.it", args["{count}"], args["{subject}"]) 
     end, 181, {netrcfile = "/home/eda/.netrc_chalmers_it"})
+-- // Mail widget
 
--- Volume widget (clickable)
+-- Volume widget
 local vol, vol_state
 volume_icon = wibox.widget.imagebox()
 volume_widget = wibox.widget.textbox()
@@ -150,19 +194,20 @@ volume_icon:buttons(awful.util.table.join(
             naughty.notify { text = "Volume: " .. vol .. "% (" .. vol_state .. ")", timeout = 5, hover_timeout = 0.5 }
         end)))
 volume_widget:buttons(volume_icon:buttons())
-
--- Tooltip
---volume_tooltip = awful.tooltip({ objects = {volume_icon},})
---volume_icon:add_signal("mouse::enter", function()
---    volume_tooltip:set_text("Volume: " .. vol .. "% (" .. vol_state .. ")")
---end)
-
 -- // Volume widget
 
 -- Time/date widgets
 clock_icon  = wibox.widget.imagebox()
 clock_icon:set_image(icons .. "clock.png")
 mydateclock = awful.widget.textclock(' <span color="' .. base00 .. '">%a %d %b</span>', 300)
---mydateclock = awful.widget.textclock(" %a %d %b", 307)
 mytimeclock = awful.widget.textclock('<span color="' .. base01 .. '"> %H:%M </span>', 60)
 
+-- Button
+clock_icon:buttons(awful.util.table.join(
+    awful.button({ }, 1, 
+        function() 
+            naughty.notify { text = awful.util.pread("cal"), timeout = 10, hover_timeout = 3 }
+        end)))
+mydateclock:buttons(clock_icon:buttons())
+mytimeclock:buttons(clock_icon:buttons())
+-- // Time/date widgets
