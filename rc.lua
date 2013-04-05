@@ -454,7 +454,7 @@ client.connect_signal("manage", function (c, startup)
         end
     end
 
-    local titlebars_enabled = false
+    local titlebars_enabled = true 
     if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
         -- buttons for the titlebar
         local buttons = awful.util.table.join(
@@ -491,14 +491,43 @@ client.connect_signal("manage", function (c, startup)
         middle_layout:buttons(buttons)
 
         -- Now bring it all together
-        local layout = wibox.layout.align.horizontal()
+        layout = wibox.layout.align.horizontal()
         layout:set_left(left_layout)
         layout:set_right(right_layout)
         layout:set_middle(middle_layout)
 
-        awful.titlebar(c):set_widget(layout)
+        --awful.titlebar(c):set_widget(layout)
+        -- Floaters always have borders
+        if awful.client.floating.get(c) or layout == "floating" then
+            c.border_width = beautiful.border_width
+        
+            if not c.fullscreen then -- Floaters have titlebars
+                if not c.titlebar and c.class ~= "Xmessage" then
+                    awful.titlebar(c):set_widget(layout)
+                end -- Floaters are always on top
+                c.above = true
+            end
+        end
     end
 end)
+
+-- {{{ Arrange clients
+for s = 1, screen.count() do screen[s]:connect_signal("arrange", function() 
+    local clients = awful.client.visible(s)
+    local layout  = awful.layout.getname(awful.layout.get(s)) 
+    if #clients > 0 then
+        for _, c in pairs(clients) do
+            -- Remove border when the it is only one client on the tag.
+            if #clients == 1 or layout == "max" then
+                clients[1].border_width = 0
+            else
+                c.border_width = beautiful.border_width
+            end
+        end
+    end
+    end)
+end
+-- }}}
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
