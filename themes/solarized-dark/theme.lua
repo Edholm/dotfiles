@@ -35,12 +35,12 @@ theme.colors.green   = "#859900ff"
 theme.font      = "Terminus 11"
 
 -- {{{ Colors
-theme.fg_normal  = theme.colors.base02
-theme.fg_focus   = theme.colors.base03
+theme.fg_normal  = theme.colors.base01
+theme.fg_focus   = theme.colors.yellow --base03
 theme.fg_urgent  = theme.colors.base3
 
 theme.bg_normal  = theme.colors.base3
-theme.bg_focus   = theme.colors.base1
+theme.bg_focus   = theme.colors.base3
 theme.bg_urgent  = theme.colors.red
 theme.bg_systray = theme.bg_normal
 -- }}}
@@ -53,7 +53,7 @@ theme.border_marked = theme.bg_urgent
 -- }}}
 
 -- {{{ Titlebars
-theme.titlebar_bg_focus  = theme.bg_focus
+theme.titlebar_bg_focus  = theme.colors.base3
 theme.titlebar_bg_normal = theme.bg_normal
 -- }}}
 
@@ -83,18 +83,18 @@ theme.menu_submenu_icon      = theme.default_themes_path.."/default/submenu.png"
 -- }}}
 
 -- {{{ Layout
-theme.layout_tile       = theme.default_themes_path.."/zenburn/layouts/tile.png"
-theme.layout_tileleft   = theme.default_themes_path.."/zenburn/layouts/tileleft.png"
-theme.layout_tilebottom = theme.default_themes_path.."/zenburn/layouts/tilebottom.png"
-theme.layout_tiletop    = theme.default_themes_path.."/zenburn/layouts/tiletop.png"
-theme.layout_fairv      = theme.default_themes_path.."/zenburn/layouts/fairv.png"
-theme.layout_fairh      = theme.default_themes_path.."/zenburn/layouts/fairh.png"
-theme.layout_spiral     = theme.default_themes_path.."/zenburn/layouts/spiral.png"
-theme.layout_dwindle    = theme.default_themes_path.."/zenburn/layouts/dwindle.png"
-theme.layout_max        = theme.default_themes_path.."/zenburn/layouts/max.png"
-theme.layout_fullscreen = theme.default_themes_path.."/zenburn/layouts/fullscreen.png"
-theme.layout_magnifier  = theme.default_themes_path.."/zenburn/layouts/magnifier.png"
-theme.layout_floating   = theme.default_themes_path.."/zenburn/layouts/floating.png"
+theme.layout_tile       = "/home/eda/.config/awesome/icons/layouts/tile.png"
+theme.layout_tileleft   = "/home/eda/.config/awesome/icons/layouts/tileleft.png"
+theme.layout_tilebottom = "/home/eda/.config/awesome/icons/layouts/tilebottom.png"
+theme.layout_tiletop    = "/home/eda/.config/awesome/icons/layouts/tiletop.png"
+theme.layout_fairv      = "/home/eda/.config/awesome/icons/layouts/fairv.png"
+theme.layout_fairh      = "/home/eda/.config/awesome/icons/layouts/fairh.png"
+theme.layout_spiral     = "/home/eda/.config/awesome/icons/layouts/spiral.png"
+theme.layout_dwindle    = "/home/eda/.config/awesome/icons/layouts/dwindle.png"
+theme.layout_max        = "/home/eda/.config/awesome/icons/layouts/max.png"
+theme.layout_fullscreen = "/home/eda/.config/awesome/icons/layouts/fullscreen.png"
+theme.layout_magnifier  = "/home/eda/.config/awesome/icons/layouts/magnifier.png"
+theme.layout_floating   = "/home/eda/.config/awesome/icons/layouts/floating.png"
 -- }}}
 
 -- {{{ Titlebar
