@@ -12,7 +12,9 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local scratch = require("scratch")
 local vicious = require("vicious")
+-- Custom code/libraries
 require("gmail_custom")
+require("widgets")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -47,18 +49,6 @@ beautiful.init("/home/eda/.config/awesome/themes/solarized-dark/theme.lua")
 terminal = "urxvt"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
-
--- Define some folders
-base_dir    = "/home/eda/"
-awesome_dir = base_dir .. ".config/awesome/"
-icons       = awesome_dir .. "icons/"
-
--- Define some colors
-yellow = "#b58900"
-base00 = "#657b83"
-base01 = "#586e75"
-base02 = "#073642"
-base03 = "#002b36"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -98,7 +88,7 @@ end
 tags = {
     names   = { "1-web", "2-foo", "3-bar", 4, 5, 6, "7-spotify", "8-skype", 9 },
     layouts = {layouts[1],layouts[1],layouts[1],layouts[1],layouts[1],layouts[1],
-                layouts[1],layouts[2],layouts[1]},
+                layouts[1],layouts[1],layouts[1]},
     icons   = {icons .. "tv.xbm", icons .. "code.xbm", nil, nil, nil, icons .. "spotify.xbm", icons .. "mail.xbm", nil}
 }
 for s = 1, screen.count() do
@@ -109,7 +99,7 @@ for s = 1, screen.count() do
     --        awful.tag.seticon(tags.icons[i], t)
     --    end
     --end
-    awful.tag.setmwfact(0.25, tags[s][8])
+    awful.tag.setmwfact(0.75, tags[s][8])
 end
 
 -- }}}
@@ -136,147 +126,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- {{{ Wibox
-local function notify(txt, tit, ico)
-    naughty.notify({
-            text = txt,
-            title = tit,
-            position = "top_right",
-            timeout = 7,
-            icon = icons .. ico,
-            fg="#fff",
-            bg="#002b36",
-            screen = 1,
-            ontop = true, 
-        })
-end
--- Create a textclock widget
 --
--- Separator
-separator = wibox.widget.imagebox()
-separator:set_image(icons .. "separator.png")
-
--- Wlan widget
-wlan_icon = wibox.widget.imagebox()
-vicious.register(wlan_icon, vicious.widgets.wifi,
-    function(widget, args) 
-        link = args["{link}"]
-        ssid = args["{ssid}"]
-        if link > 75 or ssid == "N/A" then
-            wlan_icon:set_image(icons .. "wlan_100.png")
-        elseif link < 75 and link > 50 then
-            wlan_icon:set_image(icons .. "wlan_75.png")
-        elseif link < 50 and link > 25 then
-            wlan_icon:set_image(icons .. "wlan_50.png")
-        else
-            wlan_icon:set_image(icons .. "wlan_25.png")
-        end
-    end, 7, "wlan0")
-wlan_widget = wibox.widget.textbox()
-vicious.register(wlan_widget, vicious.widgets.wifi, 
-    function(widget, args)
-        link = args["{link}"]
-        ssid = args["{ssid}"]
-        if ssid ~= "N/A" then
-            return " " ..ssid .. " (<span color=\"" .. yellow .. "\">" .. link .. "%</span>)"
-        else
-           return " Not connected"
-        end
-    end, 7,  "wlan0") 
-
--- Battery widget
-batwidget_icon = wibox.widget.imagebox()
-vicious.register(batwidget_icon, vicious.widgets.bat,
-    function(widget, args) 
-        charge  = args[2]
-        state   = args[1]
-        if charge > 75 or state == "N/A" then
-            batwidget_icon:set_image(icons .. "batt_100.png")
-        elseif charge < 75 and charge > 50 then
-            batwidget_icon:set_image(icons .. "batt_75.png")
-        elseif charge < 50 and charge > 25 then
-            batwidget_icon:set_image(icons .. "batt_50.png")
-        elseif charge < 25 then 
-            batwidget_icon:set_image(icons .. "batt_25.png")
-            if charge <= 10 and args[1] == "-" then
-                notify("Battery charge at <span color=\"red\">" .. charge .. "%</span>",
-                       "Battery warning", "batt_25_big.png")
-            end
-        end
-    end, 31, "BAT0")
-
-batwidget = wibox.widget.textbox()
-vicious.register(batwidget, vicious.widgets.bat, 
-    function(widget, args)
-        charge  = args[2]
-        bat = " <span color=\"" .. yellow .. "\">" .. charge .. "%</span>"
-        if args[1] ~= "-" then
-            bat = ' <span color="' .. base01 .. '">' .. args[1] .. '</span>' .. bat
-        end
-        if args[3] ~= "N/A" then
-            bat = bat .. " (<span color=\"" .. yellow .. "\">".. args[3] .. " left</span>)"
-        end
-        return bat
-    end, 31, "BAT0")
-
--- Mail notification widget
-local function mail_notify(address, count, subject)
-    notify('You have <span color="red">' .. count .. '</span> new mail(s)\nSubject: ' .. subject,
-            "New mail (" .. address .. ")",
-            "gmail_color.png")
-end
--- @edholm.it
-gmail1_icon = wibox.widget.imagebox()
-vicious.register(gmail1_icon, vicious.widgets.gmail,
-    function(widget, args)
-        if args["{count}"] > 0 then
-            gmail1_icon:set_image(icons .. "gmail_color.png")
-        end
-    end, 181)
-
-gmail1_widget = wibox.widget.textbox()
-vicious.register(gmail1_widget, vicious.widgets.gmail,
-    function(widget, args)
-        count = args["{count}"]
-        if count > 0 then
-            subject = args["{subject}"]
-            mail_notify("emil@edholm.it", count, subject)
-            return ' <span color="' .. base01 .. '">emil@edholm.it:</span> <span color="red">' .. count .. '</span>' 
-        else
-            return " "
-        end
-    end, 181)
-
--- @chalmers.it
-gmail2_icon = wibox.widget.imagebox()
-vicious.register(gmail2_icon, vicious.widgets.gmail_custom,
-    function(widget, args)
-        if args["{count}"] > 0 then
-            gmail2_icon:set_image(icons .. "gmail_color.png")
-        end
-    end, 181, { netrcfile = "~/.netrc_chalmers_it"})
-
-gmail2_widget = wibox.widget.textbox()
-vicious.register(gmail2_widget, vicious.widgets.gmail_custom,
-    function(widget, args)
-        count = args["{count}"]
-        if count > 0 then
-            subject = args["{subject}"]
-            mail_notify("eda@chalmers.it", count, subject)
-            return ' <span color="' .. base01 .. '">eda@chalmers.it:</span> <span color="red">' .. count .. '</span>' 
-        else
-            return " "
-        end
-    end, 181, {netrcfile = "/home/eda/.netrc_chalmers_it"})
-
--- Time/date widgets
-clock_icon  = wibox.widget.imagebox()
-clock_icon:set_image(icons .. "clock.png")
-mydateclock = awful.widget.textclock(' <span color="' .. base00 .. '">%a %d %b</span>', 300)
---mydateclock = awful.widget.textclock(" %a %d %b", 307)
-mytimeclock = awful.widget.textclock('<span color="' .. base01 .. '"> %H:%M </span>', 60)
-
-spacer = wibox.widget.textbox()
-spacer:set_text(" ")
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -369,8 +219,11 @@ for s = 1, screen.count() do
     right_layout:add(wlan_icon)
     right_layout:add(wlan_widget)
     right_layout:add(separator)
-    right_layout:add(batwidget_icon)
-    right_layout:add(batwidget)
+    right_layout:add(batt_icon)
+    right_layout:add(batt_widget)
+    right_layout:add(separator)
+    right_layout:add(volume_icon)
+    right_layout:add(volume_widget)
     right_layout:add(separator)
     right_layout:add(clock_icon)
     right_layout:add(mydateclock)
