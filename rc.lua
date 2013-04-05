@@ -132,7 +132,7 @@ mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
-                    awful.button({ }, 1, awful.tag.viewonly),
+                    --awful.button({ }, 1, awful.tag.viewonly),
                     awful.button({ modkey }, 1, awful.client.movetotag),
                     awful.button({ }, 3, awful.tag.viewtoggle),
                     awful.button({ modkey }, 3, awful.client.toggletag),
@@ -294,11 +294,11 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey }, "r", 
-        function ()  
-            local yeganesh = "exe=\"yeganesh -x -- -nb \\#002b36 -nf \\#b58900 -sb \\#002b36 -sf \\#dc322f -fn -xos4-terminus-medium-r-normal-*-20-*-*-*-*-*-*-*\" && eval \"exec $exe\"" 
-            awful.util.spawn(yeganesh)
-        end),
+    --awful.key({ modkey }, "r", 
+    --    function ()  
+    --        local yeganesh = "exe=\"yeganesh -x -- -nb \\#002b36 -nf \\#b58900 -sb \\#002b36 -sf \\#dc322f -fn -xos4-terminus-medium-r-normal-*-20-*-*-*-*-*-*-*\" && eval \"exec $exe\"" 
+    --        awful.util.spawn(yeganesh)
+    --    end),
 
     --awful.key({ modkey }, "x",
     --          function ()
@@ -308,7 +308,7 @@ globalkeys = awful.util.table.join(
     --              awful.util.getdir("cache") .. "/history_eval")
     --          end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end),
+    awful.key({ modkey }, "r", function() menubar.show() end),
     
     -- Scratch-pads
     awful.key({ modkey,         }, "s", function() scratch.drop(terminal .. " -title scratch", "bottom", "center", 1, 0.4) end),
@@ -340,16 +340,16 @@ globalkeys = awful.util.table.join(
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
-    awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
+    awful.key({ modkey, "Shift"   }, "f",      awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
-    awful.key({ modkey,           }, "n",
-        function (c)
-            -- The client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end),
+    --awful.key({ modkey,           }, "n",
+    --    function (c)
+    --        -- The client currently has the input focus, so it cannot be
+    --        -- minimized, since minimized clients can't have the focus.
+    --        c.minimized = true
+    --    end),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
