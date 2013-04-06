@@ -453,72 +453,70 @@ client.connect_signal("manage", function (c, startup)
             awful.placement.no_offscreen(c)
         end
     end
-
-    local titlebars_enabled = true 
-    if titlebars_enabled and (c.type == "normal" or c.type == "dialog") then
-        -- buttons for the titlebar
-        local buttons = awful.util.table.join(
-                awful.button({ }, 1, function()
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.move(c)
-                end),
-                awful.button({ }, 3, function()
-                    client.focus = c
-                    c:raise()
-                    awful.mouse.client.resize(c)
-                end)
-                )
-
-        -- Widgets that are aligned to the left
-        local left_layout = wibox.layout.fixed.horizontal()
-        left_layout:add(awful.titlebar.widget.iconwidget(c))
-        left_layout:buttons(buttons)
-
-        -- Widgets that are aligned to the right
-        local right_layout = wibox.layout.fixed.horizontal()
-        right_layout:add(awful.titlebar.widget.floatingbutton(c))
-        right_layout:add(awful.titlebar.widget.maximizedbutton(c))
-        right_layout:add(awful.titlebar.widget.stickybutton(c))
-        right_layout:add(awful.titlebar.widget.ontopbutton(c))
-        right_layout:add(awful.titlebar.widget.closebutton(c))
-
-        -- The title goes in the middle
-        local middle_layout = wibox.layout.flex.horizontal()
-        local title = awful.titlebar.widget.titlewidget(c)
-        title:set_align("center")
-        middle_layout:add(title)
-        middle_layout:buttons(buttons)
-
-        -- Now bring it all together
-        layout = wibox.layout.align.horizontal()
-        layout:set_left(left_layout)
-        layout:set_right(right_layout)
-        layout:set_middle(middle_layout)
-
-        --awful.titlebar(c):set_widget(layout)
-        -- Floaters always have borders
-        if awful.client.floating.get(c) or layout == "floating" then
-            c.border_width = beautiful.border_width
-        
-            if not c.fullscreen then -- Floaters have titlebars
-                if not c.titlebar and c.class ~= "Xmessage" then
-                    awful.titlebar(c):set_widget(layout)
-                end -- Floaters are always on top
-                c.above = true
-            end
-        end
-    end
 end)
 
 -- {{{ Arrange clients
 for s = 1, screen.count() do screen[s]:connect_signal("arrange", function() 
     local clients = awful.client.visible(s)
     local layout  = awful.layout.getname(awful.layout.get(s)) 
+    
+
+    -- Do the actual arranging
     if #clients > 0 then
         for _, c in pairs(clients) do
+            -- buttons for the titlebar
+            local buttons = awful.util.table.join(
+                 awful.button({ }, 1, function()
+                     client.focus = c
+                     c:raise()
+                     awful.mouse.client.move(c)
+                 end),
+                 awful.button({ }, 3, function()
+                     client.focus = c
+                     c:raise()
+                     awful.mouse.client.resize(c)
+                 end)
+                 )
+            
+             -- Title bar related
+             -- Widgets that are aligned to the left
+             local left_layout = wibox.layout.fixed.horizontal()
+             left_layout:add(awful.titlebar.widget.iconwidget(c))
+             left_layout:buttons(buttons)
+             
+             -- Widgets that are aligned to the right
+             local right_layout = wibox.layout.fixed.horizontal()
+             right_layout:add(awful.titlebar.widget.floatingbutton(c))
+             right_layout:add(awful.titlebar.widget.maximizedbutton(c))
+             right_layout:add(awful.titlebar.widget.stickybutton(c))
+             right_layout:add(awful.titlebar.widget.ontopbutton(c))
+             right_layout:add(awful.titlebar.widget.closebutton(c))
+             
+             -- The title goes in the middle
+             local middle_layout = wibox.layout.flex.horizontal()
+             local title = awful.titlebar.widget.titlewidget(c)
+             title:set_align("center")
+             middle_layout:add(title)
+             middle_layout:buttons(buttons)
+             
+             -- Now bring it all together
+             local layout = wibox.layout.align.horizontal()
+             layout:set_left(left_layout)
+             layout:set_right(right_layout)
+             layout:set_middle(middle_layout)
+
+            -- Floaters always have borders
+            if awful.client.floating.get(c) or layout == "floating" then
+                c.border_width = beautiful.border_width
+            
+                if not c.fullscreen then -- Floaters have titlebars
+                    if not c.titlebar and c.class ~= "Xmessage" then
+                        awful.titlebar(c):set_widget(layout)
+                    end -- Floaters are always on top
+                    c.above = true
+                end
             -- Remove border when the it is only one client on the tag.
-            if #clients == 1 or layout == "max" then
+            elseif #clients == 1 or layout == "max" then
                 clients[1].border_width = 0
             else
                 c.border_width = beautiful.border_width
