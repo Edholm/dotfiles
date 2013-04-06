@@ -16,7 +16,7 @@ base01 = "#586e75"
 base02 = "#073642"
 base03 = "#002b36"
 
--- Utility functions
+-- {{{ Utility functions
 local function notify(txt, tit, ico)
     naughty.notify({
             text = txt,
@@ -48,6 +48,7 @@ local function mail_status(sep, icon, address, count, subject)
         return " "
     end
 end
+-- }}} Utility functions
 
 -- Separator
 separator = wibox.widget.imagebox()
@@ -59,42 +60,82 @@ m2_sep = wibox.widget.imagebox()
 spacer = wibox.widget.textbox()
 spacer:set_text(" ")
 
--- Wlan widget
+-- {{{ Wlan widget
 wlan_icon = wibox.widget.imagebox()
 wlan_widget = wibox.widget.textbox()
+local w_ssid = "N/A"
+local w_mode = "N/A"
+local w_chan = 0
+local w_rate = 0
+local w_link = 0
+local w_linp = 0
+local w_sign = 0
+local w_icon = nil
 vicious.register(wlan_widget, vicious.widgets.wifi, 
     function(widget, args)
-        link = args["{link}"]
-        ssid = args["{ssid}"]
-        if link > 75 or ssid == "N/A" then
-            wlan_icon:set_image(icons .. "wlan_100.png")
-        elseif link <= 75 and link > 50 then
-            wlan_icon:set_image(icons .. "wlan_75.png")
-        elseif link <= 50 and link > 25 then
-            wlan_icon:set_image(icons .. "wlan_50.png")
+        w_link = args["{link}"]
+        w_ssid = args["{ssid}"]
+        w_mode = args["{mode}"]
+        w_chan = args["{chan}"]
+        w_rate = args["{rate}"]
+        w_linp = args["{linp}"]
+        w_sign = args["{sign}"]
+        if w_linp > 75 or w_ssid == "N/A" then
+            w_icon = icons .. "wlan_100.png"
+        elseif w_linp <= 75 and w_linp > 50 then
+           w_icon = icons .. "wlan_75.png"
+        elseif w_linp <= 50 and w_linp > 25 then
+            w_icon = icons .. "wlan_50.png"
         else
-            wlan_icon:set_image(icons .. "wlan_25.png")
+            w_icon = icons .. "wlan_25.png"
         end
-        if ssid ~= "N/A" then
-            return " " ..ssid .. " (<span color=\"" .. yellow .. "\">" .. link .. "%</span>)"
+        wlan_icon:set_image(w_icon)
+        if w_ssid ~= "N/A" then
+            return " " ..w_ssid .. " (<span color=\"" .. yellow .. "\">" .. w_linp .. "%</span>)"
         else
            return " Not connected"
         end
     end, 7,  "wlan0") 
--- Buttons
-wlan_icon:buttons(awful.util.table.join(
-    awful.button({ }, 1, 
-        function() 
-            -- needs nopasswd in visudo
-            naughty.notify { text = "Available access points:\n" ..  awful.util.pread("sudo iwlist wlan0 scan | grep ESSID | awk -F\\\" \'{print $(NF-1)}\'"), timeout = 10, hover_timeout = 3 }
-        end)))
-wlan_widget:buttons(wlan_icon:buttons())
--- // Wlan widget
+    
+-- Hover effect 
 
--- Battery widget
-local b_charge  = 0 
-local b_state   = ""
-local b_time    = ""
+-- }}}  Wlan widget
+wnot = nil
+function destroy_wlan()
+    if wnot ~= nil then
+        naughty.destroy(wnot)
+        wnot = nil
+    end
+end
+
+function update_wlan()
+    vicious.force({wlan_widget,})
+end
+
+function show_wlan()
+  destroy_wlan()
+  wnot = naughty.notify { 
+                title = "Wlan",
+                text = "SSID: " .. w_ssid .. "\nLink: " .. w_linp ..
+                "%\nMode: " .. w_mode .. "\nChannel: " .. w_chan ..
+                "\nRate: " .. w_rate .. "\nLink: " .. w_link ..
+                "/70\nSignal: " .. w_sign .. "db", 
+                timeout = 0,
+                icon = w_icon,
+                width=250
+            }
+end
+wlan_icon:connect_signal("mouse::enter", show_wlan)
+wlan_icon:connect_signal("mouse::leave", destroy_wlan)
+wlan_widget:connect_signal("mouse::enter", show_wlan)
+wlan_widget:connect_signal("mouse::leave", destroy_wlan)
+
+-- {{{ Battery widget
+local b_charge = 0 
+local b_state  = ""
+local b_time   = ""
+local b_icon   = nil
+local b_shown  = 0
 batt_icon = wibox.widget.imagebox()
 batt_widget = wibox.widget.textbox()
 vicious.register(batt_widget, vicious.widgets.bat, 
@@ -103,16 +144,20 @@ vicious.register(batt_widget, vicious.widgets.bat,
         b_state   = args[1]
         b_time    = args[3]
         if b_charge > 75 or b_state == "N/A" then
-            batt_icon:set_image(icons .. "batt_100.png")
+            b_icon = icons .. "batt_100.png"
         elseif b_charge <= 75 and b_charge > 50 then
-            batt_icon:set_image(icons .. "batt_75.png")
+            b_icon = icons .. "batt_75.png"
         elseif b_charge <= 50 and b_charge > 25 then
-            batt_icon:set_image(icons .. "batt_50.png")
+            b_icon = icons .. "batt_50.png"
         elseif b_charge <= 25 then 
-            batt_icon:set_image(icons .. "batt_25.png")
+            b_icon = icons .. "batt_25.png"
             if b_charge <= 10 and args[1] == "-" then
-                notify("Battery b_charge at <span color=\"red\">" .. b_charge .. "%</span>",
-                       "Battery warning", "batt_25_big.png")
+                -- Only show the notification every other update
+                if b_shown % 2 == 0 then
+                    notify("Battery charge at <span color=\"red\">" .. b_charge .. "%</span>",
+                          "Battery warning", "batt_25_big.png")
+                end
+                b_shown = b_shown + 1 
             end
         end
         local retval = " " .. b_state;
@@ -122,11 +167,24 @@ vicious.register(batt_widget, vicious.widgets.bat,
                 retval = retval .. " (<span color=\"" .. yellow .. "\">".. args[3] .. " left</span>)"
             end
         end
+        batt_icon:set_image(b_icon)
         return retval
     end, 31, "BAT0")
 
--- Button
-function popup_bat()
+-- Hover effect
+battnot = nil
+function destroy_battery()
+    if battnot ~= nil then
+        naughty.destroy(battnot)
+        battnot = nil
+    end
+end
+
+function update_battery()
+    vicious.force({batt_widget,})
+end
+
+function show_battery()
   local state = ""
   if b_state == "↯" then
     state = "Full"
@@ -141,15 +199,22 @@ function popup_bat()
   else
     state = "Unknown"
   end
-
-  naughty.notify { text = "Charge : " .. b_charge .. "%\nState : " .. state ..
-    " (" .. b_time .. ")", timeout = 5, hover_timeout = 0.5 }
+  destroy_battery()
+  battnot = naughty.notify { 
+                title = "Battery",
+                text = "Charge : " .. b_charge .. "%\nState  : " .. state ..
+                " (" .. b_time .. ")", 
+                timeout = 0,
+                icon = b_icon
+            }
 end
-batt_widget:buttons(awful.util.table.join(awful.button({ }, 1, popup_bat)))
-batt_icon:buttons(batt_widget:buttons())
--- // Battery widget
+batt_icon:connect_signal("mouse::enter", show_battery)
+batt_icon:connect_signal("mouse::leave", destroy_battery)
+batt_widget:connect_signal("mouse::enter", show_battery)
+batt_widget:connect_signal("mouse::leave", destroy_battery)
+-- }}} Battery widget
 
--- Mail notification widget
+-- {{{ Mail notification widget
 -- @edholm.it
 gmail1_icon = wibox.widget.imagebox()
 gmail1_widget = wibox.widget.textbox()
@@ -165,10 +230,12 @@ vicious.register(gmail2_widget, vicious.widgets.gmail_custom,
     function(widget, args)
         return mail_status(m2_sep, gmail2_icon, "eda@chalmers.it", args["{count}"], args["{subject}"]) 
     end, 181, {netrcfile = "/home/eda/.netrc_chalmers_it"})
--- // Mail widget
+-- }}} Mail widget
 
--- Volume widget
-local vol, vol_state
+-- {{{ Volume widget
+vol = nil
+vol_state = nil
+vol_icon = nil
 volume_icon = wibox.widget.imagebox()
 volume_widget = wibox.widget.textbox()
 vicious.register(volume_widget, vicious.widgets.volume,
@@ -176,27 +243,46 @@ vicious.register(volume_widget, vicious.widgets.volume,
         vol       = args[1]
         vol_state = args[2]
         if vol_state ~= "♫" or vol == 0 then
-            volume_icon:set_image(icons .. "volume_muted.png")
+            vol_icon = icons .. "volume_muted.png"
         elseif vol > 66 then
-            volume_icon:set_image(icons .. "volume_100.png")
+            vol_icon = icons .. "volume_100.png"
         elseif vol <= 66 and vol > 33 then
-            volume_icon:set_image(icons .. "volume_66.png")
+            vol_icon = icons .. "volume_66.png"
         elseif vol <= 33 then 
-            volume_icon:set_image(icons .. "volume_33.png")
+            vol_icon = icons .. "volume_33.png"
         end
+        volume_icon:set_image(vol_icon)
        return "" 
     end, 7, "Master")
 
--- Button
-volume_icon:buttons(awful.util.table.join(
-    awful.button({ }, 1, 
-        function() 
-            naughty.notify { text = "Volume: " .. vol .. "% (" .. vol_state .. ")", timeout = 5, hover_timeout = 0.5 }
-        end)))
-volume_widget:buttons(volume_icon:buttons())
--- // Volume widget
+-- Hover info
+nvol = nil
+function destroy_volume()
+    if nvol ~= nil then
+        naughty.destroy(nvol)
+        nvol = nil
+    end
+end
 
--- Time/date widgets
+function update_volume()
+    vicious.force({volume_widget,})
+end
+
+function show_volume() 
+    destroy_volume()
+    nvol = naughty.notify({ 
+        text = "Volume" .. (vol_state ~= "♫" and " (muted)" or "")  .. ": " .. vol .. "%",
+        icon = vol_icon,
+        timeout = 0,
+        screen = mouse.screen,
+        ontop = true
+    })
+end
+volume_icon:connect_signal("mouse::enter", show_volume)
+volume_icon:connect_signal("mouse::leave", destroy_volume)
+-- }}} Volume widget
+
+-- {{{ Time/date widgets
 date_widget = awful.widget.textclock(' <span color="' .. base00 .. '">%a %d %b</span>', 300)
 time_widget = awful.widget.textclock('<span color="' .. base01 .. '"> %H:%M </span>', 60)
 
@@ -207,4 +293,76 @@ date_widget:buttons(awful.util.table.join(
             naughty.notify { text = awful.util.pread("cal"), timeout = 10, hover_timeout = 3 }
         end)))
 time_widget:buttons(date_widget:buttons())
--- // Time/date widgets
+
+-- The following is taken from https://github.com/intrntbrn/awesome/blob/master/rc.lua (f55390b)
+function string:split(sep)
+    local sep, fields = sep or " ", {}
+    local pattern = string.format("([^%s]+)", sep)
+    self:gsub(pattern, function(c) fields[#fields+1] = c
+    end)
+    return fields
+end
+
+function readNetrc()
+    local netrc = io.open("/home/eda/.netrc", "r")
+    local gmailstr = netrc:read("*all")
+    netrc:close()
+    -- remove all unimportant strings
+    gmailstr = string.gsub(string.gsub(gmailstr, "machine mail.google.com login ", ""), "password ", "")
+    gmaildata = { }
+    -- token this string
+    gmaildata = gmailstr:split(" ")
+    guser = string.gsub(gmaildata[1], "\0", "")
+    gpw = string.gsub(gmaildata[2], "\n", "")
+    return nil
+end
+readNetrc()
+
+
+gcal = nil
+gcaldata = nil
+gcaltoday = nil
+
+function destroy_gcal()
+    if gcal~= nil then
+        naughty.destroy(gcal)
+        gcal = nil
+    end
+end
+
+
+function update_gcal()
+    if (guser and gpw) then
+        gcaldata = awful.util.pread("gcalcli --user " .. guser .. " --pw " .. gpw .. " --detail-location --locale sv_SE.UTF-8 --24hr --nc agenda")
+        gcaldata = string.gsub(gcaldata, "%$(%w+)", "%1")
+        gcaldata = gcaldata:match( "(.-)%s*$")
+        gcaltoday = os.date("%A, %d %B")
+    end
+    return nil
+end
+
+function show_gcal()
+    if (gcaldata) then
+        destroy_gcal()
+        gcal = naughty.notify({
+            title = "Google Calendar\n" .. gcaltoday,
+            text = "<span color='" .. base01 .. "'>" .. gcaldata .. "</span>",
+            timeout = 0,
+            fg = white,
+            bg = blue,
+            screen = mouse.screen,
+            ontop = true,
+            border_color = black,
+        })
+    end
+end
+
+gcaltimer = timer({ timeout = 3607 })
+gcaltimer:connect_signal("timeout", function() update_gcal() end)
+gcaltimer:start()
+
+update_gcal() -- still necessary for awesome.restart()
+
+date_widget:connect_signal("mouse::enter", show_gcal)
+date_widget:connect_signal("mouse::leave", destroy_gcal)
+-- }}}  Time/date widgets
