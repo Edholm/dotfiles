@@ -310,7 +310,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "r", function() menubar.show() end),
     
     -- Scratch-pads
-    awful.key({ modkey,         }, "s", function() scratch.drop(terminal .. " -title scratch", "bottom", "center", 1, 0.4) end),
+    awful.key({ modkey,         }, "s", function() scratch.drop(terminal .. " -title scratch", "bottom", "center", 1, 0.5) end),
     awful.key({ modkey, "Shift" }, "s", function() scratch.drop(terminal .. " -title center", "bottom", "center", 0.65, 0.65) end),
     awful.key({ modkey,         }, "x", function() scratch.drop(terminal .. " -title alsa -e alsamixer", "center", "center", 0.65, 0.65) end),
     awful.key({ modkey,         }, "z", function() scratch.drop(terminal .. " -title htop -e htop", "center", "center", 0.65, 0.65) end),
