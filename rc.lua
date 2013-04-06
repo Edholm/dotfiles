@@ -132,7 +132,7 @@ mypromptbox = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
-                    --awful.button({ }, 1, awful.tag.viewonly),
+                    awful.button({ }, 1, awful.tag.viewonly),
                     awful.button({ modkey }, 1, awful.client.movetotag),
                     awful.button({ }, 3, awful.tag.viewtoggle),
                     awful.button({ modkey }, 3, awful.client.toggletag),
@@ -141,22 +141,22 @@ mytaglist.buttons = awful.util.table.join(
                     )
 mytasklist = {}
 mytasklist.buttons = awful.util.table.join(
-                     awful.button({ }, 1, function (c)
-                                              if c == client.focus then
-                                                  c.minimized = true
-                                              else
-                                                  -- Without this, the following
-                                                  -- :isvisible() makes no sense
-                                                  c.minimized = false
-                                                  if not c:isvisible() then
-                                                      awful.tag.viewonly(c:tags()[1])
-                                                  end
-                                                  -- This will also un-minimize
-                                                  -- the client, if needed
-                                                  client.focus = c
-                                                  c:raise()
-                                              end
-                                          end),
+                     --awful.button({ }, 1, function (c)
+                     --                         if c == client.focus then
+                     --                             c.minimized = true
+                     --                         else
+                     --                             -- Without this, the following
+                     --                             -- :isvisible() makes no sense
+                     --                             c.minimized = false
+                     --                             if not c:isvisible() then
+                     --                                 awful.tag.viewonly(c:tags()[1])
+                     --                             end
+                     --                             -- This will also un-minimize
+                     --                             -- the client, if needed
+                     --                             client.focus = c
+                     --                             c:raise()
+                     --                         end
+                     --                     end),
                      awful.button({ }, 3, function ()
                                               if instance then
                                                   instance:hide()
@@ -445,7 +445,7 @@ client.connect_signal("manage", function (c, startup)
     if not startup then
         -- Set the windows at the slave,
         -- i.e. put it at the end of others instead of setting it master.
-        -- awful.client.setslave(c)
+        awful.client.setslave(c)
 
         -- Put windows in a smart way, only if they does not set an initial position.
         if not c.size_hints.user_position and not c.size_hints.program_position then
