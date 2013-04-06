@@ -197,17 +197,14 @@ volume_widget:buttons(volume_icon:buttons())
 -- // Volume widget
 
 -- Time/date widgets
-clock_icon  = wibox.widget.imagebox()
-clock_icon:set_image(icons .. "clock.png")
-mydateclock = awful.widget.textclock(' <span color="' .. base00 .. '">%a %d %b</span>', 300)
-mytimeclock = awful.widget.textclock('<span color="' .. base01 .. '"> %H:%M </span>', 60)
+date_widget = awful.widget.textclock(' <span color="' .. base00 .. '">%a %d %b</span>', 300)
+time_widget = awful.widget.textclock('<span color="' .. base01 .. '"> %H:%M </span>', 60)
 
 -- Button
-clock_icon:buttons(awful.util.table.join(
+date_widget:buttons(awful.util.table.join(
     awful.button({ }, 1, 
         function() 
             naughty.notify { text = awful.util.pread("cal"), timeout = 10, hover_timeout = 3 }
         end)))
-mydateclock:buttons(clock_icon:buttons())
-mytimeclock:buttons(clock_icon:buttons())
+time_widget:buttons(date_widget:buttons())
 -- // Time/date widgets

@@ -223,9 +223,8 @@ for s = 1, screen.count() do
     right_layout:add(volume_icon)
     right_layout:add(volume_widget)
     right_layout:add(separator)
-    right_layout:add(clock_icon)
-    right_layout:add(mydateclock)
-    right_layout:add(mytimeclock)
+    right_layout:add(date_widget)
+    right_layout:add(time_widget)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
