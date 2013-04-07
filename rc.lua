@@ -330,10 +330,9 @@ globalkeys = awful.util.table.join(
     awful.key({},"XF86AudioPrev",        function() awful.util.spawn("sh /home/eda/.scripts/mediacontroler.py next") end),
     awful.key({},"XF86KbdBrightnessDown",function() awful.util.spawn("asus-kbd-backlight down") end),
     awful.key({},"XF86KbdBrightnessUp",  function() awful.util.spawn("asus-kbd-backlight up") end),
-    awful.key({},"XF86TouchpadToggle",   function() awful.util.spawn("/home/eda/.scripts/trackpad-toggle.sh") end)
-  --awful.key({},"XF86ScreenBrightnessUp",function()awful.util.spawn("sudo-n/home/eda/.scripts/brightness.shup"),
-  --awful.key({},"XF86ScreenBrightnessDown",function()awful.util.spawn("sudo-n/home/eda/.scripts/brightness.shdown")
-    
+    awful.key({},"XF86TouchpadToggle",   function() awful.util.spawn("/home/eda/.scripts/trackpad-toggle.sh") end),
+    awful.key({},"XF86ScreenBrightnessUp"  ,function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end),
+    awful.key({},"XF86ScreenBrightnessDown",function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end)
 )
 
 clientkeys = awful.util.table.join(
