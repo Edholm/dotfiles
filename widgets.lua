@@ -3,7 +3,7 @@ local awful   = require("awful")
 local wibox   = require("wibox")
 local naughty = require("naughty")
 local vicious = require("vicious")
-
+require("spotify")
 -- Define some folders
 base_dir    = "/home/eda/"
 awesome_dir = base_dir .. ".config/awesome/"
@@ -59,6 +59,91 @@ m2_sep = wibox.widget.imagebox()
 
 spacer = wibox.widget.textbox()
 spacer:set_text(" ")
+
+-- {{{ Spotify/Media widget
+spot_icon   = wibox.widget.imagebox()
+spot_widget = wibox.widget.textbox()
+spot_sep    = wibox.widget.imagebox()
+
+local spot_icon_s = icons .. "spotify.png"
+local spot_track  = "N/A"
+local spot_album  = "N/A"
+local spot_artist = "N/A"
+local spot_year   = "N/A"
+local spot_url    = "N/A"
+local spot_rating = 0
+vicious.register(spot_widget, vicious.widgets.spotify, 
+    function(widget, args)
+        spot_track  = args["{Title}"]
+        spot_artist = args["{Artist}"]
+        spot_album  = args["{Album}"]
+        spot_year   = args["{Year}"]
+        spot_url    = args["{Url}"]
+        spot_rating = args["{Rating}"]
+        if args["{State}"] == 'Playing' then
+            spot_icon:set_image(spot_icon_s)
+            spot_sep:set_image(icons .. "separator.png")
+            return '<span color="green">' .. spot_artist .. ' - ' .. spot_track .. '</span>'
+        else
+            spot_sep:set_image()
+            spot_icon:set_image()
+            return ''
+        end
+    end, 30)
+
+n_spot = nil
+function destroy_spotify()
+    if n_spot ~= nil then
+        naughty.destroy(n_spot)
+        n_spot = nil
+    end
+end
+
+function update_spotify()
+    vicious.force({spot_widget,})
+end
+
+function show_spotify()
+  destroy_spotify()
+  n_spot = naughty.notify { 
+                title = "Spotify",
+                text = "Artist : " .. spot_artist
+                .. "\nTrack  : " .. spot_track 
+                .. "\nAlbum  : " .. spot_album
+                .. "\nYear   : " .. spot_year
+                .. "\nRating : " .. spot_rating
+                .. "%\nUrl    : " .. spot_url, 
+                timeout = 0,
+                icon = spot_icon_s,
+                width=550
+            }
+end
+
+function copy_spot_url()
+    local string = { gmatch = string.gmatch }
+    -- Convert from spotify uri to http link
+    local url = "http://open.spotify.com/"
+    for k, v in string.gmatch(spot_url,"spotify:(%w+):(.*)") do
+        url = url .. k .. "/" .. v
+    end
+    io.popen("echo ".. url .. " | xsel -ibp")
+    naughty.notify( { text = "Spotify url copied to clipboard" })
+-- http://open.spotify.com/track/0nJW01T7XtvILxQgC5J7Wh
+-- spotify:track:0nJW01T7XtvILxQgC5J7Wh
+end
+
+spot_icon:connect_signal("mouse::enter", show_spotify)
+spot_icon:connect_signal("mouse::leave", destroy_spotify)
+spot_widget:connect_signal("mouse::enter", show_spotify)
+spot_widget:connect_signal("mouse::leave", destroy_spotify)
+
+-- Click on the widget to copy the spotify url
+spot_icon:buttons(awful.util.table.join(
+    awful.button({ }, 1, copy_spot_url ),
+    awful.button({ }, 2, update_spotify )
+))
+spot_widget:buttons(spot_icon:buttons())
+-- }}} Spotity/media widget
 
 -- {{{ Wlan widget
 wlan_icon = wibox.widget.imagebox()
@@ -116,10 +201,13 @@ function show_wlan()
   destroy_wlan()
   wnot = naughty.notify { 
                 title = "Wlan",
-                text = "SSID: " .. w_ssid .. "\nLink: " .. w_linp ..
-                "%\nMode: " .. w_mode .. "\nChannel: " .. w_chan ..
-                "\nRate: " .. w_rate .. "\nLink: " .. w_link ..
-                "/70\nSignal: " .. w_sign .. "db", 
+                text = "SSID    : " .. w_ssid 
+                .. "\nLink    : " .. w_linp 
+                .. "%\nMode    : " .. w_mode 
+                .. "\nChannel : " .. w_chan
+                .. "\nRate    : " .. w_rate
+                .. "\nLink    : " .. w_link
+                .. "/70\nSignal  : " .. w_sign .. "db", 
                 timeout = 0,
                 icon = w_icon,
                 width=250

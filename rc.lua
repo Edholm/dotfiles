@@ -208,6 +208,10 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     --if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(spacer)
+    right_layout:add(spot_icon)
+    right_layout:add(spacer)
+    right_layout:add(spot_widget)
+    right_layout:add(spot_sep)
     right_layout:add(gmail1_icon)
     right_layout:add(gmail1_widget)
     right_layout:add(m1_sep)
@@ -330,10 +334,10 @@ globalkeys = awful.util.table.join(
     awful.key({},"XF86AudioPrev",        function() awful.util.spawn("sh /home/eda/.scripts/mediacontroler.py next") end),
     awful.key({},"XF86KbdBrightnessDown",function() awful.util.spawn("asus-kbd-backlight down") end),
     awful.key({},"XF86KbdBrightnessUp",  function() awful.util.spawn("asus-kbd-backlight up") end),
-    awful.key({},"XF86TouchpadToggle",   function() awful.util.spawn("/home/eda/.scripts/trackpad-toggle.sh") end),
-    awful.key({},"XF86ScreenBrightnessUp"  ,function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end),
-    awful.key({},"XF86ScreenBrightnessDown",function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end)
-)
+    awful.key({},"XF86TouchpadToggle",   function() awful.util.spawn("/home/eda/.scripts/trackpad-toggle.sh") end)
+    --awful.key({},"XF86ScreenBrightnessUp"  ,function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end),
+    --awful.key({},"XF86ScreenBrightnessDown",function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end)
+) -- TODO: Notifications for keyboard backlight and trackpad toggle.
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
