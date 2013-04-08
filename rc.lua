@@ -8,7 +8,7 @@ local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
 -- Notification library
-local naughty = require("naughty")
+naughty = require("naughty")
 local menubar = require("menubar")
 local scratch = require("scratch")
 local vicious = require("vicious")
