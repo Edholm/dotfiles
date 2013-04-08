@@ -16,6 +16,7 @@ local function worker(format, warg)
         ["{Album}"]  = "N/A",
         ["{Year}"]   = "N/A",
         ["{Url}"]    = "N/A",
+        ["{ArtUrl}"] = "N/A",
         ["{Rating}"] = 0, -- In percentage
     }
 
@@ -28,12 +29,13 @@ local function worker(format, warg)
 	spotify["{State}"] = 'Playing'
 	local metadata = io.popen('/bin/bash -c "exec /usr/bin/qdbus-qt4 org.mpris.MediaPlayer2.spotify / org.freedesktop.MediaPlayer2.GetMetadata"')
 	for line in metadata:lines() do
-	  for k, v in string.gmatch(line,"xesam:(%w+): (.*)") do
+	  for k, v in string.gmatch(line,".*:(%w+): (.*)") do
 	    if	   k == "album"  then spotify["{Album}"]  = helpers.escape(v)
 	    elseif k == "artist" then spotify["{Artist}"] = helpers.escape(v)
 	    elseif k == "title"  then spotify["{Title}"]  = helpers.escape(v)
 	    elseif k == "contentCreated"  then spotify["{Year}"]  = string.sub(v, 1, 4)
 	    elseif k == "url"  then spotify["{Url}"]  = helpers.escape(v)
+	    elseif k == "artUrl"  then spotify["{ArtUrl}"]  = v
 	    elseif k == "autoRating"  then spotify["{Rating}"]  = v and tonumber(v) * 100
 	    end
 	  end
