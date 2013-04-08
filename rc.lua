@@ -436,6 +436,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { name = "File Transfers" },
       properties = { floating = true } },
+    { rule = { role  = "Preferences" },
+      properties = { floating = true } },
 }
 -- }}}
 
