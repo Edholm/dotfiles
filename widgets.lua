@@ -80,16 +80,26 @@ vicious.register(spot_widget, vicious.widgets.spotify,
         spot_year   = args["{Year}"]
         spot_url    = args["{Url}"]
         spot_rating = args["{Rating}"]
-        if args["{State}"] == 'Playing' then
+        if args["{State}"] ~= "Closed" then
+            pb_back:set_image(icons .. "back.png")
+            pb_forward:set_image(icons .. "forward.png")
             spot_icon:set_image(spot_icon_s)
             spot_sep:set_image(icons .. "separator.png")
+            if args["{State}"] == 'Playing' then
+                pb_playpause:set_image(icons .. "pause.png")
+            else
+                pb_playpause:set_image(icons .. "play.png")
+            end
             return '<span color="green">' .. spot_artist .. ' - ' .. spot_track .. '</span>'
         else
             spot_sep:set_image()
             spot_icon:set_image()
-            return ''
+            pb_playpause:set_image()
+            pb_back:set_image()
+            pb_forward:set_image()
+            return ""
         end
-    end, 30)
+    end, 97)
 
 n_spot = nil
 function destroy_spotify()
@@ -136,6 +146,29 @@ spot_icon:connect_signal("mouse::enter", show_spotify)
 spot_icon:connect_signal("mouse::leave", destroy_spotify)
 spot_widget:connect_signal("mouse::enter", show_spotify)
 spot_widget:connect_signal("mouse::leave", destroy_spotify)
+
+-- Playback buttons
+--
+pb_back = wibox.widget.imagebox()
+pb_playpause = wibox.widget.imagebox()
+pb_forward = wibox.widget.imagebox()
+
+local qdbus = "qdbus-qt4 org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 "
+
+pb_back:buttons(awful.util.table.join(
+    awful.button({ }, 1, 
+    function() awful.util.spawn(qdbus .. "Previous") end)
+))
+
+pb_playpause:buttons(awful.util.table.join(
+    awful.button({ }, 1,
+    function() awful.util.spawn(qdbus .. "PlayPause") end)
+))
+
+pb_forward:buttons(awful.util.table.join(
+    awful.button({ }, 1, 
+    function() awful.util.spawn(qdbus .. "Next") end)
+))
 
 -- Click on the widget to copy the spotify url
 spot_icon:buttons(awful.util.table.join(
@@ -449,7 +482,7 @@ gcaltimer = timer({ timeout = 3607 })
 gcaltimer:connect_signal("timeout", function() update_gcal() end)
 gcaltimer:start()
 
-update_gcal() -- still necessary for awesome.restart()
+--update_gcal() -- still necessary for awesome.restart()
 
 date_widget:connect_signal("mouse::enter", show_gcal)
 date_widget:connect_signal("mouse::leave", destroy_gcal)

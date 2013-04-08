@@ -1,6 +1,6 @@
 local io = { popen = io.popen, input = io.input }
 local setmetatable = setmetatable
-local string = { gmatch = string.gmatch, sub = string.sub }
+local string = { gmatch = string.gmatch, sub = string.sub, find = string.find }
 local tonumber = tonumber
 local helpers = require("vicious.helpers")
 
@@ -11,8 +11,8 @@ module("vicious.widgets.spotify")
 local function worker(format, warg)
     local spotify  = {
         ["{State}"]  = "N/A",
-        ["{Artist}"] = "N/A",
-        ["{Title}"]  = "N/A",
+        ["{Artist}"] = "Not",
+        ["{Title}"]  = "playing",
         ["{Album}"]  = "N/A",
         ["{Year}"]   = "N/A",
         ["{Url}"]    = "N/A",
@@ -39,6 +39,8 @@ local function worker(format, warg)
 	  end
        end
        metadata:close()
+    elseif state == nil then
+       spotify["{State}"] = 'Closed'
     else
        spotify["{State}"] = 'Paused'
     end
