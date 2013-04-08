@@ -94,6 +94,7 @@ vicious.register(spot_widget, vicious.widgets.spotify,
             spot_sep:set_image(icons .. "separator.png")
             if args["{State}"] == 'Playing' then
                 pb_playpause:set_image(icons .. "pause.png")
+                spot_thumb = "/tmp/spotify_thumb.png"
 
                 -- Download thumb if needed (Albums probably have the same thumb)
                 if spot_album ~= spot_prev_album then
@@ -101,10 +102,12 @@ vicious.register(spot_widget, vicious.widgets.spotify,
                     spot_prev_album = spot_album
                 end
             else
+                spot_thumb = spot_icon_s
                 pb_playpause:set_image(icons .. "play.png")
             end
             return '<span color="' .. green .. '">' .. spot_artist .. ' - ' .. spot_track .. '</span>'
         else
+            spot_thumb = spot_icon_s
             spot_sep:set_image()
             spot_icon:set_image()
             pb_playpause:set_image()
