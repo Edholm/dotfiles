@@ -15,6 +15,7 @@ base00 = "#657b83"
 base01 = "#586e75"
 base02 = "#073642"
 base03 = "#002b36"
+green  = "#859900"
 
 -- {{{ Utility functions
 local function notify(txt, tit, ico)
@@ -90,7 +91,7 @@ vicious.register(spot_widget, vicious.widgets.spotify,
             else
                 pb_playpause:set_image(icons .. "play.png")
             end
-            return '<span color="green">' .. spot_artist .. ' - ' .. spot_track .. '</span>'
+            return '<span color="' .. green .. '">' .. spot_artist .. ' - ' .. spot_track .. '</span>'
         else
             spot_sep:set_image()
             spot_icon:set_image()
@@ -172,8 +173,13 @@ pb_forward:buttons(awful.util.table.join(
 
 -- Click on the widget to copy the spotify url
 spot_icon:buttons(awful.util.table.join(
-    awful.button({ }, 1, copy_spot_url ),
-    awful.button({ }, 2, update_spotify )
+    awful.button({ }, 1, function() 
+        awful.tag.viewonly(awful.tag.gettags(mouse.screen)[6]) -- Change to wherever you send Spotify
+    end), 
+    awful.button({ }, 2, copy_spot_url ),
+    awful.button({ "Shift" }, 1, update_spotify ),
+    awful.button({ "Control", "Shift" }, 1, 
+        function() awful.util.spawn(qdbus .. "Quit") end)
 ))
 spot_widget:buttons(spot_icon:buttons())
 -- }}} Spotity/media widget
