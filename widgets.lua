@@ -65,14 +65,19 @@ spacer:set_text(" ")
 spot_icon   = wibox.widget.imagebox()
 spot_widget = wibox.widget.textbox()
 spot_sep    = wibox.widget.imagebox()
+pb_back = wibox.widget.imagebox()
+pb_playpause = wibox.widget.imagebox()
+pb_forward = wibox.widget.imagebox()
 
 local spot_icon_s = icons .. "spotify.png"
+local spot_thumb  = "/tmp/spotify_thumb.png"
 local spot_track  = "N/A"
 local spot_album  = "N/A"
 local spot_artist = "N/A"
 local spot_year   = "N/A"
 local spot_url    = "N/A"
 local spot_rating = 0
+local spot_prev_album = ""
 vicious.register(spot_widget, vicious.widgets.spotify, 
     function(widget, args)
         spot_track  = args["{Title}"]
@@ -80,6 +85,7 @@ vicious.register(spot_widget, vicious.widgets.spotify,
         spot_album  = args["{Album}"]
         spot_year   = args["{Year}"]
         spot_url    = args["{Url}"]
+        spot_arturl = args["{ArtUrl}"]
         spot_rating = args["{Rating}"]
         if args["{State}"] ~= "Closed" then
             pb_back:set_image(icons .. "back.png")
@@ -88,6 +94,12 @@ vicious.register(spot_widget, vicious.widgets.spotify,
             spot_sep:set_image(icons .. "separator.png")
             if args["{State}"] == 'Playing' then
                 pb_playpause:set_image(icons .. "pause.png")
+
+                -- Download thumb if needed (Albums probably have the same thumb)
+                if spot_album ~= spot_prev_album then
+                    awful.util.spawn("wget -O /tmp/spotify_thumb.png -nv " .. spot_arturl )
+                    spot_prev_album = spot_album
+                end
             else
                 pb_playpause:set_image(icons .. "play.png")
             end
@@ -125,7 +137,7 @@ function show_spotify()
                 .. "\nRating : " .. spot_rating
                 .. "%\nUrl    : " .. spot_url, 
                 timeout = 0,
-                icon = spot_icon_s,
+                icon = spot_thumb,
                 width=550
             }
 end
@@ -150,9 +162,6 @@ spot_widget:connect_signal("mouse::leave", destroy_spotify)
 
 -- Playback buttons
 --
-pb_back = wibox.widget.imagebox()
-pb_playpause = wibox.widget.imagebox()
-pb_forward = wibox.widget.imagebox()
 
 local qdbus = "qdbus-qt4 org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 "
 
@@ -488,7 +497,7 @@ gcaltimer = timer({ timeout = 3607 })
 gcaltimer:connect_signal("timeout", function() update_gcal() end)
 gcaltimer:start()
 
---update_gcal() -- still necessary for awesome.restart()
+update_gcal() -- still necessary for awesome.restart()
 
 date_widget:connect_signal("mouse::enter", show_gcal)
 date_widget:connect_signal("mouse::leave", destroy_gcal)
