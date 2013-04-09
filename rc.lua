@@ -324,7 +324,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift" }, "s", function() scratch.drop(terminal .. " -title center", "bottom", "center", 0.65, 0.65) end),
     awful.key({ modkey,         }, "x", function() scratch.drop(terminal .. " -title alsa -e alsamixer", "center", "center", 0.65, 0.65) end),
     awful.key({ modkey,         }, "z", function() scratch.drop(terminal .. " -title htop -e htop", "center", "center", 0.65, 0.65) end),
-    awful.key({ modkey, "Shift" }, "i", function() scratch.drop(terminal .. " -title irc -e weechat-screen.sh", "center", "center", 0.85, 0.85) end),
+    awful.key({ modkey, "Shift" }, "i", function() scratch.drop(terminal .. " -title irc -e weechat-screen.sh", "center", "center", 0.90, 0.90) end),
     awful.key({ modkey, "Shift" }, "r", function() scratch.drop(terminal .. " -title fm -e ranger", "center", "center", 0.85, 0.85) end),
     
     -- Spawn apps
