@@ -42,7 +42,7 @@ local function mail_status(sep, icon, address, count, subject)
         sep:set_image(icons .. "separator.png")
         icon:set_image(icons .. "gmail_color.png")
         mail_notify(address, count, subject)
-        return ' <span color="' .. base01 .. '">' .. address .. ':</span> <span color="red">' .. count .. '</span>' 
+        return ' ' .. address .. ': <span color="red">' .. count .. '</span>' 
     else
         sep:set_image()
         icon:set_image()
@@ -299,9 +299,9 @@ vicious.register(batt_widget, vicious.widgets.bat,
                 b_shown = b_shown + 1 
             end
         end
-        local retval = " " .. b_state;
+        local retval = " " .. b_state .. " ";
         if b_state == "-" then -- discharging
-            retval = retval .. " <span color=\"" .. yellow .. "\">" .. b_charge .. "%</span>"
+            retval = retval .. b_charge .. "%"
             if args[3] ~= "N/A" then
                 retval = retval .. " (<span color=\"" .. yellow .. "\">".. args[3] .. " left</span>)"
             end
@@ -369,6 +369,16 @@ vicious.register(gmail2_widget, vicious.widgets.gmail_custom,
     function(widget, args)
         return mail_status(m2_sep, gmail2_icon, "eda@chalmers.it", args["{count}"], args["{subject}"]) 
     end, 181, {netrcfile = "/home/eda/.netrc_chalmers_it"})
+
+gmail1_icon:buttons(awful.util.table.join(
+    awful.button({ }, 1, function() 
+        awful.util.spawn("firefox -new-tab http://mail.google.com")
+    end) 
+))
+gmail1_widget:buttons(gmail1_icon:buttons())
+gmail2_icon:buttons(gmail1_icon:buttons())
+gmail2_widget:buttons(gmail1_icon:buttons())
+
 -- }}} Mail widget
 
 -- {{{ Volume widget
