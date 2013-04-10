@@ -482,7 +482,7 @@ end
 
 function update_gcal()
     if (guser and gpw) then
-        gcaldata = awful.util.pread("gcalcli --user " .. guser .. " --pw " .. gpw .. " --detail-location --locale sv_SE.UTF-8 --24hr --nc agenda")
+        gcaldata = awful.util.pread("gcalcli --user " .. guser .. " --pw " .. gpw .. " --ignore-started --detail-location --locale sv_SE.UTF-8 --24hr --nc agenda")
         gcaldata = string.gsub(gcaldata, "%$(%w+)", "%1")
         gcaldata = gcaldata:match( "(.-)%s*$")
         gcaltoday = os.date("%A, %d %B")
