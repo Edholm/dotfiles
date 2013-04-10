@@ -299,9 +299,9 @@ vicious.register(batt_widget, vicious.widgets.bat,
                 b_shown = b_shown + 1 
             end
         end
-        local retval = " " .. b_state .. " ";
+        local retval = " " .. b_state;
         if b_state == "-" then -- discharging
-            retval = retval .. b_charge .. "%"
+            retval = retval .. " " .. b_charge .. "%"
             if args[3] ~= "N/A" then
                 retval = retval .. " (<span color=\"" .. yellow .. "\">".. args[3] .. " left</span>)"
             end
@@ -360,7 +360,7 @@ gmail1_widget = wibox.widget.textbox()
 vicious.register(gmail1_widget, vicious.widgets.gmail,
     function(widget, args)
         return mail_status(m1_sep, gmail1_icon, "emil@edholm.it", args["{count}"], args["{subject}"]) 
-    end, 173)
+    end, 113)
 
 -- @chalmers.it
 gmail2_icon = wibox.widget.imagebox()
@@ -368,7 +368,7 @@ gmail2_widget = wibox.widget.textbox()
 vicious.register(gmail2_widget, vicious.widgets.gmail_custom,
     function(widget, args)
         return mail_status(m2_sep, gmail2_icon, "eda@chalmers.it", args["{count}"], args["{subject}"]) 
-    end, 181, {netrcfile = "/home/eda/.netrc_chalmers_it"})
+    end, 127, {netrcfile = "/home/eda/.netrc_chalmers_it"})
 
 gmail1_icon:buttons(awful.util.table.join(
     awful.button({ }, 1, function() 
