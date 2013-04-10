@@ -439,6 +439,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { role  = "Preferences" },
       properties = { floating = true } },
+    { rule = { name  = "Welcome to Wolfram Mathematica 9" },
+      properties = { floating = true } },
 }
 -- }}}
 
