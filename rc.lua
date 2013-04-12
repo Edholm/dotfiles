@@ -441,6 +441,10 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { name  = "Welcome to Wolfram Mathematica 9" },
       properties = { floating = true } },
+    { rule = { name  = "Qt-subapplication" },
+      properties = { floating = true } },
+    { rule = { name  = "Preferences" },
+      properties = { floating = true } },
 }
 -- }}}
 
