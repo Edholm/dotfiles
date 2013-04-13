@@ -495,13 +495,11 @@ function show_gcal()
         destroy_gcal()
         gcal = naughty.notify({
             title = "Google Calendar\n" .. gcaltoday,
-            text = "<span color='" .. base01 .. "'>" .. gcaldata .. "</span>",
+            text = "<span color='" .. base00 .. "'>" .. gcaldata .. "</span>",
             timeout = 0,
-            fg = white,
-            bg = blue,
+            fg = yellow,
             screen = mouse.screen,
             ontop = true,
-            border_color = black,
         })
     end
 end

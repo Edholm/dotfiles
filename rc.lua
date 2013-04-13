@@ -61,8 +61,8 @@ modkey = "Mod4"
 local layouts =
 {
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile.left,
     awful.layout.suit.tile.top,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.max,
