@@ -322,14 +322,14 @@ globalkeys = awful.util.table.join(
     -- Scratch-pads
     awful.key({ modkey,         }, "s", function() scratch.drop(terminal .. " -title scratch", "bottom", "center", 1, 0.5) end),
     awful.key({ modkey, "Shift" }, "s", function() scratch.drop(terminal .. " -title center", "bottom", "center", 0.65, 0.65) end),
-    awful.key({ modkey,         }, "x", function() scratch.drop(terminal .. " -title alsa -e alsamixer", "center", "center", 0.65, 0.65) end),
+    awful.key({ modkey,         }, "x", function() scratch.drop(terminal .. " -title alsamixer -e alsamixer", "center", "center", 0.65, 0.65) end),
     awful.key({ modkey,         }, "z", function() scratch.drop(terminal .. " -title htop -e htop", "center", "center", 0.90, 0.65) end),
     awful.key({ modkey, "Shift" }, "i", function() scratch.drop(terminal .. " -title irc -e weechat-screen.sh", "center", "center", 0.90, 0.90) end),
     awful.key({ modkey, "Shift" }, "r", function() scratch.drop(terminal .. " -title fm -e ranger", "center", "center", 0.85, 0.85) end),
     
     -- Spawn apps
-    awful.key({ modkey            }, "c", function() awful.util.spawn("firefox") end),
-    awful.key({ modkey            }, "v", function() awful.util.spawn("firefox --private") end),
+    awful.key({ modkey            }, "c", function() awful.util.spawn("google-chrome") end),
+    awful.key({ modkey            }, "v", function() awful.util.spawn("google-chrome --incognito") end),
     awful.key({ modkey, "Control" }, "r", function() awful.util.spawn(terminal .. " -e ranger") end),
 
     -- Multimedia keys
@@ -430,6 +430,9 @@ awful.rules.rules = {
       properties = { tag = tags[1][1],
                      border_width = 0} },
     { rule = { class = "Firefox" },
+      properties = { tag = tags[1][1],
+                     border_width = 0} },
+    { rule = { role = "browser" },
       properties = { tag = tags[1][1],
                      border_width = 0} },
     { rule = { class = "Skype" },
