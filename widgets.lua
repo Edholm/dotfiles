@@ -231,7 +231,7 @@ vicious.register(wlan_widget, vicious.widgets.wifi,
         else
            return " Not connected"
         end
-    end, 7,  "wlan0") 
+    end, 37,  "wlan0") 
     
 -- Hover effect 
 
@@ -308,7 +308,7 @@ vicious.register(batt_widget, vicious.widgets.bat,
         end
         batt_icon:set_image(b_icon)
         return retval
-    end, 31, "BAT0")
+    end, 67, "BAT0")
 
 -- Hover effect
 battnot = nil
