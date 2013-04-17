@@ -372,7 +372,7 @@ vicious.register(gmail2_widget, vicious.widgets.gmail_custom,
 
 gmail1_icon:buttons(awful.util.table.join(
     awful.button({ }, 1, function() 
-        awful.util.spawn("firefox -new-tab http://mail.google.com")
+        awful.util.spawn("google-chrome http://mail.google.com")
     end) 
 ))
 gmail1_widget:buttons(gmail1_icon:buttons())
