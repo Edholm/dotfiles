@@ -452,6 +452,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { name  = "Preferences" },
       properties = { floating = true } },
+    { rule = { name  = "feh" },
+      properties = { floating = true } },
 }
 -- }}}
 
