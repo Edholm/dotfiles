@@ -11,7 +11,7 @@
 theme = {}
 theme.default_themes_path = "/usr/share/awesome/themes"
 --theme.wallpaper = theme.default_themes_path.."/zenburn/zenburn-background.png"
-theme.wallpaper = "/home/eda/rnd-junk/pics/wp/vim-shortcuts.png"
+theme.wallpaper = "/home/eda/rnd-junk/pics/wp/freddie.jpg"
 theme.colors = {}
 theme.colors.base3   = "#002b36ff"
 theme.colors.base2   = "#073642ff"
