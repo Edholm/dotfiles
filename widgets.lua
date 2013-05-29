@@ -245,9 +245,9 @@ vicious.register(wlan_widget, vicious.widgets.wifi_mod,
 --    end
 --end
 --
---function update_wlan()
---    vicious.force({wlan_widget,})
---end
+function update_wlan()
+    vicious.force({wlan_widget,})
+end
 --
 --function show_wlan()
 --  destroy_wlan()

@@ -339,11 +339,11 @@ globalkeys = awful.util.table.join(
     awful.key({},"XF86AudioRaiseVolume", function() awful.util.spawn("sh /home/eda/.scripts/cvol -i 5") end),
     awful.key({},"XF86AudioNext",        function() awful.util.spawn("sh /home/eda/.scripts/mediacontroler.py next") end),
     awful.key({},"XF86AudioPrev",        function() awful.util.spawn("sh /home/eda/.scripts/mediacontroler.py next") end),
-    awful.key({},"XF86KbdBrightnessDown",function() awful.util.spawn("asus-kbd-backlight down") end),
-    awful.key({},"XF86KbdBrightnessUp",  function() awful.util.spawn("asus-kbd-backlight up") end),
-    awful.key({},"XF86TouchpadToggle",   function() awful.util.spawn("/home/eda/.scripts/trackpad-toggle.sh") end)
-    --awful.key({},"XF86ScreenBrightnessUp"  ,function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end),
-    --awful.key({},"XF86ScreenBrightnessDown",function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end)
+    awful.key({},"XF86KbdBrightnessDown",function() awful.util.spawn("sh /home/eda/.scripts/kbdb_noti.sh -d") end),
+    awful.key({},"XF86KbdBrightnessUp",  function() awful.util.spawn("sh /home/eda/.scripts/kbdb_noti.sh -i") end),
+    awful.key({},"XF86TouchpadToggle",   function() awful.util.spawn("/home/eda/.scripts/trackpad-toggle.sh") end),
+    awful.key({},"XF86MonBrightnessUp"  ,function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end),
+    awful.key({},"XF86MonBrightnessDown",function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end)
 ) -- TODO: Notifications for keyboard backlight and trackpad toggle.
 
 clientkeys = awful.util.table.join(
@@ -457,6 +457,8 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { name  = "Crack Attack!" },
       properties = { floating = true } },
+    { rule = { name  = "stalonetray" },
+      properties = { floating = false } },
 }
 -- }}}
 
