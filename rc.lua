@@ -69,7 +69,7 @@ local layouts =
     --awful.layout.suit.floating,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
+    awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
     --awful.layout.suit.magnifier
 }
@@ -87,17 +87,18 @@ end
 -- Define a tag table which hold all screen tags.
 tags = {
     names   = { "web", "term", "foo", "bar", "rnd", "spotify", "skype"},
-    layouts = layouts[1],
+    layout = {layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[1], layouts[3]}
+
 }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag(tags.names, s, tags.layouts)
+    tags[s] = awful.tag(tags.names, s, tags.layout)
     --if tagseparator then
     --    for i, t in ipairs(tags[s]) do
     --        awful.tag.seticon(tags.icons[i], t)
     --    end
     --end
-    awful.tag.setmwfact(0.75, tags[s][7])
+    awful.tag.setmwfact(0.20, tags[s][7])
 end
 
 -- }}}
@@ -439,8 +440,14 @@ awful.rules.rules = {
                      border_width = 0} },
     { rule = { class = "Skype" },
       properties = { tag = tags[1][7] } },
+    { rule = { class = "Pidgin" },
+      properties = { tag = tags[1][7] } },
+    { rule = { role = "conversation" },
+      properties = {},
+      callback=awful.client.setslave},
     { rule = { class = "Spotify" },
-      properties = { tag = tags[1][6] } },
+      properties = { tag = tags[1][6],
+                     floating=false} },
     { rule = { name = "Options" },
       properties = { floating = true } },
     { rule = { name = "File Transfers" },
@@ -452,6 +459,12 @@ awful.rules.rules = {
     { rule = { name  = "Qt-subapplication" },
       properties = { floating = true } },
     { rule = { name  = "Preferences" },
+      properties = { floating = true } },
+    { rule = { name  = "mpv" },
+      properties = { floating = true } },
+    { rule = { name  = "tsim" },
+      properties = { floating = true } },
+    { rule = { name  = "tools" },
       properties = { floating = true } },
     { rule = { name  = "feh" },
       properties = { floating = true } },
