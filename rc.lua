@@ -337,16 +337,16 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "r", function() awful.util.spawn(terminal .. " -e ranger") end),
 
     -- Multimedia keys
-    awful.key({},"XF86AudioMute",        function() awful.util.spawn("sh /home/eda/.scripts/cvol -t") end),
-    awful.key({},"XF86AudioLowerVolume", function() awful.util.spawn("sh /home/eda/.scripts/cvol -d 5") end),
-    awful.key({},"XF86AudioRaiseVolume", function() awful.util.spawn("sh /home/eda/.scripts/cvol -i 5") end),
-    awful.key({},"XF86AudioNext",        function() awful.util.spawn("sh /home/eda/.scripts/mediacontroler.py next") end),
-    awful.key({},"XF86AudioPrev",        function() awful.util.spawn("sh /home/eda/.scripts/mediacontroler.py next") end),
-    awful.key({},"XF86KbdBrightnessDown",function() awful.util.spawn("sh /home/eda/.scripts/kbdb_noti.sh -d") end),
-    awful.key({},"XF86KbdBrightnessUp",  function() awful.util.spawn("sh /home/eda/.scripts/kbdb_noti.sh -i") end),
-    awful.key({},"XF86TouchpadToggle",   function() awful.util.spawn("/home/eda/.scripts/trackpad-toggle.sh") end),
-    awful.key({},"XF86MonBrightnessUp"  ,function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end),
-    awful.key({},"XF86MonBrightnessDown",function() awful.util.spawn("sh /home/eda/.scripts/nbright.sh") end)
+    awful.key({},"XF86AudioMute",        function() awful.util.spawn("sh /home/eda/.bin/cvol -t") end),
+    awful.key({},"XF86AudioLowerVolume", function() awful.util.spawn("sh /home/eda/.bin/cvol -d 5") end),
+    awful.key({},"XF86AudioRaiseVolume", function() awful.util.spawn("sh /home/eda/.bin/cvol -i 5") end),
+    awful.key({},"XF86AudioNext",        function() awful.util.spawn("sh /home/eda/.bin/mediacontroler.py next") end),
+    awful.key({},"XF86AudioPrev",        function() awful.util.spawn("sh /home/eda/.bin/mediacontroler.py next") end),
+    awful.key({},"XF86KbdBrightnessDown",function() awful.util.spawn("sh /home/eda/.bin/kbdb_noti.sh -d") end),
+    awful.key({},"XF86KbdBrightnessUp",  function() awful.util.spawn("sh /home/eda/.bin/kbdb_noti.sh -i") end),
+    awful.key({},"XF86TouchpadToggle",   function() awful.util.spawn("/home/eda/.bin/trackpad-toggle.sh") end),
+    awful.key({},"XF86MonBrightnessUp"  ,function() awful.util.spawn("sh /home/eda/.bin/nbright.sh") end),
+    awful.key({},"XF86MonBrightnessDown",function() awful.util.spawn("sh /home/eda/.bin/nbright.sh") end)
 ) -- TODO: Notifications for keyboard backlight and trackpad toggle.
 
 clientkeys = awful.util.table.join(
