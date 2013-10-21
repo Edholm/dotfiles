@@ -46,7 +46,9 @@ end
 beautiful.init("/home/eda/.config/awesome/themes/solarized-dark/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
+terminal     = "urxvt"
+ircterminal  = "urxvt -xrm 'URxvt.bell-command: notify-send -i ~/.weechat/weechat.png  \"Attention required\" \"WeeChat requests your attention\"'"
+scratchterm  = "urxvt -xrm 'URxvt.bell-command: notify-send -i /usr/share/icons/Gion/48x48/apps/terminal.png  \"Attention required\" "
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -322,13 +324,13 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "r", function() menubar.show() end),
     
     -- Scratch-pads
-    awful.key({ modkey,         }, "s", function() scratch.drop(terminal .. " -title scratch", "bottom", "center", 1, 0.5) end),
-    awful.key({ modkey, "Shift" }, "s", function() scratch.drop(terminal .. " -title center", "bottom", "center", 0.65, 0.65) end),
-    awful.key({ modkey,         }, "x", function() scratch.drop(terminal .. " -title alsamixer -e alsamixer", "center", "center", 0.65, 0.65) end),
-    awful.key({ modkey,         }, "z", function() scratch.drop(terminal .. " -title htop -e htop", "center", "center", 0.90, 0.65) end),
-    awful.key({ modkey, "Shift" }, "i", function() scratch.drop(terminal .. " -title irc -e weechat-screen.sh", "center", "center", 0.90, 0.90) end),
-    awful.key({ modkey, "Shift" }, "r", function() scratch.drop(terminal .. " -title fm -e ranger", "center", "center", 0.85, 0.85) end),
-    
+    awful.key({ modkey,         }, "s", function() scratch.drop(scratchterm .. " \"The bottom scratchpad requests your attention\"' -title scratch", "bottom", "center", 1, 0.5) end),
+    awful.key({ modkey, "Shift" }, "s", function() scratch.drop(scratchterm .. " \"The center scratchpad requests your attention\"' -title center", "bottom", "center", 0.65, 0.65) end),
+    awful.key({ modkey,         }, "x", function() scratch.drop(scratchterm .. " \"The alsamixer scratchpad requests your attention\"' -title alsamixer -e alsamixer", "center", "center", 0.65, 0.65) end),
+    awful.key({ modkey,         }, "z", function() scratch.drop(scratchterm .. " \"The alsamixer scratchpad requests your attention\"' -title htop -e htop", "center", "center", 0.90, 0.65) end),
+    awful.key({ modkey, "Shift" }, "i", function() scratch.drop(ircterminal .. " -title irc -e weechat-screen.sh", "center", "center", 0.90, 0.90) end),
+    awful.key({ modkey, "Shift" }, "r", function() scratch.drop(scratchterm .. " \"The ranger scratchpad requests your attention\"' -title fm -e ranger", "center", "center", 0.85, 0.85) end),
+                                                                                  
     -- Spawn apps
     awful.key({ modkey            }, "c", function() awful.util.spawn("google-chrome") end),
     awful.key({ modkey            }, "v", function() awful.util.spawn("google-chrome --incognito") end),
