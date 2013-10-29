@@ -192,8 +192,8 @@ bindsym XF86AudioPrev         exec sh /home/eda/.bin/mediacontroler.py next
 bindsym XF86KbdBrightnessDown exec sh /home/eda/.bin/kbdb_noti.sh -d
 bindsym XF86KbdBrightnessUp   exec sh /home/eda/.bin/kbdb_noti.sh -i
 bindsym XF86TouchpadToggle    exec /home/eda/.bin/trackpad-toggle.sh
-bindsym XF86MonBrightnessUp   exec sh /home/eda/.bin/nbright.sh
-bindsym XF86MonBrightnessDown exec sh /home/eda/.bin/nbright.sh
+bindsym XF86MonBrightnessUp   exec sh /home/eda/.bin/nbright.sh -i 10
+bindsym XF86MonBrightnessDown exec sh /home/eda/.bin/nbright.sh -d 10
 
 # Application starters
 #
