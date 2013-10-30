@@ -20,16 +20,16 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 #client.focused_inactive #333333 #ffffff #ffffff #484e50
 #client.unfocused        #333333 #222222 #888888 #292d2e
 #client.urgent           #dc322f #dc322f #fdf6e3 #900000
-client.focused             #4D679A   #4D679A    #FFFFFF
-client.focused_inactive    #CCCED4   #CCCED4    #000000
-client.unfocused           #CCCED4   #CCCED4    #000000
-client.urgent              #FF0000   #FF0000    #FF0000
+client.focused             #4D679A   #b58900    #fdf6e3
+client.focused_inactive    #586e75   #002b36    #fdf6e3
+client.unfocused           #586e75   #002b36    #fdf6e3
+client.urgent              #FF0000   #FF0000    #fdf6e3
 
 ## Window border style
 ##---------------------
 new_window pixel 5
 new_float normal
-hide_edge_borders horizontal 
+#hide_edge_borders horizontal 
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
