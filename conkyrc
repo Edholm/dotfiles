@@ -80,11 +80,11 @@ ${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}\
         ${if_match ${battery_percent} <= 50}"\#b58900"\
         ${else}"\#009904"\
         ${endif}${endif},\
-         "icon_color": "\#b58900", "full_text":\
+         "icon_color": "\#b58900", "full_text":"\
 ${if_existing /sys/class/power_supply/AC0/online 1}\
-${if_match ${battery_percent} >= 95}"${endif}\
+${if_match ${battery_percent} >= 95}${endif}\
 ${else}\
-"${battery_percent BAT0}%${if_empty ${battery_time BAT0}}${else} - ${exec battery-left.sh} left${endif}${endif}"}, \
+${battery_percent BAT0}%${if_empty ${battery_time BAT0}}${else} - ${exec battery-left.sh} left${endif}${endif}"}, \
   {"name": "volume", "icon":"/home/eda/.i3/icons/\
 ${if_match "${exec cvol -p}" == "off"}volume0.xbm"\
 ${else}\
