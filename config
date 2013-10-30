@@ -97,6 +97,7 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+workspace "1: web" output eDP1 
 # switch to workspace
 bindsym $mod+1 workspace number 1: web
 bindsym $mod+2 workspace number 2: term
