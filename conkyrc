@@ -49,7 +49,7 @@ ${if_match ${wireless_link_qual_perc wlan0} <= 30}"\#dc322f"\
 ${else}\
 ${if_match ${wireless_link_qual_perc wlan0} <= 60}"\#b58900"\
 ${else}"\#009904"\
-${endif}${endif}
+${endif}${endif}\
      ,"full_text": "${wireless_essid wlan0} (${wireless_link_qual_perc wlan0}%)"}, \
     ${else}\
 	{"name":"nonet", "icon_color": "\#EE6633", "full_text": "disconnected", "icon": "/home/eda/.i3/xbmicons/net_down_01.xbm"}, \
@@ -80,7 +80,11 @@ ${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}\
         ${if_match ${battery_percent} <= 50}"\#b58900"\
         ${else}"\#009904"\
         ${endif}${endif},\
-         "icon_color": "\#b58900", "full_text": "${battery_percent BAT0}%${if_empty ${battery_time BAT0}}${else} - ${exec battery-left.sh} left${endif}"}, \
+         "icon_color": "\#b58900", "full_text":\
+${if_existing /sys/class/power_supply/AC0/online 1}\
+${if_match ${battery_percent} >= 95}"${endif}\
+${else}\
+"${battery_percent BAT0}%${if_empty ${battery_time BAT0}}${else} - ${exec battery-left.sh} left${endif}${endif}"}, \
   {"name": "volume", "icon":"/home/eda/.i3/icons/\
 ${if_match "${exec cvol -p}" == "off"}volume0.xbm"\
 ${else}\
