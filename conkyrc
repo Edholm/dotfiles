@@ -99,5 +99,5 @@ ${endif}${endif}${endif}${endif}\
    "color": "\#fdf6e3", "full_text": ""},\
   {"name": "time", \
    "color": "\#657b83", \
-   "full_text": "${time %a %m %b} ${time %H:%M} "}\
+   "full_text": "${time %a %d %b} ${time %H:%M} "}\
 ],
