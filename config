@@ -180,16 +180,16 @@ bar {
 
 # Multimedia keybindings
 #
-bindsym XF86AudioMute         exec sh /home/eda/.bin/cvol -t
-bindsym XF86AudioLowerVolume  exec sh /home/eda/.bin/cvol -d 5
-bindsym XF86AudioRaiseVolume  exec sh /home/eda/.bin/cvol -i 5
-bindsym XF86AudioNext         exec sh /home/eda/.bin/mediacontroler.py next
-bindsym XF86AudioPrev         exec sh /home/eda/.bin/mediacontroler.py next
-bindsym XF86KbdBrightnessDown exec sh /home/eda/.bin/kbdb_noti.sh -d
-bindsym XF86KbdBrightnessUp   exec sh /home/eda/.bin/kbdb_noti.sh -i
-bindsym XF86TouchpadToggle    exec /home/eda/.bin/trackpad-toggle.sh
-bindsym XF86MonBrightnessUp   exec sh /home/eda/.bin/nbright.sh -i 10
-bindsym XF86MonBrightnessDown exec sh /home/eda/.bin/nbright.sh -d 10
+bindsym XF86AudioMute         exec --no-startup-id sh /home/eda/.bin/cvol -t
+bindsym XF86AudioLowerVolume  exec --no-startup-id sh /home/eda/.bin/cvol -d 5
+bindsym XF86AudioRaiseVolume  exec --no-startup-id sh /home/eda/.bin/cvol -i 5
+bindsym XF86AudioNext         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
+bindsym XF86AudioPrev         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
+bindsym XF86KbdBrightnessDown exec --no-startup-id sh /home/eda/.bin/kbdb_noti.sh -d
+bindsym XF86KbdBrightnessUp   exec --no-startup-id sh /home/eda/.bin/kbdb_noti.sh -i
+bindsym XF86TouchpadToggle    exec --no-startup-id sh /home/eda/.bin/trackpad-toggle.sh
+bindsym XF86MonBrightnessUp   exec --no-startup-id sh /home/eda/.bin/nbright.sh -i 10
+bindsym XF86MonBrightnessDown exec --no-startup-id sh /home/eda/.bin/nbright.sh -d 10
 
 # Application starters
 #
