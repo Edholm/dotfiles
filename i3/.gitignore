@@ -3,4 +3,6 @@
 
 # But not these files...
 !config
+!icons
+!*.xbm
 !conkyrc
