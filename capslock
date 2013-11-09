@@ -1,0 +1,4 @@
+! Change capslock to escape (Useful in vim)
+remove Lock = Caps_Lock
+keysym Caps_Lock = Escape
+add Lock = Caps_Lock
