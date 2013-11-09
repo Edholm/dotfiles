@@ -22,4 +22,6 @@ My desktop as of 2013-11-09:
 
 ![i3, urxvt and custom conkyrc as status feeder](2013-11-09-i3-busy.png "Busy")
 ![Clean desktop](2013-11-09-i3-clean.png "Clean")
+On battery (patched i3bar that can show xbm icons)
+![On battery](2013-11-09-i3-battery.png "On battery")
 
