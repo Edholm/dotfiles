@@ -16,3 +16,10 @@ $ ln -s bashrc ~/.bashrc
 $ ln -s xinitrc ~/.xinitrc
 # Etc.
 ```
+
+### Screenshot###
+My desktop as of 2013-11-09:
+
+![i3, urxvt and custom conkyrc as status feeder](2013-11-09-i3-busy.png "Busy")
+![Clean desktop](2013-11-09-i3-clean.png "Clean")
+
