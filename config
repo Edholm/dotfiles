@@ -195,6 +195,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id sh /home/eda/.bin/nbright.sh 
 #
 for_window [class="(?i)google-chrome"] border none 
 for_window [class="(?i)dwb"] border none 
+for_window [class="(?i)mpv"] floating enable 
 bindsym $mod+c exec "google-chrome"
 bindsym $mod+Mod1+c exec "google-chrome --incognito"
 bindsym $mod+Shift+Return exec "urxvt -e ranger"
