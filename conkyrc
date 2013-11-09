@@ -52,7 +52,7 @@ ${else}"\#009904"\
 ${endif}${endif}\
      ,"full_text": "${wireless_essid wlan0} (${wireless_link_qual_perc wlan0}%)"}, \
     ${else}\
-	{"name":"nonet", "icon_color": "\#EE6633", "full_text": "disconnected", "icon": "/home/eda/.i3/xbmicons/net_down_01.xbm"}, \
+	{"name":"nonet", "icon_color": "\#EE6633", "full_text": "disconnected", "icon": "/home/eda/.i3/icons/net_down_01.xbm"}, \
   ${endif}  \
         {"name": "battery", "icon":"/home/eda/.i3/icons/\
 ${if_existing /sys/class/power_supply/AC0/online 1}ac.xbm"\
