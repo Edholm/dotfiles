@@ -1,0 +1,148 @@
+xterm.background: black
+xterm.foreground: white
+
+URxvt.loginshell: false
+URxvt.internalborder: 0
+URxvt.underlinecolor: #999999
+URxvt.cutchars: "`\"()*,<>[]{}|'"
+!URxvt.print-pipe: cat >/tmp/xxx
+URxvt.visualBell: false
+URxvt.urgentOnBell: true
+URxvt.perl-ext-common: default,clipboard,confirm-paste,url-select,bell-command
+URxvt.termName: rxvt-256color
+
+! --[ URxvt - URL Handling ]-------------------------------
+URxvt.url-select.launcher: google-chrome 
+URxvt.url-select.underline: true
+URxvt.url-select.button: 1 
+
+URxvt.keysym.M-u:   perl:url-select:select_next
+URxvt.keysym.M-c:   perl:clipboard:copy
+URxvt.keysym.M-v:   perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+! TEST: http://www.google.com
+!
+
+URxvt.scrollBar: off
+
+!#URxvt.depth: 32
+
+!URxvt.iconFile: /usr/share/icons/gnome/48x48/apps/terminal.png
+
+!-------------------------------------------------------------------------------
+!! Xft settings
+!!-------------------------------------------------------------------------------
+!
+Xft.dpi:                    96
+Xft.antialias:              true
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+
+!URxvt.font: -xos4-terminus-medium-r-normal-*-16-*-*-*-*-*-*-*
+!URxvt.boldFont: -xos4-terminus-bold-r-normal-*-16-*-*-*-*-*-*-*
+
+URxvt.allow_bold:           false
+!!!URxvt.font: xft:consolas:size=12
+!URxvt.boldFont: xft:consolas:bold:size=12
+
+URxvt.font: xft:DejaVu Sans Mono:size=13
+URxvt.boldFont: xft:DejaVu Sans Mono:bold:size=13
+
+!URxvt.font: xft:consolas:size=12
+!URxvt.boldFont: xft:consolas:bold:size=12
+
+!URxvt*font: xft:Monospace:pixelsize=14
+!URxvt*boldFont: xft:Monospace:pixelsize=14
+
+! Fix font space
+URxvt*letterSpace: -1
+
+! Cursor
+URxvt.cursorBlink:          false
+URxvt.cursorUnderline:      false
+
+! ! Pointer
+URxvt.pointerBlank:         true
+
+! Solarized color scheme for the X Window System
+!
+! http://ethanschoonover.com/solarized
+
+
+! Common
+
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+
+
+! Dark
+
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+
+! Light
+
+!#define S_base03        #fdf6e3
+!#define S_base02        #eee8d5
+!#define S_base01        #93a1a1
+!#define S_base00        #839496
+!#define S_base0         #657b83
+!#define S_base1         #586e75
+!#define S_base2         #073642
+!#define S_base3         #002b36
+
+
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
+!
+! URxvt*background:            S_base03
+URxvt.intensityStyles: false
+URxvt*background:              S_base03
+URxvt*foreground:              S_base0
+!URxvt*fading:                  40
+URxvt*fadeColor:               S_base03
+URxvt*cursorColor:             S_base1
+URxvt*pointerColorBackground:  S_base01
+URxvt*pointerColorForeground:  S_base1
+
+URxvt*color0:                  S_base02
+URxvt*color1:                  S_red
+URxvt*color2:                  S_green
+URxvt*color3:                  S_yellow
+URxvt*color4:                  S_blue
+URxvt*color5:                  S_magenta
+URxvt*color6:                  S_cyan
+URxvt*color7:                  S_base2
+URxvt*color9:                  S_orange
+URxvt*color8:                  S_base03
+URxvt*color10:                 S_base01
+URxvt*color11:                 S_base00
+URxvt*color12:                 S_base0
+URxvt*color13:                 S_violet
+URxvt*color14:                 S_base1
+URxvt*color15:                 S_base3
+
+!#include "/home/edholm/.xcolors/white"
+!#include "/home/edholm/.xcolors/dwmrob"
+!#include "/home/edholm/.xcolors/gnometerm"
+!#include "/home/edholm/.xcolors/jasonwryan"
+!#include "/home/edholm/.xcolors/phrak1"
+!#include "/home/edholm/.xcolors/rezza"
+!#include "/home/edholm/.xcolors/rydgel"
+!#include "/home/edholm/.xcolors/tango"
+!#include "/home/edholm/.xcolors/zenburn"
+
