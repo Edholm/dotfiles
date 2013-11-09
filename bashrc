@@ -1,7 +1,6 @@
 #
 # ~/.bashrc
 #
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -11,10 +10,6 @@ fi
 
 umask u=rwx,g=rx,o=
 eval $(dircolors ~/.dircolors)
-
-# used for restoring windows in bspwm
-export PANEL_FIFO=/tmp/panel-fifo
-export PANEL_HEIGHT=24
 
 # Larger bash history (allow 32³ entries; default is 500)
 export HISTSIZE=32768
@@ -29,8 +24,6 @@ else
     export BROWSER=w3m
 fi
 
-export TERMCMD=urxvt
-
 # Highlight section titles in manual pages
 export LESS_TERMCAP_md="$ORANGE"
 
@@ -42,9 +35,6 @@ shopt -s nocaseglob
 
 # Append to the Bash history file, rather than overwriting it
 shopt -s histappend
-
-# Autocorrect typos in path names when using `cd`
-shopt -s cdspell
 
 # Enable some Bash 4 features when possible:
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
@@ -62,13 +52,11 @@ export FILESERVER=/home/eda/fs-mnt
 export UPPACKAT=$FILESERVER"/Uppackat"
 export SERIER=$FILESERVER"/\#Storage/TV-Shows/"
 export EDITOR=vim
-##export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true'
 export GTK2_RC_FILES=/etc/gtk-2.0/gtkrc:$HOME/.gtkrc-2.0
 source $HOME/.bin/git-prompt.sh
 
 alias gs='git status'
 alias gd='git diff'
-alias spotify='spotify-awesome.sh'
 alias sl='ls'
 alias p='sudo pacman -S'
 alias pa='packer -S'
@@ -80,22 +68,16 @@ alias du='du -hc'
 alias ls='ls -hF --color=always --group-directories-first'
 alias grep='grep --color=auto'
 alias passwordmaker='passwordmaker -a RIPEMD160 -x -g 14 -r '
-alias ping='ping -c 10'
+alias ping='ping -c 3'
 alias halt='systemctl poweroff'
 alias reboot='systemctl reboot'
 alias shutdown='systemctl poweroff'
 alias poweroff='systemctl poweroff'
-alias backlight.sh='sudo backlight.sh'
 alias xprop='xprop -notype WM_CLASS WM_NAME WM_WINDOW_ROLE'
 alias subliminal='subliminal -l en'
-alias texi2pdf='texi2pdf -c'
 alias pss='ps -A -o pid,user,cmd | grep'
 
 function sudo () { [[ $1 == vim ]] && shift && sudoedit "$@" || command sudo "$@"; }
-
-goto() { [ -d "$1" ] && cd "$1" || cd "$(dirname "$1")"; }
-cpf() { cp "$@" && goto "$_"; }
-mvf() { mv "$@" && goto "$_"; }
 
 function duf {
 du -k "$@" | sort -n | while read size fname; do for unit in k M G T P E Z Y; do if [ $size -lt 1024 ]; then echo -e "${size}${unit}\t${fname}"; break; fi; size=$((size/1024)); done; done
@@ -117,10 +99,6 @@ cdserier() {
 cdfsmnt() {
 	sh /home/eda/.bin/fsmnt
 	cd $FILESERVER
-}
-screenoff() {
-    dbus-send --type=method_call --print-reply=literal --system --dest="org.freedesktop.UPower" /org/freedesktop/UPower/KbdBacklight org.freedesktop.UPower.KbdBacklight.SetBrightness  int32:0
-    sleep 1 && xset dpms force off
 }
 
 export GREP_COLOR="1;33"
@@ -158,11 +136,6 @@ bakcyn='\e[46m'   # Cyan
 bakwht='\e[47m'   # White
 txtrst='\e[0m'    # Text Reset
 
-#Color and PS1 conf
-#PS1="\[$txtcyn\]\h \[$txtgrn\][\W] \$\[$txtwht\] "
-
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
-#PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
-#PS1="\[$txtgrn\]\u\[$txtwht\]@\[$txtcyn\]\h \[$txtwht\][\W] \[$txtgrn\]\$ \[$txtwht\]"
 PS1='\[\e[0;32m\]\u\[\e[0;37m\]@\[\e[0;36m\]\h \[\e[0;37m\][\W]$(__git_ps1 " \[\e[0;31m\](%s)") \[\e[0;32m\]\$ \[\e[0;37m\]'
