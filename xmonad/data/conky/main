@@ -1,0 +1,41 @@
+# Conky Config File
+#
+# just log everything to the desktop
+#
+###
+
+# Main options (alphabetically)
+alignment bl
+background yes
+default_color 606060
+draw_outline no
+draw_shades no
+double_buffer yes
+gap_x 10 
+gap_y 10 
+minimum_size 100 100
+own_window yes 
+own_window_type override
+own_window_transparent yes
+total_run_times 0
+update_interval 10
+use_xft yes
+xftalpha 0.7
+xftfont Verdana:size=9
+default_color eee8d5
+
+# After TEXT is formatted on screen
+TEXT
+${voffset 0}
+${font size=14}${color b58900}Notepad:${font}
+${font size=11}${color }${exec cat /home/eda/notes}
+
+${font}
+${voffset 10}
+${font size=10}${color b58900}Logs! Logs everywhere!${font}
+
+${color}${exec journalctl -q -b --lines=25 --no-pager -a | awk '{$1=$2=$4="";gsub(FS "+",FS)}1'}
+
+${color b58900}dmesg:
+${color }${exec dmesg -T | tail -n10}
+

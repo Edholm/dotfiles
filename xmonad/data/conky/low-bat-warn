@@ -1,0 +1,6 @@
+#!/bin/bash
+warn_lvl=15
+BATT=$(acpi -b | awk '{print $4}' | awk 'sub("..$", "")')
+if [ "$BATT" -le "$warn_lvl" ]; then
+	echo WARNING! Low battery - $BATT% | dzen2 -fg red -h 50 -fn -xos4-terminus-medium-r-normal-*-40-*-*-*-*-*-*-* -p 3
+fi
