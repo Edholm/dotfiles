@@ -86,13 +86,13 @@ ${if_match ${battery_percent} >= 95}${endif}\
 ${else}\
 ${battery_percent BAT0}%${if_empty ${battery_time BAT0}}${else} - ${exec battery-left.sh} left${endif}${endif}"}, \
   {"name": "volume", "icon":"/home/eda/.i3/icons/\
-${if_match "${exec cvol -p}" == "off"}volume0.xbm"\
+${if_match "${exec /home/eda/.bin/cvol -p}" == "off"}volume0.xbm"\
 ${else}\
-${if_match ${exec cvol -p} <= 25}volume25.xbm"\
+${if_match ${exec /home/eda/.bin/cvol -p} <= 25}volume25.xbm"\
 ${else}\
-${if_match ${exec cvol -p} <= 50}volume50.xbm"\
+${if_match ${exec /home/eda/.bin/cvol -p} <= 50}volume50.xbm"\
 ${else}\
-${if_match ${exec cvol -p} <= 75}volume75.xbm"\
+${if_match ${exec /home/eda/.bin/cvol -p} <= 75}volume75.xbm"\
 ${else}volume100.xbm"\
 ${endif}${endif}${endif}${endif}\
   ,"icon_color":"\#b58900", \
