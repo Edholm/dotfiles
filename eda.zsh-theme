@@ -1,8 +1,8 @@
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 
-PROMPT='%{$fg[$NCOLOR]%}%n%{$fg[white]%}@%{$fg[cyan]%}%m%{$reset_color%} %{$fg[white]%}[%~]%{$reset_color%} $(git_prompt_info)%{$fg[green]%}%(!.#.$)%{$fg[white]%} %{$reset_color%}'
+autoload -U colors && colors
+PROMPT='%{$fg[$NCOLOR]%}%n%{$fg[white]%}@%{$fg[cyan]%}%m%{$reset_color%} %{$fg[white]%}[%~]%{$reset_color%} $(git_prompt_info)%{$fg[green]%}%(!.#.$)%{$reset_color%} '
 #RPROMPT='[%*]'
-RPROMPT=''
 
 
 # git theming
@@ -12,3 +12,4 @@ ZSH_THEME_GIT_PROMPT_CLEAN=""
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}✗"
 
 eval $(dircolors ~/.dircolors)
+export ZLS_COLORS=$LS_COLORS
