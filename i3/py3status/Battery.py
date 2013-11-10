@@ -59,7 +59,7 @@ class Py3status:
         import time
 
         # Default options
-        postion = 0
+        postion = 1
         response = {'full_text': '', 'name': 'battery'}
         response['cached_until'] = time.time() + 10 # refresh every 10s
         response['separator_block_width'] = 20 
