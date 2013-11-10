@@ -5,4 +5,5 @@
 !config
 !icons
 !*.xbm
-!conkyrc
+!py3status
+!*.py
