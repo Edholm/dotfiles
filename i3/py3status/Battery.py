@@ -55,11 +55,12 @@ class Battery:
                 prop, dbus_interface=dbus.PROPERTIES_IFACE)
 
 class Py3status:
+    #TODO: Add click event where a popup dialog (dzen) is shown
     def battery(self, json, i3status_config):
         import time
 
         # Default options
-        postion = 1
+        position = 1
         response = {'full_text': '', 'name': 'battery'}
         response['cached_until'] = time.time() + 10 # refresh every 10s
         response['separator_block_width'] = 20 
@@ -88,7 +89,7 @@ class Py3status:
             # Only show time left if under 1.5h
             if h > 0 and m > 0 and s > 0 and secs_left <= 5400: 
                 response['full_text'] += ' {}h {}m {}s left'.format(h, m, s)
-        return (postion, response)
+        return (position, response)
 
     def _get_icon(self, percentage, state):
         import math
