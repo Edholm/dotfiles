@@ -1,19 +1,26 @@
+# Requires psutil (https://code.google.com/p/psutil/)
+# pacman -S python-psutil if using Arch Linux
 class Py3status:
-    """ Only show cpu-usage when over certain limit """
-    def cond_top(self, json, i3status_config):
-        import time
-        threshold = 35 # In percent
-        threshold_degraded = 65
+    def __init__(self):
+        self.threshold          = 15  # CPU Below this value vill not be shown. 
+        self.threshold_good     = 10  # In percent 
+        self.threshold_degraded = 65
 
+    def cond_top(self, json, i3status_config):
+        """ Only show cpu-usage when over certain limit """
+        import time
         position = 0
         response = {'full_text': '', 'name': 'cpu_usage'}
-        response['cached_until'] = time.time() + 1 # refresh every 10
+        response['cached_until'] = time.time() + 5 
         response['separator_block_width'] = 20 
 
-        cpu = 0 
+        import psutil
+        cpu = psutil.cpu_percent(interval=2) 
 
-        if cpu >= threshold:
-            if cpu <= threshold_degraded:
+        if cpu >= self.threshold:
+            if cpu <= self.threshold_good:
+                response['color'] = i3status_config['color_good']
+            elif cpu <= self.threshold_degraded:
                 response['color'] = i3status_config['color_degraded']
             else:
                 response['color'] = i3status_config['color_bad']
