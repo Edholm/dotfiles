@@ -67,7 +67,8 @@ class Py3status:
         batt          = Battery()
         percentage    = batt.get_percentage()
         state, phrase = batt.get_state()
-        h, m, s       = batt.sec_to_hms(batt.time_left())
+        secs_left     = batt.time_left()
+        h, m, s       = batt.sec_to_hms(secs_left)
 
         response['icon'] = self._get_icon(percentage, state) 
 
@@ -83,7 +84,9 @@ class Py3status:
         # Format
         if (state != 1 and state != 4) or percentage < 95:
             response['full_text'] = ' {}%'.format(int(percentage))
-            if h > 0 and m > 0 and s > 0:
+            
+            # Only show time left if under 1.5h
+            if h > 0 and m > 0 and s > 0 and secs_left <= 5400: 
                 response['full_text'] += ' {}h {}m {}s left'.format(h, m, s)
         return (postion, response)
 
