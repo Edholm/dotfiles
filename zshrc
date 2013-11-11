@@ -46,9 +46,6 @@ alias pss='ps -A -o pid,user,cmd | grep'
 # Autocomplete .. to ../
 zstyle ':completion:*' special-dirs true
 
-# History search
-[[ -n "${key[PageUp]}"   ]]  && bindkey  "${key[PageUp]}"    history-beginning-search-backward
-[[ -n "${key[PageDown]}" ]]  && bindkey  "${key[PageDown]}"  history-beginning-search-forward
 #
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -79,7 +76,7 @@ zstyle ':completion:*' special-dirs true
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git cp colored-man archlinux rsync)
+plugins=(git command-not-found cp colored-man archlinux rsync)
 
 source $ZSH/oh-my-zsh.sh
 
