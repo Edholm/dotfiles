@@ -47,7 +47,7 @@ class Py3status:
             response['icon'] = "/home/eda/.i3/icons/net_down_01.xbm"
         else:
             response['icon'] = self._get_icon(quality)
-            response['full_text'] = essid
+            response['full_text'] = " " + essid
             if quality < 45:
                 if quality <= 20:
                     response['color'] = i3status_config['color_bad'] 
