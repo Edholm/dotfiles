@@ -33,7 +33,7 @@ class Wifi:
 class Py3status:
     def output(self, json, i3status_config):
         import time
-        position = 2
+        position = 1
         response = {'full_text': 'wifi', 'name': 'wifi'}
         response['cached_until'] = time.time() + 20 # refresh every 10s
         response['separator_block_width'] = 20 
