@@ -84,7 +84,6 @@ plugins=(git cp colored-man archlinux rsync)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/eda/.bin
 export EDITOR="vim -X"
 
 if [[ -n "$DISPLAY" ]]; then
