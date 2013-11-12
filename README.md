@@ -25,15 +25,15 @@ I modified the icon patch to not add spacing after the icons. This makes using o
 For status output I use [py3status-git](https://aur.archlinux.org/packages/py3status-git/) with my own custom modules.
 #### Screenshot####
 Statusbar on AC-power and low CPU usage:  
-![Statusbar](2013-11-12-statusbar.png "i3bar-icon, i3status and py3status")  
+![Statusbar](screenshots/2013-11-12-statusbar.png "i3bar-icon, i3status and py3status")  
 Statusbar on battery and high CPU usage (CPU usage only shows when above certain threshold)  
-![Statusbar](2013-11-12-statusbar-battery.png "i3bar-icon, i3status and py3status")  
+![Statusbar](screenshots/2013-11-12-statusbar-battery.png "i3bar-icon, i3status and py3status")  
 
 (Note: The below screenshots use _conky_ as status output command)  
 My desktop as of 2013-11-09:
 
 ![i3, urxvt and custom conkyrc as status feeder](2013-11-09-i3-busy.png "Busy")
-![Clean desktop](2013-11-09-i3-clean.png "Clean")
+![Clean desktop](screenshots/2013-11-09-i3-clean.png "Clean")
 On battery (patched i3bar that can show xbm icons)
-![On battery](2013-11-09-i3-battery.png "On battery")
+![On battery](screenshots/2013-11-09-i3-battery.png "On battery")
 
