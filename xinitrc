@@ -20,7 +20,7 @@ xmodmap ~/.capslock
 xset r rate 250 &
 
 # Suspend after 10 min and disable screen saver
-xset dpms 720 1000 700
+xset dpms 720 1000 1000
 xset s 600 120 &
 xss-lock -n /home/eda/.bin/dimmer.sh -- i3lock-wrapper -n &
 
