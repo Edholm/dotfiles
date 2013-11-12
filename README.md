@@ -32,7 +32,7 @@ Statusbar on battery and high CPU usage (CPU usage only shows when above certain
 (Note: The below screenshots use _conky_ as status output command)  
 My desktop as of 2013-11-09:
 
-![i3, urxvt and custom conkyrc as status feeder](2013-11-09-i3-busy.png "Busy")
+![i3, urxvt and custom conkyrc as status feeder](screenshots/2013-11-09-i3-busy.png "Busy")
 ![Clean desktop](screenshots/2013-11-09-i3-clean.png "Clean")
 On battery (patched i3bar that can show xbm icons)
 ![On battery](screenshots/2013-11-09-i3-battery.png "On battery")
