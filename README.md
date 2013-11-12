@@ -14,10 +14,17 @@ $ git submodule init     # To fetch the vimrc submodule
 $ git submodule update
 $ ln -s bashrc ~/.bashrc
 $ ln -s xinitrc ~/.xinitrc
+$ ln -s i3 ~/.i3
 # Etc.
 ```
 
-### Screenshot###
+###i3###
+I use [i3](https://www.archlinux.org/packages/community/x86_64/i3-wm/) with [i3bar-icons-git](https://aur.archlinux.org/packages/i3bar-icons-git/). 
+I modified the icon patch to not add spacing after the icons. This makes using only icons a bit nicer.
+
+For status output I use [py3status-git](https://aur.archlinux.org/packages/py3status-git/) with my own custom modules.
+#### Screenshot####
+(Note: these screenshots use _conky_ as status output command)  
 My desktop as of 2013-11-09:
 
 ![i3, urxvt and custom conkyrc as status feeder](2013-11-09-i3-busy.png "Busy")
