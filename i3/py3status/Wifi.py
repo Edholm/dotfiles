@@ -42,7 +42,7 @@ class Py3status:
         essid, quality = wifi.info()
 
         if essid is None:
-            response['full_text'] = "Disconnected" 
+            response['full_text'] = " Disconnected" 
             response['color'] = i3status_config['color_bad']
             response['icon'] = "/home/eda/.i3/icons/net_down_01.xbm"
         else:
