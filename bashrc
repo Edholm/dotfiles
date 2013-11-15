@@ -16,7 +16,7 @@ export HISTSIZE=32768
 export HISTFILESIZE=$HISTSIZE
 export HISTCONTROL=ignoreboth
 # Make some commands not show up in history
-export HISTIGNORE="cd ..:ls:sl:ls -la:cd:cd -:pwd:exit:date:* --help:logout"
+export HISTIGNORE="cd ..:ls:sl:ls -la:cd:cd -:pwd:exit:date:logout"
 
 if [[ -n "$DISPLAY" ]]; then
     export BROWSER=google-chrome
@@ -47,7 +47,8 @@ done
 stty -ixon
 
 export HISTCONTROL=ignoreboth
-export PATH=$PATH":/home/eda/.bin"
+export GOPATH="/home/eda/git-repos/golang"
+export PATH=$PATH":/home/eda/.bin:/home/eda/git-repos/golang/bin"
 export FILESERVER=/home/eda/fs-mnt
 export UPPACKAT=$FILESERVER"/Uppackat"
 export SERIER=$FILESERVER"/\#Storage/TV-Shows/"
