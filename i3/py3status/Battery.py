@@ -87,7 +87,7 @@ class Py3status:
             response['full_text'] = ' {}%'.format(int(percentage))
             
             # Only show time left if under 1.5h
-            if h > 0 and m > 0 and s > 0 and secs_left <= 5400: 
+            if (h > 0 or m > 0 or s > 0) and secs_left <= 5400: 
                 response['full_text'] += ' {}h {}m {}s left'.format(h, m, s)
         return (position, response)
 
