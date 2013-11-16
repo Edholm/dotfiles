@@ -89,14 +89,17 @@ autoFSMount() {
 		sh /home/eda/.bin/fsmnt
 	fi
 }
+
 cduppackat() {
 	autoFSMount $UPPACKAT
 	cd $UPPACKAT
 }
+
 cdserier() {
 	autoFSMount $SERIER 
 	cd $SERIER
 }
+
 cdfsmnt() {
 	sh /home/eda/.bin/fsmnt
 	cd $FILESERVER
