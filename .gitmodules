@@ -1,3 +1,6 @@
 [submodule "vim_runtime"]
 	path = vim_runtime
 	url = git@github.com:Edholm/vimrc.git
+[submodule "spf13-vim"]
+	path = spf13-vim
+	url = https://github.com/Edholm/spf13-vim
