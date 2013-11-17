@@ -12,7 +12,7 @@ class Trackpad(object):
 
     def is_enabled(self):
         """ Return whether or not the trackpad is enabled. """
-        return self.exec_cmd("trackpad-toggle.sh", "state").strip() == "0"
+        return self.exec_cmd("trackpad-toggle.sh", "state").strip() == "1"
 
 class Py3status(object):
 
