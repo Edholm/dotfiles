@@ -77,6 +77,7 @@ alias poweroff='systemctl poweroff'
 alias xprop='xprop -notype WM_CLASS WM_NAME WM_WINDOW_ROLE'
 alias subliminal='subliminal -l en'
 alias pss='ps -A -o pid,user,cmd | grep'
+alias gofmt='gofmt -tabs=false -tabwidth=4'
 
 function sudo () { [[ $1 == vim ]] && shift && sudoedit "$@" || command sudo "$@"; }
 
