@@ -1,20 +1,15 @@
+# vim: set foldmarker={,} foldlevel=1 foldmethod=marker:
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below. ISO 10646 = Unicode
+# Font {
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-#font pango:DejaVu Sans Mono, Terminus Bold Semi-Condensed 11
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, if you need a lot of unicode glyphs or
-# right-to-left text rendering, you should instead use pango for rendering and
-# chose a FreeType font, such as:
-# font pango:DejaVu Sans Mono 10
+# }
 
-# Colors
+# Colors {
 # class                 border  backgr. text    indicator
 #client.focused          #b58900 #000000 #ffffff #2e9ef4
 #client.focused_inactive #333333 #ffffff #ffffff #484e50
@@ -24,13 +19,16 @@ client.focused             #4D679A   #b58900    #fdf6e3
 client.focused_inactive    #586e75   #002b36    #fdf6e3
 client.unfocused           #586e75   #002b36    #fdf6e3
 client.urgent              #FF0000   #FF0000    #fdf6e3
+# }
 
-## Window border style
+## Window border style {
 ##---------------------
 new_window pixel 5
 new_float normal
-#hide_edge_borders horizontal 
+#hide_edge_borders horizontal
+# }
 
+# Keybindings {
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -96,8 +94,11 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+#
+# end bindings }
 
-workspace "1: web" output eDP1 
+# Workspaces {
+workspace "1: web" output eDP1
 # switch to workspace
 bindsym $mod+1 workspace number 1: web
 bindsym $mod+2 workspace number 2: term
@@ -121,15 +122,18 @@ bindsym $mod+Shift+7 move container to workspace 7: spotify
 bindsym $mod+Shift+8 move container to workspace 8: pidgin
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
+# }
 
+# i3 managemant {
 # reload the configuration file
 bindsym $mod+q reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# }
 
-# resize window (you can also use the mouse for that)
+# resize window (you can also use the mouse for that) {
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -154,16 +158,16 @@ mode "resize" {
 }
 
 bindsym $mod+d mode "resize"
+# }
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# Bar config {
 bar {
         status_command    py3status -c /home/eda/.config/i3status/config
         i3bar_command     /usr/bin/i3bar-icons
         position          top
         workspace_buttons yes
         tray_output       none
-        #verbose            yes        
+        #verbose            yes
 
         font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
         colors {
@@ -177,8 +181,9 @@ bar {
             urgent_workspace   #dc322f  #dc322f      #fdf6e3
         }
 }
+# }
 
-# Multimedia keybindings
+# Multimedia keybindings {
 #
 bindsym XF86AudioMute         exec --no-startup-id sh /home/eda/.bin/cvol -t
 bindsym XF86AudioLowerVolume  exec --no-startup-id sh /home/eda/.bin/cvol -d 5
@@ -190,27 +195,29 @@ bindsym XF86KbdBrightnessUp   exec --no-startup-id sh /home/eda/.bin/kbdb_noti.s
 bindsym XF86TouchpadToggle    exec --no-startup-id sh /home/eda/.bin/trackpad-toggle.sh
 bindsym XF86MonBrightnessUp   exec --no-startup-id sh /home/eda/.bin/nbright.sh -i 10
 bindsym XF86MonBrightnessDown exec --no-startup-id sh /home/eda/.bin/nbright.sh -d 10
+# }
 
-# Application starters
+# Application starters {
 #
-for_window [class="(?i)google-chrome"] border none 
-for_window [class="(?i)dwb"] border none 
-for_window [class="(?i)mpv"] floating enable 
+for_window [class="(?i)google-chrome"] border none
+for_window [class="(?i)dwb"] border none
+for_window [class="(?i)mpv"] floating enable
 bindsym $mod+c exec "google-chrome"
 bindsym $mod+Mod1+c exec "google-chrome --incognito"
 bindsym $mod+Shift+Return exec "urxvt -e ranger"
+# }
 
-
-# Workspace assignments
+# Workspace assignments {
 #
 assign [class="(?i)google-chrome"] → 1: web
-assign [class="Spotify"] → 7: spotify 
-assign [class="(?i)Pidgin"] → 8: pidgin 
+assign [class="Spotify"] → 7: spotify
+assign [class="(?i)Pidgin"] → 8: pidgin
 assign [class="(?i)Skype"] → 8: pidgin
+# }
 
-
-# Scratch-pads
+# Scratch-pads {
 #
 exec --no-startup-id urxvt -name scratchpad
 for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
 bindsym mod4+s [class="URxvt" instance="scratchpad"] scratchpad show
+# }
