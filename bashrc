@@ -86,24 +86,24 @@ du -k "$@" | sort -n | while read size fname; do for unit in k M G T P E Z Y; do
 }
 
 autoFSMount() {
-	if [ ! -d "$1" ]; then
-		sh /home/eda/.bin/fsmnt
-	fi
+    if [ ! -d "$1" ]; then
+        sh /home/eda/.bin/fsmnt
+    fi
 }
 
 cduppackat() {
-	autoFSMount $UPPACKAT
-	cd $UPPACKAT
+    autoFSMount $UPPACKAT
+    cd $UPPACKAT
 }
 
 cdserier() {
-	autoFSMount $SERIER 
-	cd $SERIER
+    autoFSMount $SERIER
+    cd $SERIER
 }
 
 cdfsmnt() {
-	sh /home/eda/.bin/fsmnt
-	cd $FILESERVER
+    sh /home/eda/.bin/fsmnt
+    cd $FILESERVER
 }
 
 export GREP_COLOR="1;33"
@@ -143,4 +143,5 @@ txtrst='\e[0m'    # Text Reset
 
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWUNTRACKEDFILES=1
-PS1='\[\e[0;32m\]\u\[\e[0;37m\]@\[\e[0;36m\]\h \[\e[0;37m\][\W]$(__git_ps1 " \[\e[0;31m\](%s)") \[\e[0;32m\]\$ \[\e[0;37m\]'
+PS1="\[${txtgrn}\]\u\[$txtwht\]@\[$txtcyn\]\h \[$txtwht\][\W]"'$(__git_ps1 " \[$txtred\](%s)")'" \[$txtgrn\]\$ \[$txtrst\]"
+PS2="\[$txtgrn\]    ⇶\[$txtrst\] "
