@@ -13,6 +13,9 @@ noremap <Leader>w :update<CR>
 " Solarized Airline theme "
 let g:airline_theme="solarized"
 
+" Yank to clipboard "
+set clipboard=unnamedplus
+
 " gotags settings for TagBar {
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',

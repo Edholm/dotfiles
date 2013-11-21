@@ -39,8 +39,8 @@ Xft.hinting:                true
 Xft.hintstyle:              hintslight
 
 URxvt.allow_bold:           false
-URxvt.font: xft:DejaVu Sans Mono:size=13
-URxvt.boldFont: xft:DejaVu Sans Mono:bold:size=13
+URxvt.font: xft:Liberation Mono:size=14
+URxvt.boldFont: xft:Liberation Mono:bold:size=14
 
 ! Fix font space
 URxvt*letterSpace: -1
