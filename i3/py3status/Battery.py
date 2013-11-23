@@ -62,20 +62,20 @@ class Py3status:
         # Default options
         position = 3
         response = {'full_text': '', 'name': 'battery'}
-        response['cached_until'] = time.time() + 10 # refresh every 10s
+        response['cached_until'] = time.time() + 10  # refresh every 10s
         response['separator_block_width'] = 20
 
-        batt          = Battery()
-        percentage    = batt.get_percentage()
-        state, phrase = batt.get_state()
-        secs_left     = batt.time_left()
-        h, m, s       = batt.sec_to_hms(secs_left)
+        batt = Battery()
+        percentage = batt.get_percentage()
+        state, _ = batt.get_state()
+        secs_left = batt.time_left()
+        h, m, s = batt.sec_to_hms(secs_left)
 
         response['icon'] = self._get_icon(percentage, state)
 
         # Choose color based on battery level left.
         if percentage <= 15:
-            response['color']      = i3status_config['color_bad']
+            response['color'] = i3status_config['color_bad']
             response['icon_color'] = response['color']
         elif percentage <= 50:
             response['color'] = i3status_config['color_degraded']
@@ -83,12 +83,14 @@ class Py3status:
             response['color'] = i3status_config['color_good']
 
         # Format
-        if (state != 1 and state != 4) or percentage < 95:
+        if percentage < 95:
             response['full_text'] = ' {}%'.format(int(percentage))
 
-            # Only show time left if under 1.5h
-            if (h > 0 or m > 0 or s > 0) and secs_left <= 5400:
-                response['full_text'] += ' {}h {}m {}s left'.format(h, m, s)
+            # If we're not charging
+            if (state != 1 and state != 4):
+                # Only show time left if under 1.5h
+                if (h > 0 or m > 0 or s > 0) and secs_left <= 5400:
+                    response['full_text'] += ' {}h {}m {}s left'.format(h, m, s)
         return (position, response)
 
     def _get_icon(self, percentage, state):
@@ -102,4 +104,3 @@ class Py3status:
             return icon_path + "battery" + str(math.ceil(percentage/10)*10) + ".xbm"
         else:
             return icon_path + "battery80.xbm"
-
