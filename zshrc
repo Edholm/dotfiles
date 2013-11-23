@@ -95,6 +95,8 @@ else
 fi
 
 typeset -U path
-path=(/home/eda/.bin $path)
+path=(~/.bin ~/git-repos/golang/bin/ $path)
 export PATH
+
+export GOPATH=~/git-repos/golang/
 
