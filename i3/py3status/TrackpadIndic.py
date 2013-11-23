@@ -23,7 +23,7 @@ class Py3status(object):
         # Default options
         position = 0
         response = {'full_text': '', 'name': 'trackpad'}
-        response['cached_until'] = time.time() + 5
+        response['cached_until'] = time.time() + 600
         response['separator_block_width'] = 20
 
         t = Trackpad()
