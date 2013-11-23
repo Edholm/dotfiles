@@ -9,9 +9,7 @@ Example:
 
  ```bash
 $ git clone git@github.com:Edholm/dotfiles.git  
-$ cd dotfiles  
-$ git submodule init     # To fetch the vimrc submodule
-$ git submodule update
+$ cd dotfiles
 $ ln -s bashrc ~/.bashrc
 $ ln -s xinitrc ~/.xinitrc
 $ ln -s i3 ~/.i3
@@ -37,3 +35,6 @@ My desktop as of 2013-11-09:
 On battery (patched i3bar that can show xbm icons)
 ![On battery](screenshots/2013-11-09-i3-battery.png "On battery")
 
+####zsh####
+If you want to use my zsh config. Clone my fork of oh-my-zsh first and place zshrc in `~/.zshrc` and the `eda.zsh-theme`
+in `~/.oh-my-zsh/custom`
