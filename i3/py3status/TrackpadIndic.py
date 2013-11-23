@@ -12,7 +12,8 @@ class Trackpad(object):
 
     def is_enabled(self):
         """ Return whether or not the trackpad is enabled. """
-        return self.exec_cmd("trackpad-toggle.sh", "state").strip() == "1"
+        state = self.exec_cmd("trackpad-toggle.sh", "state").strip()
+        return state.startswith("1")
 
 class Py3status(object):
 
@@ -21,8 +22,8 @@ class Py3status(object):
 
         # Default options
         position = 0
-        response = {'full_text': '', 'name': 'battery'}
-        response['cached_until'] = time.time() + 120
+        response = {'full_text': '', 'name': 'trackpad'}
+        response['cached_until'] = time.time() + 5
         response['separator_block_width'] = 20
 
         t = Trackpad()
