@@ -93,3 +93,8 @@ if [[ -n "$DISPLAY" ]]; then
 else
     export BROWSER=w3m
 fi
+
+typeset -U path
+path=(/home/eda/.bin $path)
+export PATH
+

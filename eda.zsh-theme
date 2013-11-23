@@ -9,7 +9,8 @@ PROMPT='%{$fg[$NCOLOR]%}%n%{$fg[white]%}@%{$fg[cyan]%}%m%{$reset_color%} %{$fg[w
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg_no_bold[red]%}%B"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%b%{$fg_bold[blue]%})%{$reset_color%} "
 
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%} *"
+ZSH_THEME_GIT_PROMPT_DIRTY=""
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%} *"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%}%%"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
 
