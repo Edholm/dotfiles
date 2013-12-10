@@ -12,7 +12,7 @@ URxvt.perl-ext-common: default,clipboard,confirm-paste,url-select,bell-command
 URxvt.termName: rxvt-256color
 
 ! --[ URxvt - URL Handling ]-------------------------------
-URxvt.url-select.launcher: google-chrome
+URxvt.url-select.launcher: google-chrome-stable
 URxvt.url-select.underline: true
 URxvt.url-select.button: 1
 
