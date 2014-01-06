@@ -33,7 +33,7 @@ new_float normal
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec urxvtc
 
 # kill focused window
 bindsym $mod+Shift+c kill
@@ -217,7 +217,7 @@ assign [class="(?i)Skype"] → 8: pidgin
 
 # Scratch-pads {
 #
-exec --no-startup-id urxvt -name scratchpad
+exec --no-startup-id urxvtc -name scratchpad
 for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
 bindsym mod4+s [class="URxvt" instance="scratchpad"] scratchpad show
 # }
