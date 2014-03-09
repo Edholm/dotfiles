@@ -14,7 +14,6 @@ export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
 sh /home/eda/.fehbg &
 
 # Keyboard related settings
-setxkbmap -layout se
 xbindkeys
 xsetroot -cursor_name left_ptr &
 # Bind escape to capslock (easier vim usage)
