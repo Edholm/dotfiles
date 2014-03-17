@@ -31,7 +31,7 @@ xss-lock -n /home/eda/.bin/dimmer.sh -- i3lock-wrapper -n &
 urxvtd -q -f -o &
 
 #Disable touchpad while typing
-syndaemon -t -k -i 2 -d &
+syndaemon -t -k -i 0.6 -d &
 
 #To be able to load certain fonts
 xset +fp /usr/share/fonts/local
