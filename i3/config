@@ -223,3 +223,5 @@ exec --no-startup-id urxvtc -name scratchpad
 for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
 bindsym mod4+s [class="URxvt" instance="scratchpad"] scratchpad show
 # }
+
+for_window [class="^Spotify Premium$"] floating enable
