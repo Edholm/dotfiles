@@ -95,7 +95,7 @@ URxvt.pointerBlank:         true
 ! To only apply colors to your terminal, for example, prefix
 ! the color assignment statement with its name. Example:
 !
-! URxvt*background:            S_base03
+# URxvt*background:            S_base03
 URxvt.intensityStyles: false
 URxvt*background:              S_base03
 URxvt*foreground:              S_base2

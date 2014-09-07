@@ -25,7 +25,7 @@ xset r rate 250 &
 # Suspend after 10 min and disable screen saver
 xset dpms 720 1000 1000
 xset s 600 120 &
-xss-lock -n /home/eda/.bin/dimmer.sh -- i3lock-wrapper -n &
+    #xss-lock -n /home/eda/.bin/dimmer.sh -- i3lock-wrapper -n &
 
 # Start urxvt daemon
 urxvtd -q -f -o &
@@ -38,5 +38,5 @@ xset +fp /usr/share/fonts/local
 xset fp rehash
 
 xrdb -merge ~/.Xdefaults
-#exec xmonad
-exec i3 --shmlog-size=26214400
+#exec ssh-agent xmonad "$@"
+exec i3
