@@ -39,8 +39,14 @@ TEXT
 # JSON for i3bar
 
 [
+    ${if_running spotify}
     {
-        "full_text" : "CPU ",
+        "full_text" : " ${exec ~/.bin/spotify-info.sh} ",
+        "color"     : "\#b58900"
+    },
+    ${endif}
+    {
+        "full_text" : " CPU ",
         "color"     : "\#839496",
         "separator" : false,
         "separator_block_width" : 0
