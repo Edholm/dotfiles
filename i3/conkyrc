@@ -84,7 +84,7 @@ TEXT
     },
     ###########################################################################
     {
-        "full_text" : " Vol ",
+        "full_text" : " ${if_mixer_mute}🔈${else}🔊${endif} ",
         "color"     : "\#839496",
         "separator" : false,
         "separator_block_width" : 0
@@ -95,7 +95,7 @@ TEXT
     },
     ###########################################################################
     {
-        "full_text" : " ${time %A %d %b} ${time %R} ",
+        "full_text" : " 🕧 ${time %A %d %b} ${time %R} ",
         "color"     : "\#839496",
         "separator" : false
     }
