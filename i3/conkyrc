@@ -1,0 +1,103 @@
+out_to_x no
+out_to_console yes
+own_window no
+background no
+max_text_width 0
+net_avg_samples 3
+default_bar_size 0 5
+
+# Update interval in seconds
+update_interval 2
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+short_units yes
+
+# How strict should if_up be when testing an interface for being up?
+# The value is one of up, link or address, to check for the interface
+# being solely up, being up and having link or being up, having link
+# and an assigned IP address.
+if_up_strictness link
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+# use_spacer should have an argument of left, right, or none
+use_spacer left
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 1
+
+# Stuff after 'TEXT' will be formatted on screen
+TEXT
+
+# JSON for i3bar
+
+[
+    {
+        "full_text" : "CPU ",
+        "color"     : "\#839496",
+        "separator" : false,
+        "separator_block_width" : 0
+    },
+    {
+        "full_text" : "${cpubar cpu0 0,10} ",
+        "color"     : ${if_match ${cpu}>70}"\#c00000"${else}${if_match ${cpu}>=45}"\#b58900"${else}"\#839496"${endif}${endif}
+    },
+    ###########################################################################
+    {
+        "full_text" : " Mem ",
+        "color"     : "\#839496",
+        "separator" : false,
+        "separator_block_width" : 0
+    },
+    {
+        "full_text" : "${membar 0,10} ",
+        "color"     : ${if_match ${memperc}>80}"\#c00000"${else}${if_match ${memperc}>=70}"\#b58900"${else}"\#839496"${endif}${endif}
+    },
+    ###########################################################################
+    {
+        "full_text" : " ${wireless_essid wlan0} ",
+        "color"     : "\#839496",
+        "separator" : false,
+        "separator_block_width" : 0
+    },
+    {
+        "full_text" : "${wireless_link_bar 1,10 wlan0} ",
+        "color"     : ${if_match ${wireless_link_qual_perc wlan0}<25}"\#c00000"${else}"\#839496"${endif}
+    },
+    ###########################################################################
+    {
+        "full_text" : " Bat ",
+        "color"     : "\#839496",
+        "separator" : false,
+        "separator_block_width" : 0
+    },
+    {
+        "full_text" : "${exec ~/.i3/battery-status.sh} ${battery_bar 0,10 BAT0} ",
+        "color"     : ${if_match ${battery_percent BAT0}<15}"\#c00000"${else}${if_match ${battery_percent BAT0}<=40}"\#b58900"${else}"\#00c000"${endif}${endif}
+    },
+    ###########################################################################
+    {
+        "full_text" : " Vol ",
+        "color"     : "\#839496",
+        "separator" : false,
+        "separator_block_width" : 0
+    },
+    {
+        "full_text" : "${mixerbar} ",
+        "color"     : ${if_mixer_mute}"\#c00000"${else}"\#839496"${endif}
+    },
+    ###########################################################################
+    {
+        "full_text" : " ${time %A %d %b} ${time %R} ",
+        "color"     : "\#839496",
+        "separator" : false
+    }
+],
+

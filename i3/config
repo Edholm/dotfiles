@@ -162,13 +162,12 @@ bindsym $mod+d mode "resize"
 
 # Bar config {
 bar {
-        #status_command    py3status -c /home/eda/.config/i3status/config
-        status_command    i3status -c /home/eda/.config/i3status/config
+        status_command    $HOME/.i3/conky-i3bar
         i3bar_command     /usr/bin/i3bar
         position          top
         workspace_buttons yes
         tray_output       none
-        #verbose            yes
+        #verbose           yes
 
         #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
         font xft:Liberation Mono, Icons 11
@@ -224,4 +223,4 @@ for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpa
 bindsym mod4+s [class="URxvt" instance="scratchpad"] scratchpad show
 # }
 
-for_window [class="^Spotify Premium$"] floating enable
+for_window [class="^Spotify$"] floating enable
