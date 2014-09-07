@@ -11,4 +11,4 @@ echo '['
 echo '[],'
 
 # Now send blocks with information forever:
-conky -c $HOME/.i3/conkyrc | sed -ue "s/##/▣▣/g" -e "s/#_/▣▢/g" -e "s/#\"/▣\"/g" -e "s/__/▢▢/g" -e "s/_\"/▢\"/g"
+exec conky -c $HOME/.i3/conkyrc 2>/dev/null | sed -ue "s/##/▣▣/g" -e "s/#_/▣▢/g" -e "s/#\"/▣\"/g" -e "s/__/▢▢/g" -e "s/_\"/▢\"/g"
