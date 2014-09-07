@@ -210,10 +210,10 @@ bindsym $mod+Shift+Return exec "urxvt -e ranger"
 
 # Workspace assignments {
 #
-assign [class="(?i)google-chrome"] → 1: web
-assign [class="Spotify"] → 7: spotify
-assign [class="(?i)Pidgin"] → 8: pidgin
-assign [class="(?i)Skype"] → 8: pidgin
+assign [class="(?i)google-chrome"] → 1: 
+assign [class="Spotify"] → 7: 
+assign [class="(?i)Pidgin"] → 8: 
+assign [class="(?i)Skype"] → 8: 
 # }
 
 # Scratch-pads {
