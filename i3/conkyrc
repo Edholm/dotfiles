@@ -75,7 +75,7 @@ TEXT
     },
     {
         "full_text" : "${wireless_link_bar 1,10 wlan0} ",
-        "color"     : ${if_match ${wireless_link_qual_perc wlan0}<25}"\#c00000"${else}"\#839496"${endif}
+        "color"     : ${if_match ${wireless_link_qual_perc wlan0}<25}"\#c00000"${else}${if_match ${wireless_link_qual_perc wlan0}>=80}"\#00c000"${else}"\#839496"${endif}${endif}
     },
     ###########################################################################
     {
