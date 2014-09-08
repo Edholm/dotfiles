@@ -38,12 +38,12 @@ conky.text = [[
 [\
 ${if_running spotify}\
     { \
-        "full_text" : " ${exec ~/.bin/spotify-info.sh} ",\
+        "full_text" : " ${exec ~/.bin/spotify-info.sh} ",\
         "color"     : "\#b58900"\
     },\
 ${endif}\
     {\
-        "full_text" : " CPU ",\
+        "full_text" : "  CPU ",\
         "color"     : "\#839496",\
         "separator" : false,\
         "separator_block_width" : 0\
@@ -54,7 +54,7 @@ ${endif}\
     },\
     ###########################################################################
     {\
-        "full_text" : " Mem ",\
+        "full_text" : "  Mem ",\
         "color"     : "\#839496",\
         "separator" : false,\
         "separator_block_width" : 0\
@@ -65,7 +65,7 @@ ${endif}\
     },\
     ###########################################################################
     {\
-        "full_text" : " ${wireless_essid wlan0} ",\
+        "full_text" : "  ${wireless_essid wlan0} ",\
         "color"     : "\#839496",\
         "separator" : false,\
         "separator_block_width" : 0\
@@ -76,7 +76,7 @@ ${endif}\
     },\
     ###########################################################################
     {\
-        "full_text" : " Bat ",\
+        "full_text" : " ",\
         "color"     : "\#839496",\
         "separator" : false,\
         "separator_block_width" : 0\
@@ -87,7 +87,7 @@ ${endif}\
     },\
     ###########################################################################
     {\
-        "full_text" : " ${if_mixer_mute}🔈${else}🔊${endif} ",\
+        "full_text" : " ${if_mixer_mute}ׅ ${else}ׅ ${endif} ",\
         "color"     : "\#839496",\
         "separator" : false,\
         "separator_block_width" : 0\
@@ -98,7 +98,7 @@ ${endif}\
     },\
     ###########################################################################
     {\
-        "full_text" : " 🕧 ${time %A %d %b} ${time %R} ",\
+        "full_text" : "  ${time %A %d %b} ${time %R} ",\
         "color"     : "\#839496",\
         "separator" : false\
     }\
