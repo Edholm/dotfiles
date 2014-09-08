@@ -36,12 +36,12 @@ conky.config = {
 
 conky.text = [[
 [\
-    ${if_running spotify}\
+${if_running spotify}\
     { \
         "full_text" : " ${exec ~/.bin/spotify-info.sh} ",\
         "color"     : "\#b58900"\
     },\
-    ${endif}\
+${endif}\
     {\
         "full_text" : " CPU ",\
         "color"     : "\#839496",\
@@ -82,7 +82,7 @@ conky.text = [[
         "separator_block_width" : 0\
     },\
     {\
-        "full_text" : "${exec ~/.i3/battery-status.sh} ${battery_bar 0,10 BAT0} ",\
+        "full_text" : "${exec ~/.i3/battery-bar.sh} ",\
         "color"     : ${if_match ${battery_percent BAT0}<15}"\#c00000"${else}${if_match ${battery_percent BAT0}<=40}"\#b58900"${else}"\#00c000"${endif}${endif}\
     },\
     ###########################################################################
