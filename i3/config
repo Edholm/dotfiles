@@ -167,7 +167,7 @@ bar {
         position          top
         workspace_buttons yes
         tray_output       none
-        #verbose           yes
+        verbose           no
 
         #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
         font xft:Liberation Mono, Awesome 12
@@ -176,10 +176,10 @@ bar {
             statusline #839496
             separator  #b58900
             # colorclass       <border> <background> <text>
-            focused_workspace  #002b36  #002b36      #b58900
+            focused_workspace  #b58900  #002b36      #b58900
             active_workspace   #002b36  #002b36      #ffffff
             inactive_workspace #002b36  #002b36      #657b83
-            urgent_workspace   #dc322f  #dc322f      #fdf6e3
+            urgent_workspace   #b58900  #dc322f      #fdf6e3
         }
 }
 # }
@@ -211,10 +211,10 @@ bindsym $mod+a exec --no-startup-id "subl3"
 
 # Workspace assignments {
 #
-assign [class="(?i)google-chrome"] → 1: 
-assign [class="Spotify"] → 7: 
-assign [class="(?i)Pidgin"] → 8: 
-assign [class="(?i)Skype"] → 8: 
+assign [class="(?i)google-chrome"] → 1:
+assign [class="Spotify"] → 7:
+assign [class="(?i)Pidgin"] → 8:
+assign [class="(?i)Skype"] → 8:
 # }
 
 # Scratch-pads {
