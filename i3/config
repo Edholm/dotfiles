@@ -98,7 +98,7 @@ bindsym $mod+space focus mode_toggle
 # end bindings }
 
 # Workspaces {
-workspace "1: " output eDP1
+workspace "1:" output eDP1
 # switch to workspace
 bindsym $mod+1 workspace number 1:
 bindsym $mod+2 workspace number 2:
