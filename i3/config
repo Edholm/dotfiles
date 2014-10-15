@@ -162,7 +162,7 @@ bindsym $mod+d mode "resize"
 
 # Bar config {
 bar {
-        status_command    $HOME/.i3/conky-i3bar
+        status_command    $HOME/.i3/status-to-json
         i3bar_command     /usr/bin/i3bar
         position          top
         workspace_buttons yes
