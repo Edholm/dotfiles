@@ -16,7 +16,7 @@ zstyle ':completion:*' special-dirs true
 # CASE_SENSITIVE="true"
 
 # Uncomment this to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how often before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -41,10 +41,10 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git command-not-found cp colored-man archlinux rsync)
+plugins=(git command-not-found cp colored-man archlinux rsync vagrant systemd)
 
 source $ZSH/oh-my-zsh.sh
-source ~/git-repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /home/eda/git-repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
