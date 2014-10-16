@@ -8,7 +8,7 @@ export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 
 # Gnome-keyring related
 eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
-export GNOME_KEYRING_CONTROL GNOME_KEYRING_PID GPG_AGENT_INFO SSH_AUTH_SOCK
+export GPG_AGENT_INFO SSH_AUTH_SOCK
 
 # Set background
 sh /home/eda/.fehbg &
@@ -16,8 +16,9 @@ sh /home/eda/.fehbg &
 # Keyboard related settings
 xbindkeys
 xsetroot -cursor_name left_ptr &
+
 # Bind escape to capslock (easier vim usage)
-xmodmap ~/.capslock
+setxkbmap -option caps:escape
 
 # Keyboard repeat delay
 xset r rate 250 &
