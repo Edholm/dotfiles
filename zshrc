@@ -7,6 +7,7 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="gallifrey"
 ZSH_THEME="eda"
+umask=077
 
 # Autocomplete .. to ../
 zstyle ':completion:*' special-dirs true
