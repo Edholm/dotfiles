@@ -23,9 +23,9 @@ client.urgent              #FF0000   #FF0000    #fdf6e3
 
 ## Window border style {
 ##---------------------
-new_window pixel 5
-new_float normal
-#hide_edge_borders horizontal
+new_window pixel 1
+new_float 1pixel
+hide_edge_borders both
 # }
 
 # Keybindings {
@@ -39,7 +39,7 @@ bindsym $mod+Return exec urxvtc
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+r exec j4-dmenu-desktop --dmenu="dmenu -i -fn 'DejaVu Sans Mono-10' -nb \#073642 -sf \#FF0000 -sb \#073642 "
+bindsym $mod+r exec j4-dmenu-desktop --dmenu="dmenu -i -fn 'DejaVu Sans Mono-12' -nb \#073642 -sf \#FF0000 -sb \#073642 "
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -90,7 +90,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -98,28 +98,28 @@ bindsym $mod+a focus parent
 # end bindings }
 
 # Workspaces {
-workspace "1: web" output eDP1
+workspace "1:" output eDP1
 # switch to workspace
-bindsym $mod+1 workspace number 1: web
-bindsym $mod+2 workspace number 2: term
-bindsym $mod+3 workspace number 3: apa
-bindsym $mod+4 workspace number 4: bepa
-bindsym $mod+5 workspace number 5: irc
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7: spotify
-bindsym $mod+8 workspace number 8: pidgin
+bindsym $mod+1 workspace number 1:
+bindsym $mod+2 workspace number 2:
+bindsym $mod+3 workspace number 3:
+bindsym $mod+4 workspace number 4:
+bindsym $mod+5 workspace number 5:
+bindsym $mod+6 workspace number 6:
+bindsym $mod+7 workspace number 7:
+bindsym $mod+8 workspace number 8:
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1: web
-bindsym $mod+Shift+2 move container to workspace 2: term
-bindsym $mod+Shift+3 move container to workspace 3: apa
-bindsym $mod+Shift+4 move container to workspace 4: bepa
-bindsym $mod+Shift+5 move container to workspace 5: irc
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7: spotify
-bindsym $mod+Shift+8 move container to workspace 8: pidgin
+bindsym $mod+Shift+1 move container to workspace 1:
+bindsym $mod+Shift+2 move container to workspace 2:
+bindsym $mod+Shift+3 move container to workspace 3:
+bindsym $mod+Shift+4 move container to workspace 4:
+bindsym $mod+Shift+5 move container to workspace 5:
+bindsym $mod+Shift+6 move container to workspace 6:
+bindsym $mod+Shift+7 move container to workspace 7:
+bindsym $mod+Shift+8 move container to workspace 8:
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 # }
@@ -168,27 +168,28 @@ bar {
         position          top
         workspace_buttons yes
         tray_output       none
-        verbose            yes
+        verbose           no
 
-        font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+        #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+        font xft:Liberation Mono, Awesome 12
         colors {
             background #002b36
             statusline #839496
             separator  #b58900
             # colorclass       <border> <background> <text>
-            focused_workspace  #002b36  #002b36      #b58900
+            focused_workspace  #b58900  #002b36      #b58900
             active_workspace   #002b36  #002b36      #ffffff
             inactive_workspace #002b36  #002b36      #657b83
-            urgent_workspace   #dc322f  #dc322f      #fdf6e3
+            urgent_workspace   #b58900  #dc322f      #fdf6e3
         }
 }
 # }
 
 # Multimedia keybindings {
 #
-bindsym XF86AudioMute         exec --no-startup-id sh /home/eda/.bin/cvol -t
-bindsym XF86AudioLowerVolume  exec --no-startup-id sh /home/eda/.bin/cvol -d 5
-bindsym XF86AudioRaiseVolume  exec --no-startup-id sh /home/eda/.bin/cvol -i 5
+bindsym XF86AudioMute         exec --no-startup-id sh /home/eda/.bin/notify-volume.sh -t
+bindsym XF86AudioLowerVolume  exec --no-startup-id sh /home/eda/.bin/notify-volume.sh -d 5
+bindsym XF86AudioRaiseVolume  exec --no-startup-id sh /home/eda/.bin/notify-volume.sh -i 5
 bindsym XF86AudioNext         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
 bindsym XF86AudioPrev         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
 bindsym XF86KbdBrightnessDown exec --no-startup-id sh /home/eda/.bin/kbdb_noti.sh -d
@@ -206,14 +207,15 @@ for_window [class="(?i)mpv"] floating enable
 bindsym $mod+c exec "google-chrome"
 bindsym $mod+Mod1+c exec "google-chrome --incognito"
 bindsym $mod+Shift+Return exec "urxvt -e ranger"
+bindsym $mod+a exec --no-startup-id "subl3"
 # }
 
 # Workspace assignments {
 #
-assign [class="(?i)google-chrome"] → 1: web
-assign [class="Spotify"] → 7: spotify
-assign [class="(?i)Pidgin"] → 8: pidgin
-assign [class="(?i)Skype"] → 8: pidgin
+assign [class="(?i)google-chrome"] → 1:
+assign [class="Spotify"] → 7:
+assign [class="(?i)Pidgin"] → 8:
+assign [class="(?i)Skype"] → 8:
 # }
 
 # Scratch-pads {
@@ -222,3 +224,5 @@ exec --no-startup-id urxvtc -name scratchpad
 for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
 bindsym mod4+s [class="URxvt" instance="scratchpad"] scratchpad show
 # }
+
+for_window [class="^Spotify$"] floating enable
