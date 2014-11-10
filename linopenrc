@@ -1,0 +1,53 @@
+#
+# linopen configuration
+# enviroiment variables can be used
+#
+
+# Specify your terminal emulator here
+# for terminal support.
+terminal=urxvt
+
+# Specify all programs you want to
+# open in terminal like this:
+interm=vim
+
+# There are 4 ways to match filetypes.
+# The following examples are in the order
+# which linopen chooses the program as well.
+
+# 1. File extension
+# .png:sxiv
+# .mp4:mplayer
+# .txt:vim
+.pdf:zathura
+
+# 2. Mime type
+# image/png:sxiv
+# video/mp4:mplayer
+# text/plain:vim
+
+# 3. Mime category
+image:feh
+video:mpv
+udio:mpv->interm # you can also specify the interm rule explictly after '->'
+text:vim->interm
+
+# 4. Regexp
+# Match some protocols by default
+?'^http:\/\/':google-chrome
+?'^https:\/\/':google-chrome
+?'^www.':google-chrome
+?'^dvd:\/\/':mpv
+?'^cdda:\/\/':mpv->interm
+?'^spotify:':spotify
+
+# Directory rule for directories
+# ideally you want to use file manager
+# here if you are a GUI user.
+directory:ranger->interm
+
+# Default rule just echoes back whatever
+# was feed. If you are using DE you could
+# just map a file manager here and it would
+# integrate with your system.
+default:echo
