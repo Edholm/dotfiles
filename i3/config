@@ -187,9 +187,9 @@ bar {
 
 # Multimedia keybindings {
 #
-bindsym XF86AudioMute         exec --no-startup-id sh /home/eda/.bin/notify-volume.sh -t
-bindsym XF86AudioLowerVolume  exec --no-startup-id sh /home/eda/.bin/notify-volume.sh -d 5
-bindsym XF86AudioRaiseVolume  exec --no-startup-id sh /home/eda/.bin/notify-volume.sh -i 5
+bindsym XF86AudioMute         exec --no-startup-id sh /home/eda/.bin/cvol -t
+bindsym XF86AudioLowerVolume  exec --no-startup-id sh /home/eda/.bin/cvol -d 5
+bindsym XF86AudioRaiseVolume  exec --no-startup-id sh /home/eda/.bin/cvol -i 5
 bindsym XF86AudioNext         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
 bindsym XF86AudioPrev         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
 bindsym XF86KbdBrightnessDown exec --no-startup-id sh /home/eda/.bin/kbdb_noti.sh -d
