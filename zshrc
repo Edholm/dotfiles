@@ -42,7 +42,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git command-not-found cp colored-man archlinux rsync vagrant systemd)
+plugins=(git command-not-found cp colored-man archlinux rsync vagrant systemd vagrant laravel4 git-flow composer)
 
 source $ZSH/oh-my-zsh.sh
 source /home/eda/git-repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
