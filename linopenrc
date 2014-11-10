@@ -58,4 +58,4 @@ directory:ranger->interm
 # was feed. If you are using DE you could
 # just map a file manager here and it would
 # integrate with your system.
-default:echo
+default:rangerselect->interm
