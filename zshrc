@@ -52,10 +52,10 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 
 # Customize to your needs...
-export EDITOR="vim -X"
+export EDITOR="vim"
 
 if [[ -n "$DISPLAY" ]]; then
-    export BROWSER=google-chrome-stable
+    export BROWSER=google-chrome
 else
     export BROWSER=w3m
 fi
