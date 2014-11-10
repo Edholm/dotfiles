@@ -6,9 +6,9 @@
 # Specify your terminal emulator here
 # for terminal support.
 terminal=urxvt
-
 # Specify all programs you want to
 # open in terminal like this:
+interm=listarchive
 interm=vim
 
 # There are 4 ways to match filetypes.
@@ -20,17 +20,25 @@ interm=vim
 # .mp4:mplayer
 # .txt:vim
 .pdf:zathura
+.ppt:google-chrome
+.pptx:google-chrome
+.doc:google-chrome
+.docx:google-chrome
 
 # 2. Mime type
 # image/png:sxiv
-# video/mp4:mplayer
+# video/mp4:mpv
 # text/plain:vim
+application/x-tar:listarchive
+application/x-gzip:listarchive
+application/zip:listarchive
+application/x-rar:listarchive
 
 # 3. Mime category
 image:feh
 video:mpv
-udio:mpv->interm # you can also specify the interm rule explictly after '->'
-text:vim->interm
+audio:mpv # you can also specify the interm rule explictly after '->'
+text:vim
 
 # 4. Regexp
 # Match some protocols by default
