@@ -66,3 +66,4 @@ export PATH
 
 export GOPATH=~/git-repos/golang/
 
+eval "$(fasd --init auto)"

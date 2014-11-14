@@ -20,10 +20,10 @@ interm=vim
 # .mp4:mplayer
 # .txt:vim
 .pdf:zathura
-.ppt:google-chrome
-.pptx:google-chrome
-.doc:google-chrome
-.docx:google-chrome
+.ppt:libreoffice
+.pptx:libreoffice
+.doc:libreoffice
+.docx:libreoffice
 
 # 2. Mime type
 # image/png:sxiv

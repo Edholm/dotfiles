@@ -16,6 +16,9 @@ URxvt.url-select.launcher: google-chrome
 URxvt.url-select.underline: true
 URxvt.url-select.button: 1
 
+! "Hard" reset on ctrl-k
+#URxvt.keysym.C-k:   echo -ne '\\033c'\n
+
 URxvt.keysym.M-u:   perl:url-select:select_next
 URxvt.keysym.M-c:   perl:clipboard:copy
 URxvt.keysym.M-v:   perl:clipboard:paste
