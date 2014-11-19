@@ -2,3 +2,4 @@
 " Bundle config for my installation of spf13-vim
 " https://github.com/spf13/spf13-vim
 Bundle 'terryma/vim-expand-region'
+Bundle 'Valloric/MatchTagAlways'
