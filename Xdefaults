@@ -12,12 +12,12 @@ URxvt.perl-ext-common: default,clipboard,confirm-paste,url-select,bell-command
 URxvt.termName: rxvt-256color
 
 ! --[ URxvt - URL Handling ]-------------------------------
-URxvt.url-select.launcher: google-chrome
+URxvt.url-select.launcher: firefox
 URxvt.url-select.underline: true
 URxvt.url-select.button: 1
 
 ! "Hard" reset on ctrl-k
-#URxvt.keysym.C-k:   echo -ne '\\033c'\n
+!URxvt.keysym.C-k:   echo -ne '\\033c'\n
 
 URxvt.keysym.M-u:   perl:url-select:select_next
 URxvt.keysym.M-c:   perl:clipboard:copy
@@ -26,6 +26,7 @@ URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 ! TEST: http://www.google.com
 !
 URxvt.scrollBar: off
+URxvt.saveLines: 1000
 
 !#URxvt.depth: 32
 

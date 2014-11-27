@@ -51,11 +51,10 @@ source /home/eda/git-repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 
-# Customize to your needs...
 export EDITOR="vim"
 
 if [[ -n "$DISPLAY" ]]; then
-    export BROWSER=google-chrome
+    export BROWSER=firefox
 else
     export BROWSER=w3m
 fi
