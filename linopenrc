@@ -42,9 +42,9 @@ text:vim
 
 # 4. Regexp
 # Match some protocols by default
-?'^http:\/\/':google-chrome
-?'^https:\/\/':google-chrome
-?'^www.':google-chrome
+?'^http:\/\/':$BROWSER
+?'^https:\/\/':$BROWSER
+?'^www.':$BROWSER
 ?'^dvd:\/\/':mpv
 ?'^cdda:\/\/':mpv->interm
 ?'^spotify:':spotify
