@@ -43,8 +43,8 @@ Xft.hinting:                true
 Xft.hintstyle:              hintslight
 
 URxvt.allow_bold:           false
-URxvt.font: xft:Liberation Mono:size=14
-URxvt.boldFont: xft:Liberation Mono:bold:size=14
+URxvt.font: xft:Liberation Mono:size=16
+URxvt.boldFont: xft:Liberation Mono:bold:size=16
 
 ! Fix font space
 URxvt*letterSpace: -1
