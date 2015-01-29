@@ -54,15 +54,17 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 export EDITOR="vim"
 
 if [[ -n "$DISPLAY" ]]; then
-    export BROWSER=firefox
+    export BROWSER=google-chrome
 else
     export BROWSER=w3m
 fi
 
 typeset -U path
-path=(~/.bin ~/git-repos/golang/bin/ $path)
+path=(~/.bin ~/git-repos/golang/bin/ ~/.gem/ruby/2.1.0/bin $path)
 export PATH
 
 export GOPATH=~/git-repos/golang/
 
 eval "$(fasd --init auto)"
+
+unset GREP_OPTIONS
