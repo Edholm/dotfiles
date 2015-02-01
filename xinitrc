@@ -39,5 +39,4 @@ xset +fp /usr/share/fonts/local
 xset fp rehash
 
 xrdb -merge ~/.Xdefaults
-#exec ssh-agent xmonad "$@"
 exec i3
