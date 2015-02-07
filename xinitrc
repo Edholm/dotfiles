@@ -21,7 +21,7 @@ xsetroot -cursor_name left_ptr &
 setxkbmap -option caps:escape
 
 # Keyboard repeat delay
-xset r rate 250 &
+xset r rate 200 30
 
 # Suspend after 10 min and disable screen saver
 xset dpms 720 1000 1000
