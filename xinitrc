@@ -38,5 +38,5 @@ syndaemon -t -k -i 0.6 -d &
 xset +fp /usr/share/fonts/local
 xset fp rehash
 
-xrdb -merge ~/.Xdefaults
+xrdb ~/.Xresources
 exec i3
