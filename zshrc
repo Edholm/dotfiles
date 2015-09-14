@@ -60,7 +60,7 @@ else
 fi
 
 typeset -U path
-path=(~/.bin ~/git-repos/golang/bin/ ~/.gem/ruby/2.1.0/bin ~/.cabal/bin $path)
+path=(~/.bin ~/git-repos/golang/bin/ ~/.gem/ruby/2.2.0/bin ~/.cabal/bin $path)
 export PATH
 
 export GOPATH=~/git-repos/golang/
