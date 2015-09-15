@@ -32,7 +32,7 @@ xset s 600 120 &
 urxvtd -q -f -o &
 
 #Disable touchpad while typing
-syndaemon -t -k -i 0.6 -d &
+syndaemon -t -k -i 1.0 -d &
 
 #To be able to load certain fonts
 xset +fp /usr/share/fonts/local
