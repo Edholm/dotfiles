@@ -46,6 +46,7 @@ let g:tagbar_type_go = {
 \ }
 " }
 
+let g:pymode_lint = 0
 " Use pylint checker for syntastic "
 let g:syntastic_python_checkers=['pylama']
 
