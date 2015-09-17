@@ -11,7 +11,7 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 export GPG_AGENT_INFO SSH_AUTH_SOCK
 
 # Set background
-sh /home/eda/.fehbg &
+sh /home/eda/.bin/random-bg.sh &
 
 # Keyboard related settings
 xbindkeys
