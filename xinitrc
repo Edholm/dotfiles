@@ -11,7 +11,7 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh
 export GPG_AGENT_INFO SSH_AUTH_SOCK
 
 # Flush keyring and sudo password
- xss-lock -- /home/eda/.bin/on-suspend.sh
+ xss-lock -- /home/eda/.bin/on-suspend.sh &
 
 # Set background
 sh /home/eda/.bin/random-bg.sh &
