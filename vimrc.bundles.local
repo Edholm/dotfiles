@@ -3,3 +3,6 @@
 " https://github.com/spf13/spf13-vim
 Bundle 'terryma/vim-expand-region'
 Bundle 'Valloric/MatchTagAlways'
+Bundle 'slim-template/vim-slim'
+Bundle 'vim-ruby/vim-ruby'
+Bundle 'vim-airline/vim-airline-themes'

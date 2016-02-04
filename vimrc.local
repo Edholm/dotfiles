@@ -12,6 +12,7 @@ noremap <Leader>w :update<CR>
 
 " Solarized Airline theme "
 let g:airline_theme="solarized"
+let g:airline#extensions#tabline#enabled = 1
 
 " Yank to clipboard "
 set clipboard=unnamedplus
@@ -64,3 +65,11 @@ let g:syntastic_check_on_wq = 0
 au! BufRead,BufNewFile *.repy  setfiletype repy
 
 set mouse=
+
+"let g:spf13_bundle_groups=['general', 'writing', 'youcompleteme', 'programming', 'php', 'ruby', 'python', 'javascript', 'html', 'misc',]
+"iunmap <Esc>
+" Fix for not being able to write å
+let g:AutoPairsShortcutFastWrap='<Nop>'
+
+" https://github.com/spf13/spf13-vim/issues/819
+"inoremap <expr><CR> neosnippet#expandable() ? neosnippet#mappings#expand_or_jump_impl() : pumvisible() ? neocomplete#close_popup() : "\<CR>"
