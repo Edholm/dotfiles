@@ -42,9 +42,9 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git command-not-found cp colored-man archlinux rsync vagrant systemd vagrant laravel4 git-flow composer)
+plugins=(git cp colored-man archlinux rsync systemd git-flow)
 
-source $ZSH/oh-my-zsh.sh
+ source $ZSH/oh-my-zsh.sh
 source /home/eda/git-repos/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
@@ -54,15 +54,9 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 export EDITOR="vim"
 
 if [[ -n "$DISPLAY" ]]; then
-    export BROWSER=firefox
+    export BROWSER=google-chrome
 else
     export BROWSER=w3m
 fi
 
-typeset -U path
-path=(~/.bin ~/git-repos/golang/bin/ $(ruby -rubygems -e "puts Gem.user_dir")/bin ~/.cabal/bin $path)
-export PATH
 
-export GOPATH=~/git-repos/golang/
-
-eval "$(fasd --init auto)"
