@@ -33,7 +33,7 @@ hide_edge_borders both
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvtc
+bindsym $mod+Return exec urxvt
 
 # kill focused window
 bindsym $mod+Shift+c kill
@@ -221,7 +221,7 @@ assign [class="(?i)Skype"] → 8:
 
 # Scratch-pads {
 #
-exec --no-startup-id urxvtc -name scratchpad
+exec --no-startup-id urxvt -name scratchpad
 for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
 bindsym mod4+s [class="URxvt" instance="scratchpad"] scratchpad show
 # }
