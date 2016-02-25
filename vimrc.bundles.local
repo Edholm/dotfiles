@@ -2,7 +2,10 @@
 " Bundle config for my installation of spf13-vim
 " https://github.com/spf13/spf13-vim
 Bundle 'terryma/vim-expand-region'
-Bundle 'Valloric/MatchTagAlways'
+"Bundle 'Valloric/MatchTagAlways'
 Bundle 'slim-template/vim-slim'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'vim-airline/vim-airline-themes'
+Bundle 'xolox/vim-easytags'
+Bundle 'xolox/vim-misc'
+Bundle 'benekastah/neomake'
+

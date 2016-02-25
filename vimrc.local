@@ -12,7 +12,6 @@ noremap <Leader>w :update<CR>
 
 " Solarized Airline theme "
 let g:airline_theme="solarized"
-let g:airline#extensions#tabline#enabled = 1
 
 " Yank to clipboard "
 set clipboard=unnamedplus
@@ -47,6 +46,7 @@ let g:tagbar_type_go = {
 \ }
 " }
 
+"set runtimepath-=~/.vim/bundle/syntastic
 let g:pymode_lint = 0
 " Use pylint checker for syntastic "
 let g:syntastic_python_checkers=['pylama']
@@ -60,9 +60,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-" Repy syntax hilight
-au! BufRead,BufNewFile *.repy  setfiletype repy
+let g:syntastic_cpp_compiler_options = ' -std=c++1y'
 
 set mouse=
 
@@ -73,3 +71,17 @@ let g:AutoPairsShortcutFastWrap='<Nop>'
 
 " https://github.com/spf13/spf13-vim/issues/819
 "inoremap <expr><CR> neosnippet#expandable() ? neosnippet#mappings#expand_or_jump_impl() : pumvisible() ? neocomplete#close_popup() : "\<CR>"
+
+let g:ctrlp_funky_syntax_highlight = 1
+let g:ctrlp_cmd = 'CtrlPBuffer'
+
+map å <C-]>
+map <leader>ö :bNext<cr>
+map <leader>ä :bprev<cr>
+
+" Neomake
+let g:neomake_cpp_enable_makers = ['gpp']
+let g:neomake_cpp_gpp_maker = {
+\ 'exe' : 'g++',
+\ 'args': ['-std=c++1y'],
+\ }
