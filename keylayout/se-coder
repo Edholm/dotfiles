@@ -1,0 +1,19 @@
+// based on a keyboard map from an 'xkb/symbols/se' file
+// Makes () {} [] and <> easier to access (bind capslock to alt_gr)
+
+default  partial alphanumeric_keys
+xkb_symbols "basic" {
+    name[Group1]="Swedish (Coder layout)";
+    include "latin(type2)"
+    include "se(se)"
+    key <AD07>	{ [         u,          U,    braceleft,    braceright ]	};
+    key <AD08>	{ [         i,          I,    braceright,   braceleft ]	};
+    key <AC07>	{ [         j,          J,    parenleft,    parenright ] };
+    key <AC08>	{ [         k,          K,    parenright,   parenleft ]	};
+    key <AB06>	{ [         n,          N,    bracketleft,  bracketright ]	};
+    key <AB07>	{ [         m,          M,    bracketright, bracketleft ]	};
+    key <AC06>	{ [         h,          H,    less,         greater ]	};
+    key <AC09>	{ [         l,          L,    greater,      less ]	};
+    key <AB10>	{ [     minus, underscore,    backslash,    slash ] };
+    key <AC10>	{ [odiaeresis, Odiaeresis,    slash,        backslash ]	};
+};

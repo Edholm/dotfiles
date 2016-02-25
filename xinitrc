@@ -18,6 +18,11 @@ export GPG_AGENT_INFO SSH_AUTH_SOCK
 # Set background
 sh /home/eda/.bin/random-bg.sh &
 
+
+# Make Capslock act as escape/control
+setxkbmap se-coder -option 'lv3:caps_switch'
+xcape -e 'Caps_Lock=Escape'
+
 # Keyboard related settings
 xbindkeys
 xsetroot -cursor_name left_ptr &
