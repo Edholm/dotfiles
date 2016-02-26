@@ -81,6 +81,8 @@ map <leader>ä :bprev<cr>
 
 " Neomake
 autocmd! BufWritePost * Neomake
+" Runmake when saving a tex file
+autocmd! BufWritePost *.tex Neomake!
 let g:neomake_cpp_enable_makers = ['gpp']
 let g:neomake_cpp_gpp_maker = {
 \ 'exe' : 'g++',
