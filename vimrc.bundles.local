@@ -10,4 +10,4 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'xolox/vim-easytags'
 Bundle 'xolox/vim-misc'
 Bundle 'benekastah/neomake'
-
+Bundle 'Shougo/deoplete.nvim'

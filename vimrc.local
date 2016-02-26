@@ -88,3 +88,6 @@ let g:neomake_cpp_gpp_maker = {
 \ 'exe' : 'g++',
 \ 'args': ['-std=c++1y'],
 \ }
+
+set runtimepath-=~/.vim/bundle/neocomplete.vim
+let g:deoplete#enable_at_startup = 1
