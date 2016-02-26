@@ -46,21 +46,21 @@ let g:tagbar_type_go = {
 \ }
 " }
 
-"set runtimepath-=~/.vim/bundle/syntastic
-let g:pymode_lint = 0
-" Use pylint checker for syntastic "
-let g:syntastic_python_checkers=['pylama']
-let g:syntastic_python_pylama_args="--options=/home/eda/.pylama.ini"
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cpp_compiler_options = ' -std=c++1y'
+set runtimepath-=~/.vim/bundle/syntastic
+"let g:pymode_lint = 0
+"" Use pylint checker for syntastic "
+"let g:syntastic_python_checkers=['pylama']
+"let g:syntastic_python_pylama_args="--options=/home/eda/.pylama.ini"
+"
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_cpp_compiler_options = ' -std=c++1y'
 
 set mouse=
 
@@ -80,6 +80,7 @@ map <leader>ö :bNext<cr>
 map <leader>ä :bprev<cr>
 
 " Neomake
+autocmd! BufWritePost * Neomake
 let g:neomake_cpp_enable_makers = ['gpp']
 let g:neomake_cpp_gpp_maker = {
 \ 'exe' : 'g++',
