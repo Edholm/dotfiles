@@ -83,11 +83,11 @@ map <leader>ä :bprev<cr>
 autocmd! BufWritePost * Neomake
 " Runmake when saving a tex file
 autocmd! BufWritePost *.tex Neomake!
-let g:neomake_cpp_enable_makers = ['gpp']
 let g:neomake_cpp_gpp_maker = {
 \ 'exe' : 'g++',
 \ 'args': ['-std=c++1y'],
 \ }
+let g:neomake_cpp_enabled_makers = ['gpp']
 
 set runtimepath-=~/.vim/bundle/neocomplete.vim
 let g:deoplete#enable_at_startup = 1
