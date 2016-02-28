@@ -14,6 +14,8 @@ xkb_symbols "basic" {
     key <AB07>	{ [         m,          M,    bracketright, bracketleft ]	};
     key <AC06>	{ [         h,          H,    less,         greater ]	};
     key <AC09>	{ [         l,          L,    greater,      less ]	};
+    key <AB08>	{ [     comma,  semicolon,    semicolon,    comma ]	};
+    key <AB09>	{ [    period,   colon,       colon,        period ]	};
     key <AB10>	{ [     minus, underscore,    backslash,    slash ] };
     key <AC10>	{ [odiaeresis, Odiaeresis,    slash,        backslash ]	};
 };
