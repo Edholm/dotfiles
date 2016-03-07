@@ -2,9 +2,11 @@
 # Control your lifx bulbs with lifx-cli and rofi
 
 declare -A actions
+# FIXME: The order of actions.
 actions["toggle"]="lifx toggle"
 actions["on"]="lifx on"
 actions["off"]="lifx off"
+actions["list"]="lifx list | rofi -dmenu -p 'Lifx list:'"
 
 function print_actions() {
     for a in ${!actions[*]}; do
@@ -19,5 +21,5 @@ function start_rofi() {
 choosen=$(start_rofi)
 
 if [ ! -z "${choosen}" ]; then
-    ${actions[${choosen}]}
+    eval ${actions[${choosen}]}
 fi
