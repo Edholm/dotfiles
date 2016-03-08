@@ -130,3 +130,10 @@ URxvt*color15:                 S_base3
 URxvt.colorIT:      #87af5f
 URxvt.colorBD:      #d7d7d7
 URxvt.colorUL:      #87afd7
+
+
+! Rofi related
+! Tab completion
+rofi.kb-row-select: Tab
+rofi.kb-row-tab:    Control+space
+
