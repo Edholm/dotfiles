@@ -172,14 +172,12 @@ bindsym $mod+d mode "resize"
 # Bar config {
 bar {
         status_command    $HOME/.i3/status-to-json
-        #status_command    $HOME/git-repos/info-collector/infocoll
         i3bar_command     /usr/bin/i3bar
         position          top
         workspace_buttons yes
         tray_output       none
         verbose           no
 
-        #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
         font xft:Liberation Mono, Awesome 12
         colors {
             background #002b36
@@ -232,7 +230,7 @@ assign [class="(?i)Skype"] → $ws8
 #
 exec --no-startup-id urxvt -name scratchpad
 for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
-bindsym mod4+s [class="URxvt" instance="scratchpad"] scratchpad show
+bindsym $mod+s [class="URxvt" instance="scratchpad"] scratchpad show
 # }
 
 for_window [class="^Spotify$"] floating enable
