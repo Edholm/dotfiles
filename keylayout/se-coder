@@ -6,16 +6,25 @@ xkb_symbols "basic" {
     name[Group1]="Swedish (Coder layout)";
     include "latin(type2)"
     include "se(se)"
-    key <AD07>	{ [         u,          U,    braceleft,    braceright ]	};
-    key <AD08>	{ [         i,          I,    braceright,   braceleft ]	};
-    key <AC07>	{ [         j,          J,    parenleft,    parenright ] };
-    key <AC08>	{ [         k,          K,    parenright,   parenleft ]	};
-    key <AB06>	{ [         n,          N,    bracketleft,  bracketright ]	};
-    key <AB07>	{ [         m,          M,    bracketright, bracketleft ]	};
+    key <AD07>	{ [         u,          U,    braceleft,    bracketleft ]	};
+    key <AD08>	{ [         i,          I,    braceright,   bracketright ]	};
+    key <AC07>	{ [         j,          J,    parenleft,    bracketleft ] };
+    key <AC08>	{ [         k,          K,    parenright,   bracketright ]	};
+    key <AB06>	{ [         n,          N,    bracketleft,  braceleft ]	};
+    key <AB07>	{ [         m,          M,    bracketright, braceright ]	};
+    key <AC01>	{ [         a,          A,    asciitilde,   dead_tilde ]	};
+    key <AC02>	{ [         s,          S,    plus,         multiply ]	};
+    key <AC03>	{ [         d,          D,    minus,        underscore ]	};
+    key <AC04>	{ [         f,          F,    equal,        division ]	};
+    key <AC05>	{ [         g,          G,    percent,      at ]	};
     key <AC06>	{ [         h,          H,    less,         greater ]	};
     key <AC09>	{ [         l,          L,    greater,      less ]	};
+    key <AC10>	{ [odiaeresis, Odiaeresis,    semicolon,    colon ]	};
+    key <AC11>	{ [adiaeresis, Adiaeresis,    quotedbl,     apostrophe ]	};
     key <AB08>	{ [     comma,  semicolon,    semicolon,    comma ]	};
     key <AB09>	{ [    period,   colon,       colon,        period ]	};
-    key <AB10>	{ [     minus, underscore,    backslash,    slash ] };
-    key <AC10>	{ [odiaeresis, Odiaeresis,    slash,        backslash ]	};
+    key <AB10>	{ [     minus, underscore,    slash,        backslash ] };
+    key <AD01>	{ [         q,          Q,    bar,          brokenbar ]	};
+    key <AD02>	{ [         w,          W,    numbersign,   threesuperior ]	};
+    key <AD03>	{ [         e,          E,    underscore,   asciicircum ]	};
 };
