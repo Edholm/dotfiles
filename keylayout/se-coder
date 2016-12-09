@@ -16,7 +16,7 @@ xkb_symbols "basic" {
     key <AC02>	{ [         s,          S,    plus,         multiply ]	};
     key <AC03>	{ [         d,          D,    minus,        underscore ]	};
     key <AC04>	{ [         f,          F,    equal,        division ]	};
-    key <AC05>	{ [         g,          G,    percent,      at ]	};
+    key <AC05>	{ [         g,          G,    asterisk,     at ]	};
     key <AC06>	{ [         h,          H,    less,         greater ]	};
     key <AC09>	{ [         l,          L,    greater,      less ]	};
     key <AC10>	{ [odiaeresis, Odiaeresis,    semicolon,    colon ]	};
@@ -27,4 +27,5 @@ xkb_symbols "basic" {
     key <AD01>	{ [         q,          Q,    bar,          brokenbar ]	};
     key <AD02>	{ [         w,          W,    numbersign,   threesuperior ]	};
     key <AD03>	{ [         e,          E,    underscore,   asciicircum ]	};
+    key <AD04>	{ [         r,          R,    percent,      exclam ]	};
 };
