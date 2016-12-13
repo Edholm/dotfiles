@@ -24,7 +24,7 @@ xkb_symbols "basic" {
     key <AB08>	{ [     comma,  semicolon,    semicolon,    comma ]	};
     key <AB09>	{ [    period,   colon,       colon,        period ]	};
     key <AB10>	{ [     minus, underscore,    slash,        backslash ] };
-    key <AD01>	{ [         q,          Q,    bar,          brokenbar ]	};
+    key <AD01>	{ [         q,          Q,    bar,          ampersand ]	};
     key <AD02>	{ [         w,          W,    numbersign,   threesuperior ]	};
     key <AD03>	{ [         e,          E,    underscore,   asciicircum ]	};
     key <AD04>	{ [         r,          R,    percent,      exclam ]	};
