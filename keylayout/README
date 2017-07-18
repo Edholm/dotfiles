@@ -1,1 +1,6 @@
-Put the layouts in /usr/share/X11/xkb/symbols/
+Put the layouts in 
+/usr/share/X11/xkb/symbols/
+
+Enable with:
+setxkbmap se-coder -option 'lv3:caps_switch'
+xcape -e 'ISO_Level3_Shift=Escape

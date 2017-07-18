@@ -1,4 +1,4 @@
-# vim: set foldmarker={,} foldlevel=0 foldmethod=marker:
+# vim: set foldmarker={,} foldlevel=1 foldmethod=marker:
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
@@ -6,7 +6,8 @@
 set $mod Mod4
 
 # Font {
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font xft:Source Code Pro for Poweline Regular 6
+font xft:Droid Sans Mono 6
 # }
 
 # Colors {
@@ -17,7 +18,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 #client.urgent           #dc322f #dc322f #fdf6e3 #900000
 client.focused             #4D679A   #b58900    #fdf6e3
 client.focused_inactive    #586e75   #657b83    #fdf6e3
-client.unfocused           #586e75   #657b83    #fdf6e3
+client.unfocused           #586e75   #002b36    #fdf6e3
 client.urgent              #FF0000   #FF0000    #fdf6e3
 # }
 
@@ -25,7 +26,7 @@ client.urgent              #FF0000   #FF0000    #fdf6e3
 ##---------------------
 new_window pixel 1
 new_float 1pixel
-hide_edge_borders both
+hide_edge_borders smart
 # }
 
 # Keybindings {
@@ -171,14 +172,14 @@ bindsym $mod+d mode "resize"
 
 # Bar config {
 bar {
-        status_command    $HOME/.i3/status-to-json
+        status_command    $HOME/.bin/statobar
         i3bar_command     /usr/bin/i3bar
         position          top
         workspace_buttons yes
         tray_output       none
         verbose           no
 
-        font xft:Liberation Mono, Awesome 12
+        font xft:Liberation Mono, Awesome 7
         colors {
             background #002b36
             statusline #839496
@@ -194,25 +195,27 @@ bar {
 
 # Multimedia keybindings {
 #
-bindsym XF86AudioMute         exec --no-startup-id sh /home/eda/.bin/notify-volume.sh -t
-bindsym XF86AudioLowerVolume  exec --no-startup-id sh /home/eda/.bin/notify-volume.sh -d 5
-bindsym XF86AudioRaiseVolume  exec --no-startup-id sh /home/eda/.bin/notify-volume.sh -i 5
-bindsym XF86AudioNext         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
-bindsym XF86AudioPrev         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
-bindsym XF86KbdBrightnessDown exec --no-startup-id asus-kbd-backlight down
-bindsym XF86KbdBrightnessUp   exec --no-startup-id asus-kbd-backlight up
-bindsym XF86TouchpadToggle    exec --no-startup-id sh /home/eda/.bin/trackpad-toggle.sh
-bindsym XF86MonBrightnessUp   exec --no-startup-id sh /home/eda/.bin/nbright.sh -i 10
-bindsym XF86MonBrightnessDown exec --no-startup-id sh /home/eda/.bin/nbright.sh -d 10
+bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86Search	      exec --no-startup-id $BROWSER https:///www.google.se; workspace $ws1
+#bindsym XF86AudioNext         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
+#bindsym XF86AudioPrev         exec --no-startup-id sh /home/eda/.bin/mediacontroler.py next
+#bindsym XF86KbdBrightnessDown exec --no-startup-id asus-kbd-backlight down
+#bindsym XF86KbdBrightnessUp   exec --no-startup-id asus-kbd-backlight up
+#bindsym XF86TouchpadToggle    exec --no-startup-id sh /home/eda/.bin/trackpad-toggle.sh
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight +10
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -7
 # }
 
 # Application starters {
 #
 for_window [class="(?i)google-chrome"] border none
+for_window [class="(?i)chromium"] border none
 for_window [class="(?i)dwb"] border none
 for_window [class="(?i)mpv"] floating enable
 bindsym $mod+c exec $BROWSER
-bindsym $mod+Mod1+c exec "google-chrome --incognito"
+bindsym $mod+Mod1+c exec "chromium --incognito"
 bindsym $mod+Shift+Return exec "urxvt -e ranger"
 bindsym $mod+a exec --no-startup-id "subl3"
 # }
@@ -220,17 +223,23 @@ bindsym $mod+a exec --no-startup-id "subl3"
 # Workspace assignments {
 #
 assign [class="(?i)google-chrome"] → $ws1
+assign [class="(?i)chromium"] → $ws1
+assign [class="(?i)chromium"] → $ws1
 assign [class="(?i)firefox"] → $ws1
 assign [class="Spotify"] → $ws7
-assign [class="(?i)Pidgin"] → $ws8
-assign [class="(?i)Skype"] → $ws8
+assign [class="(?i)Pidgin"] → $ws10
+assign [class="(?i)Skype"] → $ws10
+assign [class="(?i)slack"] → $ws10
+assign [class="(?i)jetbrains-idea" instance="(?i)sun-awt-X11-XFramePeer"] → $ws2
 # }
 
 # Scratch-pads {
 #
-exec --no-startup-id urxvt -name scratchpad
+exec --no-startup-id urxvt -name scratchpad -geometry 130x30
 for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
+#for_window [instance="urxvt_scratchpad"] floating enable; move scratchpad; scratchpad show; move position 865px 512px; move scratchpad
 bindsym $mod+s [class="URxvt" instance="scratchpad"] scratchpad show
+bindsym $mod+Shift+s [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
 # }
 
 for_window [class="^Spotify$"] floating enable
@@ -240,7 +249,7 @@ for_window [instance="^Toplevel"] floating enable
 
 
 # Gaps settings
-gaps outer 0
-gaps inner 10
-smart_gaps on
-smart_borders on
+#gaps outer 0
+#gaps inner 10
+#smart_gaps on
+#smart_borders on
