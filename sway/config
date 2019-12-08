@@ -268,7 +268,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command /usr/bin/bumblebee-status -m nic battery pasink date time -p time.format="%H:%M" -t solarized-powerline -p nic.exclude="br-d0f33c15f051,br-fa7dc25ef2ef,lo,docker0"
+    status_command /usr/bin/bumblebee-status -m nic battery pasink date time -p time.format="%H:%M" -t solarized-powerline -p nic.exclude="br-d0f33c15f051,br-fa7dc25ef2ef,lo,docker0,enp14s0u1u2"
 
     colors {
         separator #002b36
