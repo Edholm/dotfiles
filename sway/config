@@ -310,6 +310,6 @@ bindsym Shift+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(
 bindsym Alt+Print exec swaymsg -t get_tree | jq '.. | (.nodes? // empty)[] | select(.focused and .pid) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | sed 's|"||g' | grim -g - ~/screenshots/$(date +'%Y-%m-%d-%H%M%S_grim.png')
 bindsym Print exec ~/.bin/snipping-tool
 exec ~/.bin/inactive-windows-transparency.py
-exec mako
+exec mako --default-timeout=30
 
 
