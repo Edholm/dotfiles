@@ -7,7 +7,8 @@ set $mod Mod4
 
 # Font {
 #font xft:Source Code Pro for Poweline Regular 6
-font xft:Droid Sans Mono 6
+#font xft:Droid Sans Mono 6
+font pango:DejaVu Sans Mono 8
 # }
 
 # Colors {
@@ -34,7 +35,7 @@ hide_edge_borders smart
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+c kill
@@ -97,18 +98,18 @@ bindsym $mod+space focus mode_toggle
 # end bindings }
 
 # Workspaces {
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
 set $ws4 "4:"
 set $ws5 "5:"
 set $ws6 "6:"
-set $ws7 "7:"
+set $ws7 "7:"
 set $ws8 "8:"
-set $ws9 "9"
-set $ws10 "10"
+set $ws9 "9:"
+set $ws10 "10:"
 
-workspace $ws1 output eDP1
+workspace $ws1 output eDP-1
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -172,14 +173,15 @@ bindsym $mod+d mode "resize"
 
 # Bar config {
 bar {
-        status_command    $HOME/.bin/statobar
+#        status_command    $HOME/.bin/statobar
+     	status_command /usr/bin/bumblebee-status -m nic battery pasink date time -p time.format="%H:%M" -t solarized-powerline -p nic.exclude="br-d0f33c15f051,br-fa7dc25ef2ef,lo,docker0"
         i3bar_command     /usr/bin/i3bar
         position          top
         workspace_buttons yes
         tray_output       none
         verbose           no
 
-        font xft:Liberation Mono, Awesome 7
+        font xft:Liberation Mono, Font Awesome 5 Free 8
         colors {
             background #002b36
             statusline #839496
@@ -215,8 +217,7 @@ for_window [class="(?i)chromium"] border none
 for_window [class="(?i)dwb"] border none
 for_window [class="(?i)mpv"] floating enable
 bindsym $mod+c exec $BROWSER
-bindsym $mod+Mod1+c exec "chromium --incognito"
-bindsym $mod+Shift+Return exec "urxvt -e ranger"
+bindsym $mod+Shift+Return exec "alacritty -e ranger"
 bindsym $mod+a exec --no-startup-id "subl3"
 # }
 
@@ -224,28 +225,32 @@ bindsym $mod+a exec --no-startup-id "subl3"
 #
 assign [class="(?i)google-chrome"] → $ws1
 assign [class="(?i)chromium"] → $ws1
-assign [class="(?i)chromium"] → $ws1
 assign [class="(?i)firefox"] → $ws1
-assign [class="Spotify"] → $ws7
+assign [class="^Spotify$"] → $ws7
 assign [class="(?i)Pidgin"] → $ws10
-assign [class="(?i)Skype"] → $ws10
+assign [class="(?i)Skype"] → $ws9
 assign [class="(?i)slack"] → $ws10
-assign [class="(?i)jetbrains-idea" instance="(?i)sun-awt-X11-XFramePeer"] → $ws2
+assign [class="(?i)jetbrains-idea"] → $ws2
+assign [class="(?i)jetbrains-datagrip"] → $ws7
+for_window [class="java-lang-Thread"] floating enable
+assign [class="java-lang-Thread"] → $ws2
 # }
 
 # Scratch-pads {
 #
-exec --no-startup-id urxvt -name scratchpad -geometry 130x30
-for_window [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
+exec --no-startup-id alacritty --class scratchpad --title scratchpad --dimensions 230 30
+for_window [class="^Alacritty$" instance="scratchpad"] border 1pixel; move scratchpad
 #for_window [instance="urxvt_scratchpad"] floating enable; move scratchpad; scratchpad show; move position 865px 512px; move scratchpad
-bindsym $mod+s [class="URxvt" instance="scratchpad"] scratchpad show
-bindsym $mod+Shift+s [class="^URxvt$" instance="scratchpad"] border 1pixel; move scratchpad
+bindsym $mod+s [class="Alacritty" instance="scratchpad"] scratchpad show
+#bindsym $mod+Shift+s [class="^Alacritty$" instance="scratchpad"] border 1pixel; move scratchpad
 # }
 
-for_window [class="^Spotify$"] floating enable
 
 # Float Firefox preferences window.
 for_window [instance="^Toplevel"] floating enable
+
+# Make intellij not lose focus on popup dialogs
+for_window [class="^jetbrains-.+"][window_type=dialog] focus
 
 
 # Gaps settings

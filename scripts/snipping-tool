@@ -1,5 +1,2 @@
 #!/usr/bin/env bash
-img=$(mktemp '/tmp/screnshot-XXXXXXXXX.png')
-scrot -s $img
-xclip -selection clipboard -t image/png $img
-rm $img
+grim -g "$(slurp)" - | wl-copy -t image/png

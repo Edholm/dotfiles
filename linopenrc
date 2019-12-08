@@ -38,7 +38,7 @@ application/x-rar:listarchive
 image:feh
 video:mpv
 audio:mpv # you can also specify the interm rule explictly after '->'
-text:vim
+text:subl3
 
 # 4. Regexp
 # Match some protocols by default
@@ -48,6 +48,7 @@ text:vim
 ?'^dvd:\/\/':mpv
 ?'^cdda:\/\/':mpv->interm
 ?'^spotify:':spotify
+?'^jetbrains:\/\/toolbox':jetbrains-toolbox
 
 # Directory rule for directories
 # ideally you want to use file manager

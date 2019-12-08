@@ -1,5 +1,5 @@
 [global]
-    font = "Droid Sans 24"
+    font = "Droid Sans 12"
 
     # Allow a small subset of html markup in notifications and formats:
     #   <b>bold</b>

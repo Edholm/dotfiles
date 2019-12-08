@@ -7,7 +7,7 @@ URxvt.cutchars: "`\"()*,<>[]{}|'"
 !URxvt.print-pipe: cat >/tmp/xxx
 URxvt.visualBell: false
 URxvt.urgentOnBell: true
-URxvt.perl-ext-common: default,clipboard,confirm-paste,url-select,bell-command,-searchable-scrollback
+URxvt.perl-ext-common: default,clipboard,confirm-paste,url-select,bell-command,-searchable-scrollback,resize-font
 URxvt.termName: rxvt-256color
 
 ! --[ URxvt - URL Handling ]-------------------------------
@@ -25,7 +25,16 @@ URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
 ! TEST: http://www.google.com
 !
 URxvt.scrollBar: off
-URxvt.saveLines: 1000
+URxvt.saveLines: 10000
+
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
 
 !#URxvt.depth: 32
 
@@ -35,9 +44,9 @@ URxvt.saveLines: 1000
 !! Xft settings
 !!-------------------------------------------------------------------------------
 !
-Xft.dpi:                    140
-Xft.autohint:		    0
-Xft.lcdfilter:		    lcddefault
+Xft.dpi:                    250
+Xft.autohint:		        0
+Xft.lcdfilter:		        lcddefault
 Xft.hintstyle:              hintfull
 Xft.hinting:                1
 Xft.antialias:              1
@@ -46,7 +55,7 @@ Xft.rgba:                   rgb
 URxvt.allow_bold:           true
 !URxvt.font: xft:Liberation Mono:size=12
 !URxvt.boldFont: xft:Liberation Mono:bold:size=12
-URxvt.font: xft:InputMono:size=14
+URxvt.font: xft:InputMono:size=10
 
 ! Fix font space
 URxvt*letterSpace: -1
@@ -142,7 +151,17 @@ rofi.kb-row-select: Tab
 rofi.kb-row-tab:    Control+space
 rofi.font:          mono 23
 rofi.width:         25
-rofi.color-window: #fdf6e3, #fdf6e3, #eee8d5
-rofi.color-normal: #fdf6e3, #819396, #fdf6e3, #eee8d5, #819396
-rofi.color-active: #fdf6e3, #008ed4, #fdf6e3, #eee8d5, #008ed4
-rofi.color-urgent: #fdf6e3, #da4281, #fdf6e3, #eee8d5, #da4281
+
+! Enable the extended coloring options
+rofi.color-enabled: true
+
+! Property Name     BG       Border   Separator
+rofi.color-window:  #073642, #073642, #002b36
+
+! Property Name     BG       FG       BG-alt   Head-BG  Head-FG
+rofi.color-normal:  #073642, #93a1a1, #073642, #073642, #fdf6e3
+rofi.color-active:  #073642, #268bd2, #073642, #073642, #268bd2
+rofi.color-urgent:  #073642, #dc322f, #073642, #073642, #dc322f
+
+! Set the desired separator style
+rofi.separator-style: solid
