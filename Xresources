@@ -149,7 +149,7 @@ URxvt.colorUL:      #87afd7
 ! Tab completion
 rofi.kb-row-select: Tab
 rofi.kb-row-tab:    Control+space
-rofi.font:          mono 23
+rofi.font:          mono 14
 rofi.width:         25
 
 ! Enable the extended coloring options

@@ -13,7 +13,7 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 # Note: it's recommended that you pass the final command to sway
-set $menu wofi -s ~/.config/wofi/config
+set $menu rofi -show run
 
 ### Output configuration
 #
@@ -233,7 +233,7 @@ input 1133:16495:Logitech_MX_Ergo {
     bindsym $mod+s scratchpad show
 
     for_window [app_id="scratchpad"] border pixel 1; move scratchpad
-    exec --no-startup-id alacritty --class scratchpad --title scratchpad
+    exec --no-startup-id alacritty --class scratchpad --title scratchpad -d 120 50
 #
 # Resizing containers:
 #
