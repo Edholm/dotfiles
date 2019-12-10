@@ -170,7 +170,8 @@ input 1133:16495:Logitech_MX_Ergo {
     bindsym $mod+Shift+9 move container to workspace $ws9
     bindsym $mod+Shift+0 move container to workspace $ws10
 
-
+    workspace $ws1 output $laptop $acer
+    workspace $ws2 output $acer $laptop
 #
 # Workspace assignments
 #
