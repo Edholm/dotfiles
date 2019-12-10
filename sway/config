@@ -16,16 +16,17 @@ set $term alacritty
 set $menu rofi -show run
 
 ### Output configuration
+set $laptop eDP-1
+set $acer DP-3
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/supplementary/pics/linus.png fit
+output $laptop bg ~/supplementary/pics/linus.png fit
+output $acer bg ~/supplementary/pics/linus_wide.png fit
 default_border pixel 1
 default_floating_border pixel 1
 hide_edge_borders smart_no_gaps
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-set $laptop eDP-1
-set $acer DP-3
 output $acer scale 1
 output $laptop scale 2
 bindswitch --reload lid:on output $laptop disable
@@ -55,17 +56,8 @@ exec swayidle -w \
          timeout 305 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
         before-sleep 'swaylock'
-
+#
 ### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
