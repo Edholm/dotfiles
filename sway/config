@@ -78,14 +78,14 @@ input * {
 # Libinput
     tap enabled
     dwt enabled
-    pointer_accel -0.2
+    pointer_accel -0.0
     accel_profile flat
 
 }
 
 input 1133:16495:Logitech_MX_Ergo {
     accel_profile adaptive
-    pointer_accel -0.5
+    pointer_accel -0.3
 }
 
 ### Key bindings
