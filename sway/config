@@ -1,3 +1,7 @@
+# Bobby config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
 # Read `man 5 sway` for a complete reference.
 
 ### Variables
@@ -10,76 +14,91 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term foot
 # Your preferred application launcher
-# Note: it's recommended that you pass the final command to sway
-set $menu rofi -show run
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu bemenu-run
+
+# Workspaces
+set $ws1 "1:"
+set $ws2 "2:"
+set $ws3 "3:"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7:"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10:"
 
 ### Output configuration
-set $laptop eDP-1
-set $acer DP-3
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output $laptop bg ~/supplementary/pics/linus.png fit
-output $acer bg ~/supplementary/pics/linus_wide.png fit
-default_border pixel 1
-default_floating_border pixel 1
-hide_edge_borders smart_no_gaps
+# Default wallpaper (more resolutions are available in /usr/local/share/backgrounds/sway/)
+output * bg ~/Pictures/finishline_brighter.png fill
 
+# Disable the laptop screen when the lid is closed.
+bindswitch --reload lid:on output eDP-1 disable
+bindswitch --reload lid:off output eDP-1 enable
+
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output $acer scale 1
-output $laptop scale 2
-bindswitch --reload lid:on output $laptop disable
-bindswitch --reload lid:off output $laptop enable
 
-# class                 border  background text    indicator child_border
-client.focused          #96a900 #859900    #fdf6e3 #dc322f   #96a900
-client.focused_inactive #073642 #269be2    #eee8d5 #dc322f   #073642
-client.unfocused        #073642 #269be2    #93a1a1 #dc322f   #073642
-client.urgent           #cb4b16 #dc322f    #fdf6e3 #dc322f   #cb4b16
+### Window borders
+#
+default_border pixel 2
+default_floating_border normal
+hide_edge_borders smart
+
+#smart_gaps on
+#gaps inner 10
 
 ### Idle configuration
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' \
-#               resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
+set $locker 'swaylock -f -i ~/Pictures/Finishline.JPG'
+exec swayidle -w \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         timeout 605 $locker \
+         before-sleep $locker \
+	 lock $locker
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
-exec swayidle -w \
-         timeout 300 'swaylock' \
-         timeout 305 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock'
+
 #
 ### Input configuration
 #
+    input type:keyboard {
+        xkb_layout se
+        xkb_variant nodeadkeys
+        repeat_delay 200
+        repeat_rate 30
+    }
+
+   ## The laptop keyboard
+   input "1:1:AT_Translated_Set_2_keyboard" {
+        xkb_options "caps:swapescape"
+   }
+
+   ## The laptop touchpad
+   input "1739:0:Synaptics_TM3471-020" {
+       pointer_accel 0.18
+       #accel_profile flat
+       #dwt enabled
+       tap enabled
+       natural_scroll enabled
+       middle_emulation enabled
+   }
+
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
-input * {
-    xkb_layout se
-    xkb_variant nodeadkeys
-    xkb_model kinesis
-    repeat_delay 200
-    repeat_rate 30
-
-# Libinput
-    tap enabled
-    dwt enabled
-    pointer_accel -0.0
-    accel_profile flat
-
-}
-
-input 1133:16495:Logitech_MX_Ergo {
-    accel_profile adaptive
-    pointer_accel -0.3
-}
 
 ### Key bindings
 #
@@ -92,7 +111,8 @@ input 1133:16495:Logitech_MX_Ergo {
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+r exec $menu
+    bindsym $mod+d exec $menu
+    bindsym $mod+r exec albert toggle
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -101,11 +121,23 @@ input 1133:16495:Logitech_MX_Ergo {
     # mouse button for dragging.
     floating_modifier $mod normal
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    set $mode_system System: (l) lock, (e) exit sway, (c) reload conf, (s) suspend, (r) reboot, (S) shutdown, (R) reboot to BIOS, (Ctrl+R) Boot selection
+    mode "$mode_system" {
+        bindsym l exec $locker, mode "default"
+        bindsym e exit
+	bindsym c reload
+        bindsym s exec systemctl suspend, mode "default"
+        bindsym r exec systemctl reboot, mode "default"
+        bindsym Shift+s exec systemctl poweroff -i, mode "default"
+        bindsym Shift+r exec systemctl reboot --firmware-setup, mode "default"
+        bindsym Control+Shift+r exec systemctl reboot --boot-loader-menu=10, mode "default"
+    
+        # return to default mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+Shift+e mode "default"
+    }
+    bindsym $mod+Shift+e mode "$mode_system"
 #
 # Moving around:
 #
@@ -131,63 +163,75 @@ input 1133:16495:Logitech_MX_Ergo {
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
 
-    bindsym $mod+less move workspace to output left
-    bindsym $mod+greater move workspace to output left
+#
+# Media controls
+#
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 python3
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym --locked XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set +5%
+
+bindsym --locked XF86Display exec toggle-sway-output.sh eDP-1
+
+# Screenshot
+# Select part of the screen
+bindsym Print exec grim -g "$(slurp)" - | wl-copy
+# Current Window
+bindsym Mod1+Print exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy
+bindsym Shift+Print exec grim - | wl-copy
+
 #
 # Workspaces:
 #
+    # Switch to workspace
+    bindsym $mod+1 workspace number $ws1
+    bindsym $mod+2 workspace number $ws2
+    bindsym $mod+3 workspace number $ws3
+    bindsym $mod+4 workspace number $ws4
+    bindsym $mod+5 workspace number $ws5
+    bindsym $mod+6 workspace number $ws6
+    bindsym $mod+7 workspace number $ws7
+    bindsym $mod+8 workspace number $ws8
+    bindsym $mod+9 workspace number $ws9
+    bindsym $mod+0 workspace number $ws10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number $ws1
+    bindsym $mod+Shift+2 move container to workspace number $ws2
+    bindsym $mod+Shift+3 move container to workspace number $ws3
+    bindsym $mod+Shift+4 move container to workspace number $ws4
+    bindsym $mod+Shift+5 move container to workspace number $ws5
+    bindsym $mod+Shift+6 move container to workspace number $ws6
+    bindsym $mod+Shift+7 move container to workspace number $ws7
+    bindsym $mod+Shift+8 move container to workspace number $ws8
+    bindsym $mod+Shift+9 move container to workspace number $ws9
+    bindsym $mod+Shift+0 move container to workspace number $ws10 
 
-    set $ws1 "1:"
-    set $ws2 "2:"
-    set $ws3 "3:"
-    set $ws4 "4:"
-    set $ws5 "5:"
-    set $ws6 "6:"
-    set $ws7 "7:"
-    set $ws8 "8:"
-    set $ws9 "9:"
-    set $ws10 "10:"
-    # switch to workspace
-    bindsym $mod+1 workspace $ws1
-    bindsym $mod+2 workspace $ws2
-    bindsym $mod+3 workspace $ws3
-    bindsym $mod+4 workspace $ws4
-    bindsym $mod+5 workspace $ws5
-    bindsym $mod+6 workspace $ws6
-    bindsym $mod+7 workspace $ws7
-    bindsym $mod+8 workspace $ws8
-    bindsym $mod+9 workspace $ws9
-    bindsym $mod+0 workspace $ws10
-    
-    # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace $ws1
-    bindsym $mod+Shift+2 move container to workspace $ws2
-    bindsym $mod+Shift+3 move container to workspace $ws3
-    bindsym $mod+Shift+4 move container to workspace $ws4
-    bindsym $mod+Shift+5 move container to workspace $ws5
-    bindsym $mod+Shift+6 move container to workspace $ws6
-    bindsym $mod+Shift+7 move container to workspace $ws7
-    bindsym $mod+Shift+8 move container to workspace $ws8
-    bindsym $mod+Shift+9 move container to workspace $ws9
-    bindsym $mod+Shift+0 move container to workspace $ws10
+    bindsym $mod+Control+Shift+Right move workspace to output right
+    bindsym $mod+Control+Shift+Left move workspace to output left
+    bindsym $mod+Control+Shift+Down move workspace to output down
+    bindsym $mod+Control+Shift+Up move workspace to output up
 
-    workspace $ws1 output $laptop $acer
-    workspace $ws2 output $acer $laptop
-#
-# Workspace assignments
-#
-    assign [class="(?i)google-chrome"] → $ws1
-    assign [class="(?i)chromium"] → $ws1
-    assign [class="(?i)firefox"] → $ws1
-    assign [class="^Spotify$"] → $ws7
-    assign [class="(?i)Pidgin"] → $ws10
-    assign [class="(?i)Skype"] → $ws9
-    assign [class="(?i)slack"] → $ws10
-    assign [class="(?i)jetbrains-idea"] → $ws2
+    # Output assignments
+    workspace $ws1 output DP-2 eDP-1
+    workspace $ws2 output DP-2 eDP-1
+    workspace $ws10 output DP-2 eDP-1
+
+    # Workspace switchers
+    assign [class="Google-chrome"] → $ws1
+    assign [app_id="firefox"] → $ws1
+    assign [class="jetbrains-goland"] → $ws2
+    assign [class="jetbrains-idea-ce"] → $ws2
+    assign [class="jetbrains-idea"] → $ws2
+    assign [class="jetbrains-clion"] → $ws2
+    assign [class="(?i)Slack"] → $ws10
+    assign [app_id="Google-chrome" title="Slack.*"] → $ws10
     assign [class="(?i)jetbrains-datagrip"] → $ws7
-    for_window [class="java-lang-Thread"] floating enable
-    assign [class="java-lang-Thread"] → $ws2
-
+    assign [class="(?i)spotify"] → $ws9
 #
 # Layout stuff:
 #
@@ -198,7 +242,7 @@ input 1133:16495:Logitech_MX_Ergo {
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    #bindsym $mod+s layout stacking
+#    bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
@@ -226,8 +270,8 @@ input 1133:16495:Logitech_MX_Ergo {
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+s scratchpad show
 
-    for_window [app_id="scratchpad"] border pixel 1; move scratchpad
-    exec --no-startup-id alacritty --class scratchpad --title scratchpad -d 120 50
+    for_window [app_id="scratchpad"] floating enable, move to scratchpad
+    exec foot --app-id scratchpad --window-size-pixels 1200x800
 #
 # Resizing containers:
 #
@@ -253,16 +297,15 @@ mode "resize" {
 }
 bindsym $mod+Shift+r mode "resize"
 
-#
+
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command /usr/bin/bumblebee-status -m nic battery pasink date time -p time.format="%H:%M" -t solarized-powerline -p nic.exclude="br-d0f33c15f051,br-fa7dc25ef2ef,lo,docker0,enp14s0u1u2"
+    status_command /usr/bin/bumblebee-status -m github nic battery pasink pasource date time -p date.format="%d %b" -p time.format="%H:%M" -t solarized -p nic.include="wlan0" -p nic.exclude="enp0s31f6,docker0,lo" -p nic.format="{ssid}" -p nic.left-click="foot --app-id=iwctl iwctl" -p pulseaudio.limit="110" -t solarized-dark-awesome -p github.token="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" -p github.reasons="review_requested"
+    #swaybar_command waybar
 
     colors {
         separator #002b36
@@ -275,35 +318,23 @@ bar {
         binding_mode #859900 #859900 #002b36
     }
 }
+#
+# Application specific settings
+#
+for_window [app_id="albert"] floating enable
+for_window [title="win0" class="jetbrains-goland"] floating enable
+for_window [title="win0" class="jetbrains-idea-ce"] floating enable
+for_window [title="win0" class="jetbrains-idea"] floating enable
+for_window [title="win0" class="jetbrains-clion"] floating enable
+
+#
+# Application starters
+#
+exec albert                        # App launcher
+#exec foot -s                       # Foot in server mode
+
+# Needed xdg-desktop-portal
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
+
 
 include /etc/sway/config.d/*
-
-
-#
-# Application specific config
-#
-    for_window [class="(?i)google-chrome"] border none
-    for_window [class="(?i)chromium"] border none
-    for_window [class="(?i)dwb"] border none
-    for_window [class="(?i)mpv"] floating enable
-
-    # Float Firefox preferences window.
-    for_window [instance="^Toplevel"] floating enable
-    
-    # Make intellij not lose focus on popup dialogs
-    for_window [class="^jetbrains-.+" window_type=dialog] focus
-    for_window [class="^jetbrains-.+" title="win0"] floating enable
-    for_window [class="^jetbrains-.+" title=".+IDEA"] floating disable
-    for_window [class="^jetbrains-.+" title=".+DataGrip"] floating disable
-
-#
-# Start apps
-#
-
-bindsym Shift+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') ~/screenshots/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-bindsym Alt+Print exec swaymsg -t get_tree | jq '.. | (.nodes? // empty)[] | select(.focused and .pid) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | sed 's|"||g' | grim -g - ~/screenshots/$(date +'%Y-%m-%d-%H%M%S_grim.png')
-bindsym Print exec ~/.bin/snipping-tool
-exec ~/.bin/inactive-windows-transparency.py
-exec mako --default-timeout=30
-
-
