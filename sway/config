@@ -35,7 +35,7 @@ set $ws10 "10:"
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/local/share/backgrounds/sway/)
-output * bg ~/Pictures/finishline_brighter.png fill
+output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
 # Disable the laptop screen when the lid is closed.
 bindswitch --reload lid:on output eDP-1 disable
@@ -304,7 +304,7 @@ bindsym $mod+Shift+r mode "resize"
 bar {
     position top
 
-    status_command /usr/bin/bumblebee-status -m github nic battery pasink pasource date time -p date.format="%d %b" -p time.format="%H:%M" -t solarized -p nic.include="wlan0" -p nic.exclude="enp0s31f6,docker0,lo" -p nic.format="{ssid}" -p nic.left-click="foot --app-id=iwctl iwctl" -p pulseaudio.limit="110" -t solarized-dark-awesome -p github.token="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" -p github.reasons="review_requested"
+    status_command /usr/bin/bumblebee-status -m github nic battery pasink pasource date time -p date.format="%d %b" -p time.format="%H:%M" -t solarized -p nic.include="wlan0" -p nic.exclude="enp0s31f6,docker0,lo" -p nic.format="{ssid}" -p nic.left-click="foot --app-id=iwctl iwctl" -p pulseaudio.limit="110" -t solarized-dark-awesome -p github.token="${GITHUB_TOKEN}" -p github.reasons="review_requested"
     #swaybar_command waybar
 
     colors {
@@ -338,3 +338,4 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 
 
 include /etc/sway/config.d/*
+include ~/.config/sway/$(hostname)/*
