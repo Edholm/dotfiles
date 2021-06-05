@@ -16,16 +16,6 @@ $ ln -s i3 ~/.i3
 # Etc.
 ```
 
-###i3###
-I use [i3](https://www.archlinux.org/packages/community/x86_64/i3-wm/) with i3bar and a custom status info script
-
-#### Screenshot####
-Busy:
-![Busy](screenshots/busy.png "Busy desktop")
-
-Clean:
-![Clean](screenshots/clean.png "Clean desktop")
-
 ####zsh####
 If you want to use my zsh config. Clone my fork of oh-my-zsh first and place zshrc in `~/.zshrc` and the `eda.zsh-theme`
 in `~/.oh-my-zsh/custom`
