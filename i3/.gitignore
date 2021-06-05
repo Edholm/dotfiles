@@ -1,9 +1,0 @@
-# Ignore everything
-*
-
-# But not these files...
-!config
-!icons
-!*.xbm
-!py3status
-!*.py
