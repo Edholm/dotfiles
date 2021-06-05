@@ -88,7 +88,7 @@ exec swayidle -w \
    }
 
    ## The laptop touchpad
-   input "1739:0:Synaptics_TM3471-020" {
+   input type:touchpad {
        pointer_accel 0.18
        #accel_profile flat
        #dwt enabled
