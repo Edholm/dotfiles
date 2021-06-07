@@ -1,0 +1,25 @@
+set visualbell
+set noerrorbells
+set smartcase
+set clipboard=unnamed
+let mapleader = ","
+set scrolloff=4
+
+" Jump to next/previous error, show error description
+" https://stackoverflow.com/questions/13346245/keyboard-shortcut-to-display-error-in-intellij
+map <Leader>e <Action>(ShowErrorDescription)
+map <Space> <Action>(GotoNextError)
+
+" Alt + Insert in idea.
+map <Leader>g <Action>(Generate)
+
+" press 0 to go to first non-whitespace
+map 0 ^
+
+map gb <Action>(Back)
+map gf <Action>(Forward)
+
+map gi <Action>(GotoImplementation)
+
+" Show documentation
+map <Leader>q <Action>(QuickJavaDoc)
