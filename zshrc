@@ -79,6 +79,16 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
+export MANPAGER="less -R --use-color -Dd+r -Du+b"
+export MANWIDTH=200
+
+man() {
+    local width=$(tput cols)
+    [ $width -gt $MANWIDTH ] && width=$MANWIDTH
+    env MANWIDTH=$width \
+    man "$@"
+}
+
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -96,11 +106,19 @@ source $ZSH/oh-my-zsh.sh
 # Dircolors
 eval "$(dircolors $HOME/.dircolors)"
 
+# alt-right, alt-left, alt-delete
+bindkey "^[[1;3C" forward-word
+bindkey "^[[1;3D" backward-word
+bindkey "^[[3;3~" kill-word
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 alias gs='git status'
+alias gd='git diff'
 alias gc='git commit'
 alias gl='git log'
+
+alias cdgo='cd ~/go/src/github.com/einride/; pwd; ls'
