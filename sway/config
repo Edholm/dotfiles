@@ -78,8 +78,8 @@ exec swayidle -w \
     input type:keyboard {
         xkb_layout se
         xkb_variant nodeadkeys
-        repeat_delay 200
-        repeat_rate 30
+        repeat_delay 250
+        repeat_rate 22
     }
 
    ## The laptop keyboard
