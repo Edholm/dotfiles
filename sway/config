@@ -97,6 +97,11 @@ exec swayidle -w \
        middle_emulation enabled
    }
 
+   input "1452:613:Apple_Inc._Magic_Trackpad_2" {
+       pointer_accel 0.10
+       tap disabled
+   }
+
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
