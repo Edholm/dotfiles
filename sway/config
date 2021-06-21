@@ -32,6 +32,17 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10:"
 
+set $disp_acer "Acer Technologies Acer X34 T3MEE0154201"
+set $disp_dell "Dell Inc. DELL U2715H GH85D686043S"
+
+set $locker 'swaylock -f -i ~/Pictures/Finishline.JPG'
+
+set $status_cmd /usr/bin/bumblebee-status -m github nic battery pasink pasource date time -p date.format="%d %b" -p time.format="%H:%M" -t solarized -p nic.include="wlan0" -p nic.exclude="enp0s31f6,enp8s0u2u1u2,docker0,lo" -p nic.format="{ssid}" -p nic.left-click="foot --app-id=iwctl iwctl" -p pulseaudio.limit="110" -t solarized-dark-awesome -p github.token="${GITHUB_TOKEN}" -p github.reasons="review_requested"
+
+
+# Custom overrides
+include ~/.config/sway/config.d/$(hostname).override
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/local/share/backgrounds/sway/)
@@ -61,7 +72,6 @@ hide_edge_borders smart
 #
 # Example configuration:
 #
-set $locker 'swaylock -f -i ~/Pictures/Finishline.JPG'
 exec swayidle -w \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          timeout 605 $locker \
@@ -172,11 +182,11 @@ exec swayidle -w \
 # Media controls
 #
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 python3
-bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym --locked XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+set $refresh_bar killall -SIGUSR1 python3
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_bar
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_bar
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_bar
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_bar
 
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp exec brightnessctl set +5%
@@ -222,8 +232,6 @@ bindsym Shift+Print exec grim - | wl-copy
     bindsym $mod+Control+Shift+Up move workspace to output up
 
     # Output assignments
-    set $disp_acer "Acer Technologies Acer X34 T3MEE0154201"
-    set $disp_dell "Dell Inc. DELL U2715H GH85D686043S"
     workspace $ws1 output $disp_acer $disp_dell eDP-1
     workspace $ws2 output $disp_acer $disp_dell eDP-1
     workspace $ws3 output $disp_acer $disp_dell eDP-1
@@ -319,7 +327,7 @@ bindsym $mod+Shift+r mode "resize"
 bar {
     position top
 
-    status_command /usr/bin/bumblebee-status -m github nic battery pasink pasource date time -p date.format="%d %b" -p time.format="%H:%M" -t solarized -p nic.include="wlan0" -p nic.exclude="enp0s31f6,enp8s0u2u1u2,docker0,lo" -p nic.format="{ssid}" -p nic.left-click="foot --app-id=iwctl iwctl" -p pulseaudio.limit="110" -t solarized-dark-awesome -p github.token="${GITHUB_TOKEN}" -p github.reasons="review_requested"
+    status_command $status_cmd
     #swaybar_command waybar
 
     colors {
@@ -351,6 +359,5 @@ exec albert                        # App launcher
 # Needed xdg-desktop-portal
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 
-
 include /etc/sway/config.d/*
-include ~/.config/sway/$(hostname)/*
+include ~/.config/sway/config.d/$(hostname).conf
