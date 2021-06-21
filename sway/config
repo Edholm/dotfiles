@@ -237,15 +237,16 @@ bindsym Shift+Print exec grim - | wl-copy
 
     # Workspace switchers
     assign [class="Google-chrome"] → $ws1
+    assign [app_id="Google-chrome"] → $ws1
     assign [app_id="firefox"] → $ws1
-    assign [class="jetbrains-goland"] → $ws2
-    assign [class="jetbrains-idea-ce"] → $ws2
-    assign [class="jetbrains-idea"] → $ws2
-    assign [class="jetbrains-clion"] → $ws2
+    for_window [class="jetbrains-goland"] move window to workspace $ws2
+    for_window [class="jetbrains-idea"] move window to workspace $ws2
+    for_window [class="jetbrains-idea-ce"] move window to workspace $ws2
+    for_window [class="jetbrains-clion"] move window to workspace $ws2
+    assign [app_id="sublime_merge"] → $ws3
+    for_window [class="jetbrains-datagrip"] move window to workspace $ws6
     assign [class="(?i)Slack"] → $ws10
-    assign [app_id="Google-chrome" title="Slack.*"] → $ws10
-    assign [class="(?i)jetbrains-datagrip"] → $ws7
-    assign [class="(?i)spotify"] → $ws9
+    for_window [class="Spotify"] move window to workspace $ws7
 #
 # Layout stuff:
 #
