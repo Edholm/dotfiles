@@ -35,7 +35,7 @@ set $ws10 "10:"
 set $disp_acer "Acer Technologies Acer X34 T3MEE0154201"
 set $disp_dell "Dell Inc. DELL U2715H GH85D686043S"
 
-set $locker 'swaylock --daemonize --image ~/Pictures/backgrounds/pod-back-3440x1440.png --scaling center'
+set $locker swaylock --daemonize --image="~/Pictures/backgrounds/pod-back-1920x1080.png" --scaling center --color=073642
 
 set $status_cmd /usr/bin/bumblebee-status -m github nic battery pasink pasource date time -p date.format="%d %b" -p time.format="%H:%M" -t solarized -p nic.include="wlan0" -p nic.exclude="enp0s31f6,enp8s0u2u1u2,docker0,lo" -p nic.format="{ssid}" -p nic.left-click="foot --app-id=iwctl iwctl" -p pulseaudio.limit="110" -t solarized-dark-awesome -p github.token="${GITHUB_TOKEN}" -p github.reasons="review_requested"
 
