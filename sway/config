@@ -136,14 +136,14 @@ exec swayidle -w \
     # mouse button for dragging.
     floating_modifier $mod normal
 
-    set $mode_system System: (l) lock, (e) exit sway, (c) reload conf, (s) suspend, (r) reboot, (S) shutdown, (R) reboot to BIOS, (Ctrl+R) Boot selection
+    set $mode_system System: (l) lock, (e) exit sway, (c) reload conf, (S) suspend, (r) reboot, (s) shutdown, (R) reboot to BIOS, (Ctrl+R) Boot selection
     mode "$mode_system" {
         bindsym l exec $locker, mode "default"
         bindsym e exit
 	bindsym c reload
-        bindsym s exec systemctl suspend, mode "default"
+        bindsym Shift+s exec systemctl suspend, mode "default"
         bindsym r exec systemctl reboot, mode "default"
-        bindsym Shift+s exec systemctl poweroff -i, mode "default"
+        bindsym s exec systemctl poweroff -i, mode "default"
         bindsym Shift+r exec systemctl reboot --firmware-setup, mode "default"
         bindsym Control+Shift+r exec systemctl reboot --boot-loader-menu=10, mode "default"
     
