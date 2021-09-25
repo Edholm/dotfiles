@@ -116,9 +116,15 @@ bindkey "^[[3;3~" kill-word
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
+alias gp='git push'
 alias gs='git status'
 alias gd='git diff'
 alias gc='git commit'
 alias gl='git log'
+alias gwc='git switch -c'
+alias gw='git switch'
+alias gpf='git push --force-with-lease'
+alias gmff='git merge --ff-only'
+
 
 alias cdgo='cd ~/go/src/github.com/einride/; pwd; ls'
