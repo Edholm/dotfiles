@@ -353,8 +353,8 @@ for_window [title="win0" class="jetbrains-clion"] floating enable
 #
 # Application starters
 #
-exec albert                        # App launcher
-#exec foot -s                       # Foot in server mode
+exec albert > /dev/null       # App launcher
+#exec foot -s                 # Foot in server mode
 
 # Needed xdg-desktop-portal
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
