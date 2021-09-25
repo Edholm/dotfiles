@@ -254,6 +254,7 @@ bindsym Shift+Print exec grim - | wl-copy
     assign [app_id="sublime_merge"] → $ws3
     for_window [class="jetbrains-datagrip"] move window to workspace $ws6
     assign [class="(?i)Slack"] → $ws10
+    assign [app_id="(?i)Slack"] → $ws10
     for_window [class="Spotify"] move window to workspace $ws7
 #
 # Layout stuff:
