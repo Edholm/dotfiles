@@ -359,5 +359,8 @@ exec albert                        # App launcher
 # Needed xdg-desktop-portal
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 
+# Keyring
+exec gnome-keyring-daemon --start --components=gpg\,pkcs11\,secrets\,ssh
+
 include /etc/sway/config.d/*
 include ~/.config/sway/config.d/$(hostname).conf
