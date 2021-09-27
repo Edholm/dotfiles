@@ -3,7 +3,7 @@ set noerrorbells
 set smartcase
 set clipboard=unnamed
 let mapleader = ","
-set scrolloff=4
+set scrolloff=10
 
 " Jump to next/previous error, show error description
 " https://stackoverflow.com/questions/13346245/keyboard-shortcut-to-display-error-in-intellij
