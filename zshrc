@@ -128,6 +128,7 @@ alias gmff='git merge --ff-only'
 
 
 alias cdgo='cd ~/go/src/github.com/einride/; pwd; ls'
+alias standup='cdgo; git standup -s'
 
 # cdpro - Cd to your projects
 cdpro() {
