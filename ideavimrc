@@ -1,6 +1,6 @@
 set visualbell
 set noerrorbells
-set smartcase
+set ignorecase
 set clipboard=unnamed
 let mapleader = ","
 set scrolloff=10
