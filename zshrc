@@ -128,3 +128,10 @@ alias gmff='git merge --ff-only'
 
 
 alias cdgo='cd ~/go/src/github.com/einride/; pwd; ls'
+
+# cdpro - Cd to your projects
+cdpro() {
+  local dir
+  local projectBase=${CDPRO_PROJECT_BASE}
+  dir=${projectBase}/$(fd . ${CDPRO_PROJECT_DIRS} --type directory --max-depth 1 --base-directory ${projectBase} | fzf +m --border=rounded --query=${1}) && cd "$dir"
+}
