@@ -195,7 +195,8 @@ bindsym --locked XF86Display exec toggle-sway-output.sh eDP-1
 
 # Screenshot
 # Select part of the screen
-bindsym Print exec grim -g "$(slurp)" - | wl-copy
+#bindsym Print exec grim -g "$(slurp)" - | wl-copy
+bindsym Print exec grim -g "$(slurp)" - | swappy -f -
 # Current Window
 bindsym Mod1+Print exec grim -g "$(swaymsg -t get_tree | jq -r '.. | select(.focused?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')" - | wl-copy
 bindsym Shift+Print exec grim - | wl-copy
