@@ -1,3 +1,8 @@
+# Plugins
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/ReplaceWithRegister'
+
 set visualbell
 set noerrorbells
 set ignorecase
