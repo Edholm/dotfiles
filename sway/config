@@ -33,7 +33,7 @@ set $ws9 "9"
 set $ws10 "10:"
 
 set $disp_acer "Acer Technologies Acer X34 T3MEE0154201"
-set $disp_dell "Dell Inc. DELL U2715H GH85D686043S"
+set $disp_dell "Dell Inc. DELL U2715H GH85D7BD0T3S"
 
 set $locker 'swaylock --daemonize --image="~/Pictures/backgrounds/pod-back-1920x1080.png" --scaling center --color=073642'
 
@@ -341,6 +341,10 @@ bar {
         urgent_workspace #cb4b16 #cb4b16 #002b36
         inactive_workspace #002b36 #002b36 #fdf6e3
         binding_mode #859900 #859900 #002b36
+    }
+
+    tray {
+    	icon_theme Adwaita
     }
 }
 #
