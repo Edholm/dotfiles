@@ -2,6 +2,8 @@
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'kana/vim-textobj-entire'
 
 set visualbell
 set noerrorbells
