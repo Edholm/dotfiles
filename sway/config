@@ -244,6 +244,7 @@ bindsym Shift+Print exec grim - | wl-copy
     workspace $ws9 output $disp_dell $disp_acer eDP-1
     workspace $ws10 output $disp_dell $disp_acer eDP-1
 
+
     # Workspace switchers
     assign [class="Google-chrome"] → $ws1
     assign [app_id="Google-chrome"] → $ws1
@@ -296,7 +297,7 @@ bindsym Shift+Print exec grim - | wl-copy
     bindsym $mod+s scratchpad show
 
     for_window [app_id="scratchpad"] floating enable, move to scratchpad
-    exec foot --app-id scratchpad --window-size-pixels 1200x800
+    exec foot --app-id scratchpad --window-size-pixels 1200x800 tmux new-session -A -s scratch
 #
 # Resizing containers:
 #
@@ -370,3 +371,4 @@ exec gnome-keyring-daemon --start --components=gpg\,pkcs11\,secrets\,ssh
 
 include /etc/sway/config.d/*
 include ~/.config/sway/config.d/$(hostname).conf
+include ~/.config/sway/outputs
