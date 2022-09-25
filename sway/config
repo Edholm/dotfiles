@@ -15,6 +15,7 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term foot
+#exec foot --server            # Foot in server mode
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -73,7 +74,7 @@ hide_edge_borders smart
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         timeout 180 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          timeout 605 $locker \
          before-sleep $locker \
 	 lock $locker
@@ -297,7 +298,7 @@ bindsym Shift+Print exec grim - | wl-copy
     bindsym $mod+s scratchpad show
 
     for_window [app_id="scratchpad"] floating enable, move to scratchpad
-    exec foot --app-id scratchpad --window-size-pixels 1200x800 tmux new-session -A -s scratch
+    exec $term --app-id scratchpad --window-size-pixels 1200x800 tmux new-session -A -s scratch
 #
 # Resizing containers:
 #
@@ -361,13 +362,16 @@ for_window [title="win0" class="jetbrains-clion"] floating enable
 # Application starters
 #
 exec albert > /dev/null       # App launcher
-#exec foot -s                 # Foot in server mode
 
 # Needed xdg-desktop-portal
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE
 
 # Keyring
-exec gnome-keyring-daemon --start --components=gpg\,pkcs11\,secrets\,ssh
+#exec gnome-keyring-daemon --start --components=gpg\,pkcs11\,secrets
+
+# 1password
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec 1password --silent
 
 include /etc/sway/config.d/*
 include ~/.config/sway/config.d/$(hostname).conf
